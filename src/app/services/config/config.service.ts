@@ -48,8 +48,8 @@ export class ConfigService {
         return "https://testapi.pay2bd.com/";
       case "bangladesh":
         this.localizationService.setLanguage("bn");
-        //return "https://api.pay2bd.com/";
-        return "https://bdapi.allnilam.com/";
+        return "https://api.pay2bd.com/";
+
       case "dev_pakistan":
         this.localizationService.setLanguage("pak");
         return "http://192.168.1.68:3001/";
@@ -70,8 +70,8 @@ export class ConfigService {
         return "https://api.pay2eg.com/";
       default:
         this.localizationService.setLanguage("bn");
-        //return "https://api.pay2bd.com/";
-        return "https://bdapi.allnilam.com/";
+        return "https://api.pay2bd.com/";
+      //return "https://bdapi.allnilam.com/";
     }
   }
 }
