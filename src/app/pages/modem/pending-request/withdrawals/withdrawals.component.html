@@ -1,0 +1,334 @@
+<main id="main" class="main">
+  <div class="pagetitle_wrap">
+    <div class="pagetitle">
+      <h1>Withdrawals (Pending)</h1>
+      <!-- <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a routerLink="/merchant">{{ "merchants" | translate }}</a>
+          </li>
+          <li class="breadcrumb-item">{{ "withdrawals" | translate }}</li>
+        </ol>
+      </nav> -->
+    </div>
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-xl-12" style="margin-top: 50px">
+        <!-- <h3>Cash In</h3> -->
+        <div class="card withdraw-card col-md-6">
+          <div class="card-body profile-overview">
+            <p *ngIf="!displayedData?.cust_phone" style="text-align: center">
+              Record not found
+            </p>
+            <div class="row my-0" *ngIf="displayedData?.cust_phone">
+              <div class="col-md-12 mt-3 text-center">
+                <h3>Withdrawals</h3>
+                <img
+                  src="../../../../../assets/img/bkash.png"
+                  style="width: 150px"
+                  *ngIf="displayedData?.bank_name == 'Bkash'"
+                />
+                <img
+                  src="../../../../../assets/img/nagad.png"
+                  style="width: 150px"
+                  *ngIf="displayedData?.bank_name == 'Nagad'"
+                />
+                <img
+                  src="../../../../../assets/img/rocket.png"
+                  style="width: 150px"
+                  *ngIf="displayedData?.bank_name == 'Roket'"
+                />
+                <img
+                  src="../../../../../assets/img/upay.png"
+                  style="width: 150px"
+                  *ngIf="displayedData?.bank_name == 'Upay'"
+                />
+              </div>
+              <div class="col-md-12 mt-3">
+                <div class="row">
+                  <div class="col-6 label text-end">Payee Number:</div>
+                  <div class="col-6 text-start">
+                    <!-- <img
+                      src="../../../../../assets/img/phonecall.png"
+                      style="width: 30px"
+                    /> -->
+                    {{ displayedData?.cust_phone }}
+                    <span
+                      class="copy"
+                      (click)="copyMerchant(displayedData?.cust_phone)"
+                      >{{ "copy" | translate }}</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 mt-3">
+                <div class="row">
+                  <div class="col-6 text-end label">
+                    {{ "Bank" | translate }}:
+                  </div>
+                  <div class="col-6 text-start">
+                    {{ displayedData?.bank_name }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 mt-3">
+                <div class="row">
+                  <div class="col-6 label text-end">
+                    {{ "amount" | translate }}:
+                  </div>
+                  <div class="col-6 text-start">
+                    {{ displayedData?.amount }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 mt-3">
+                <div class="row">
+                  <div class="col-6 label text-end">
+                    {{ "service_type" | translate }}:
+                  </div>
+                  <div class="col-6 text-start">
+                    {{ formatLabel(displayedData?.service_type) }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 mt-3">
+                <div class="row">
+                  <div class="col-6 text-end label">Date:</div>
+                  <div class="col-6 text-start">
+                    {{ displayedData?.date | timezoneDate }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 mt-3 mb-3">
+                <div class="row text-center">
+                  <div class="col-md-12">
+                    <button
+                      type="button"
+                      class="btn btn-primary me-2"
+                      (click)="isType('approve')"
+                    >
+                      {{ "Approve" | translate }}
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn btn-danger rejected"
+                      (click)="isType('reject')"
+                    >
+                      {{ "Reject" | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6" style="margin: auto">
+                <form
+                  class="row g-3"
+                  [formGroup]="actionForm"
+                  #f="ngForm"
+                  (submit)="saveApprove(f.value)"
+                  autocomplete="off"
+                  *ngIf="formType == 'approve'"
+                >
+                  <div class="col-12">
+                    <!-- <select
+      class="form-select requiredField"
+      formControlName="modem_type"
+      (change)="modemType($event)"
+    >
+      <option selected disabled value="">Choose...</option>
+      <option value="p2c_qr">P2C QR</option>
+      <option value="p2c_api">P2C API</option>
+      <option value="p2p_agent">P2P Agent</option>
+    </select> -->
+                    <input
+                      class="form-control requiredField"
+                      formControlName="transaction_id"
+                      placeholder="123****"
+                      maxlength="{{ maxTrxID }}"
+                      (input)="checkMaxLimit(maxTrxID, $event)"
+                    />
+                  </div>
+                  <!-- <div class="col-12">
+                    <input
+                      class="form-control requiredField"
+                      formControlName="notes"
+                      placeholder="Notes"
+                    />
+                  </div> -->
+                  <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary me-2">
+                      {{ "save" | translate }}
+                    </button>
+                  </div>
+                </form>
+                <form
+                  class="row g-3"
+                  [formGroup]="rejectForm"
+                  #r="ngForm"
+                  (submit)="saveReject(r.value)"
+                  autocomplete="off"
+                  *ngIf="formType == 'reject'"
+                >
+                  <div class="col-12">
+                    <select
+                      class="form-select requiredField"
+                      formControlName="notes"
+                    >
+                      <option selected disabled value="">Choose...</option>
+                      <option value="Daily Limit Exceed">
+                        Daily Limit Exceed
+                      </option>
+                      <option value="Monthly Limit Exceed">
+                        Monthly Limit Exceed
+                      </option>
+                      <option value="Detail are incorrect">
+                        Detail are incorrect
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary me-2">
+                      {{ "save" | translate }}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <div
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">×</span>
+      </div>
+    </div>
+    <div class="modal-body">
+      <table
+        class="table table-striped table-bordered"
+        id="dash-all-transactions"
+      >
+        <tbody>
+          <tr>
+            <td>{{ "bank_type" | translate }}</td>
+            <td>
+              {{ showingData?.bank_type }}
+            </td>
+          </tr>
+          <tr>
+            <td>{{ "request_type" | translate }}</td>
+            <td>
+              {{ showingData?.request_type }}
+            </td>
+          </tr>
+          <tr>
+            <td>{{ "amount" | translate }}</td>
+            <td>
+              {{ showingData?.amount | appNumberFormat }}
+            </td>
+          </tr>
+          <tr>
+            <td>Cur.</td>
+            <td>
+              {{ showingData?.currency }}
+            </td>
+          </tr>
+          <tr>
+            <td>{{ "payment_id" | translate }}</td>
+            <td>
+              {{ showingData?.payment_id }}
+            </td>
+          </tr>
+          <tr>
+            <td>{{ "Call Back URL" | translate }}</td>
+            <td>
+              {{ showingData?.success_callback_url }}
+            </td>
+          </tr>
+          <tr>
+            <td>{{ "Faild Call Back URL" | translate }}</td>
+            <td>
+              {{ showingData?.failed_callback_url }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- <div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+	  </div> -->
+  </ng-template>
+  <ng-template #mymodal2 let-modal>
+    <div class="modal-header actionform">
+      <div
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">×</span>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="row mb-4">
+        <div class="col-md-12 text-center pb-4">
+          <div
+            class="swal2-icon swal2-warning swal2-icon-show"
+            style="display: flex"
+          >
+            <div class="swal2-icon-content">!</div>
+          </div>
+          <h2>{{ "are_you_sure" | translate }}?</h2>
+          <div>You want to {{ actionType }}</div>
+        </div>
+        <form
+          [formGroup]="actionForm"
+          #f="ngForm"
+          (submit)="saveAction(f.value)"
+          autocomplete="off"
+          class="actionForm mx-auto col-10 py-2"
+        >
+          <div class="col-md-12">
+            <input
+              type="text"
+              formControlName="notes"
+              class="form-control requiredField"
+              id="validationDefault01"
+              placeholder="{{ 'notes' | translate }}"
+            />
+          </div>
+          <div class="col-md-12">
+            <input
+              type="text"
+              formControlName="transaction_id"
+              class="form-control requiredField"
+              id="validationDefault01"
+              placeholder="{{ 'Transaction ID' | translate }}"
+            />
+          </div>
+          <div class="col-md-12 text-end pt-4">
+            <button type="submit" class="btn black me-2">Yes</button>
+            <button
+              type="button"
+              class="btn red"
+              (click)="modal.dismiss('Cross click')"
+            >
+              No
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ng-template>
+</main>

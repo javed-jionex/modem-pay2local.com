@@ -1,0 +1,176 @@
+<main id="main" class="main">
+  <div class="pagetitle_wrap">
+    <div class="pagetitle">
+      <h1>Deposit (Pending)</h1>
+      <!-- <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a routerLink="/merchant">{{ "merchants" | translate }}</a>
+          </li>
+          <li class="breadcrumb-item">{{ "withdrawals" | translate }}</li>
+        </ol>
+      </nav> -->
+    </div>
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-xl-12" style="margin-top: 50px">
+        <!-- <h3>Cash In</h3> -->
+        <div class="card withdraw-card col-md-6">
+          <div class="card-body profile-overview">
+            <p
+              *ngIf="!displayedData?.transaction_id"
+              style="text-align: center"
+            >
+              Record not found
+            </p>
+            <div class="row my-0" *ngIf="displayedData?.transaction_id">
+              <div class="col-md-12 mt-3 text-center">
+                <h3>Deposit</h3>
+                <img
+                  src="../../../../../assets/img/bkash.png"
+                  style="width: 150px"
+                  *ngIf="displayedData?.bank_name == 'Bkash'"
+                />
+                <img
+                  src="../../../../../assets/img/nagad.png"
+                  style="width: 150px"
+                  *ngIf="displayedData?.bank_name == 'Nagad'"
+                />
+                <img
+                  src="../../../../../assets/img/rocket.png"
+                  style="width: 150px"
+                  *ngIf="displayedData?.bank_name == 'Roket'"
+                />
+                <img
+                  src="../../../../../assets/img/upay.png"
+                  style="width: 150px"
+                  *ngIf="displayedData?.bank_name == 'Upay'"
+                />
+              </div>
+              <div class="col-md-12 mt-3" *ngIf="displayedData?.cust_phone">
+                <div class="row">
+                  <div class="col-6 label text-end">Payee Number:</div>
+                  <div class="col-6 text-start">
+                    <!-- <img
+                      src="../../../../../assets/img/phonecall.png"
+                      style="width: 30px"
+                    /> -->
+                    {{ displayedData?.cust_phone }}
+                    <span
+                      class="copy"
+                      (click)="copyMerchant(displayedData?.cust_phone)"
+                      >{{ "copy" | translate }}</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 mt-3">
+                <div class="row">
+                  <div class="col-6 label text-end">Transaction ID:</div>
+                  <div class="col-6 text-start">
+                    <!-- <img
+                      src="../../../../../assets/img/phonecall.png"
+                      style="width: 30px"
+                    /> -->
+                    {{ displayedData?.transaction_id }}
+                    <span
+                      class="copy"
+                      (click)="copyMerchant(displayedData?.transaction_id)"
+                      >{{ "copy" | translate }}</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 mt-3">
+                <div class="row">
+                  <div class="col-6 text-end label">
+                    {{ "Bank" | translate }}:
+                  </div>
+                  <div class="col-6 text-start">
+                    {{ displayedData?.bank_name }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 mt-3">
+                <div class="row">
+                  <div class="col-6 label text-end">
+                    {{ "amount" | translate }}:
+                  </div>
+                  <div class="col-6 text-start">
+                    {{ displayedData?.amount }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 mt-3">
+                <div class="row">
+                  <div class="col-6 label text-end">
+                    {{ "service_type" | translate }}:
+                  </div>
+                  <div class="col-6 text-start">
+                    {{ formatLabel(displayedData?.service_type) }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 mt-3">
+                <div class="row">
+                  <div class="col-6 text-end label">Date:</div>
+                  <div class="col-6 text-start">
+                    {{ displayedData?.date | timezoneDate }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 mt-3 mb-3">
+                <div class="row text-center">
+                  <div class="col-md-12">
+                    <button
+                      type="button"
+                      class="btn btn-primary me-2"
+                      (click)="saveApprove()"
+                    >
+                      {{ "Approve" | translate }}
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn btn-danger rejected"
+                      (click)="isType('reject')"
+                    >
+                      {{ "Reject" | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6" style="margin: auto">
+                <form
+                  class="row g-3"
+                  [formGroup]="actionForm"
+                  #r="ngForm"
+                  (submit)="saveReject(r.value)"
+                  autocomplete="off"
+                  *ngIf="formType == 'reject'"
+                >
+                  <div class="col-12">
+                    <input
+                      class="form-control requiredField"
+                      formControlName="notes"
+                      placeholder="Reason"
+                    />
+                  </div>
+
+                  <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary me-2">
+                      {{ "save" | translate }}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,139 @@
+/* .docs-article table tr td {
+    text-align: left !important;
+}
+.docs-article table tr th {
+    text-align: left !important;
+} */
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+  padding: 10px;
+}
+.selectbank.selectServiceType {
+  width: 35%;
+}
+.screenshot {
+  width: 100%;
+  text-align: center;
+}
+
+.screenshot img {
+  width: 30%;
+}
+.table.header-border tr td {
+  border: 1px solid #007250;
+  color: green;
+}
+/* remove border radius for the tab */
+
+#exTab1 .nav-pills > li > a {
+  border-radius: 0;
+}
+
+#v-pills-tabContent .tab-pane {
+  border-left: 5px solid var(--main-color);
+  padding: 1rem 0 1rem 30px;
+}
+
+.nav-pills .nav-link {
+  text-align: left;
+  border-bottom: 1px solid;
+}
+tr td {
+  max-width: 1000px;
+}
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  --bs-table-bg-type: transparent;
+}
+
+/* change border radius for the tab , apply corners on top*/
+#developer {
+  font-family: "Kanit", sans-serif !important;
+}
+
+#developer table {
+  margin-bottom: 30px;
+}
+#developer table tr:nth-child(1) th {
+  background-color: var(--color-one);
+  color: #fff;
+}
+#developer table td:nth-child(1) {
+  padding-left: 15px;
+}
+#developer table th:nth-child(1) {
+  padding-left: 15px;
+}
+
+.tab-content h3 {
+  font-weight: 700;
+}
+
+.row_dev {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.row_dev .col_md_3 {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 90px;
+  width: 300px;
+}
+
+.row_dev .col_md_9 {
+  flex: 1;
+}
+
+.row_dev .col_md_3 h3 {
+  padding: 20px;
+  font-weight: 700;
+  font-size: 20px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.row_dev .col_md_9 h3 {
+  padding: 20px;
+  font-weight: 700;
+  font-size: 20px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background: linear-gradient(45deg, var(--main-color), var(--second-color));
+  color: #fff;
+  margin: 15px 0;
+}
+
+.nav-pills .nav-link {
+  padding: 15px 20px;
+  border: none;
+  color: #2c2c2c;
+  letter-spacing: 0.2px;
+  font-weight: 500;
+  font-size: 15px;
+}
+.nav-pills .nav-link h6 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.nav-pills .nav-link span {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-tabs .nav-link h6 {
+  color: #000;
+}
+
+.nav-tabs .nav-link.active h6 {
+  color: var(--second-color);
+}

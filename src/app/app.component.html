@@ -1,0 +1,17 @@
+<router-outlet></router-outlet>
+<footer class="powered_footer" *ngIf="isCheckedJionex">
+  <div class="col-12 text-center py-2 d">
+    Powered by
+    <a href="https://jionex.com/" target="_blank">
+      <img
+        class="powerdby"
+        width="80px"
+        [src]="
+          this.themeMode === 'dark-style'
+            ? '/assets/img/jionex_logo_white.png'
+            : '/assets/img/jionex_logo.png'
+        "
+      />
+    </a>
+  </div>
+</footer>

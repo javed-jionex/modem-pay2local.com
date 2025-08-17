@@ -1,0 +1,17 @@
+<button
+  [disabled]="loading || disabled"
+  class="btn btn-primary"
+  [ngClass]="buttonClass"
+>
+  <div *ngIf="loading; else buttonContent">
+    <span
+      class="spinner-border spinner-border-sm"
+      role="status"
+      aria-hidden="true"
+    ></span>
+    <span class="sr-only">{{ "loading" | translate }}...</span>
+  </div>
+  <ng-template #buttonContent>
+    <ng-content></ng-content>
+  </ng-template>
+</button>

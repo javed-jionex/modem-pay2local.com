@@ -1,0 +1,166 @@
+<form
+  class="row g-3"
+  [formGroup]="settingSearchForm"
+  #f="ngForm"
+  (submit)="search(f.value)"
+  autocomplete="off"
+>
+  <div class="col-2">
+    <div class="dataTables_length">
+      <label class="form-label">{{ "show_entries" | translate }}</label>
+      <select
+        [(ngModel)]="itemsPerPage"
+        formControlName="page_size"
+        class="form-select"
+      >
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+  </div>
+  <!-- <div class="col-2">
+		<label for="inputPassword4" class="form-label">{{ 'start_date' | translate }}</label>
+		<input
+			type="text"
+			class="form-control"
+			formControlName="start_date"
+			placeholder="dd/mm/yyyy"
+			name="d1"
+			(click)="d1.toggle()"
+			ngbDatepicker
+			#d1="ngbDatepicker"
+		/>
+	</div>
+    <div class="col-2">
+		<label for="inputPassword4" class="form-label">{{ 'end_date' | translate }}</label>
+		<input
+			type="text"
+			class="form-control"
+			formControlName="end_date"
+			placeholder="dd/mm/yyyy"
+			name="d2"
+			(click)="d2.toggle()"
+			ngbDatepicker
+			#d2="ngbDatepicker"
+		/>
+	</div> -->
+  <!-- <div class="col-2">
+    <label for="inputPassword4" class="form-label">{{
+      "start_date" | translate
+    }}</label>
+    <input
+      placeholder="yyyy-dd-mm"
+      [max]="today"
+      [owlDateTimeTrigger]="startDt"
+      class="form-control requiredField"
+      formControlName="start_date"
+      [owlDateTime]="startDt"
+      readonly
+    />
+    <owl-date-time #startDt [showSecondsTimer]="isTime"></owl-date-time>
+  </div>
+
+  <div class="col-2">
+    <label for="inputPassword4" class="form-label">{{
+      "end_date" | translate
+    }}</label>
+    <input
+      placeholder="yyyy-dd-mm"
+      [max]="today"
+      [owlDateTimeTrigger]="endDt"
+      class="form-control requiredField"
+      formControlName="end_date"
+      [owlDateTime]="endDt"
+      readonly
+    />
+    <owl-date-time #endDt [showSecondsTimer]="isTime"></owl-date-time>
+  </div>
+  <div class="col-2">
+    <label for="inputPassword4" class="form-label">{{
+      "customer_number" | translate
+    }}</label>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="cust_phone"
+      id="inputEmail4"
+      placeholder="{{ 'customer_number' | translate }}"
+    />
+  </div>
+  <div class="col-2">
+    <label for="inputPassword4" class="form-label">{{
+      "transaction_id" | translate
+    }}</label>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="transaction_id"
+      id="inputEmail4"
+      placeholder="{{ 'transaction_id' | translate }}"
+    />
+  </div>
+  <div class="col-2">
+    <label for="inputPassword4" class="form-label">{{
+      "merchant_id" | translate
+    }}</label>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="merchant_id"
+      id="inputEmail4"
+      placeholder="{{ 'merchant_id' | translate }}"
+    />
+  </div>
+  <div class="col-2">
+    <label for="inputNanme4" class="form-label">{{
+      "service_type" | translate
+    }}</label>
+    <select
+      class="form-select"
+      formControlName="modem_type"
+      (change)="modemType($event)"
+    >
+      <option selected disabled value="">Choose...</option>
+      <option value="p2c_qr">P2C QR</option>
+      <option value="p2c_api">P2C API</option>
+      <option value="p2p_agent">P2P Agent</option>
+    </select>
+  </div>
+  <div class="col-2">
+    <label for="inputPassword4" class="form-label">{{
+      "bank_type" | translate
+    }}</label>
+    <select
+      class="form-select"
+      name="mobile_banking_id"
+      formControlName="mobile_banking_id"
+      (click)="bankType()"
+    >
+      <option selected disabled value="">Choose...</option>
+      <option *ngFor="let item of bankList" [value]="item?.id">
+        {{ item?.bank_name }}
+      </option>
+    </select>
+    <div class="error-message" *ngIf="banTypeError">
+      <div class="child-error-message">{{ banTypeError }}</div>
+    </div>
+  </div> -->
+  <div class="text-start col-3 pt-4 mt-4">
+    <button type="submit" class="btn btn-primary">Search</button>
+    <button
+      type="button"
+      (click)="resetSearch()"
+      [disabled]="isReset"
+      class="btn btn-primary mx-1"
+    >
+      <i class="fa fa-refresh" aria-hidden="true"></i>
+    </button>
+  </div>
+  <!-- <div class="col-md-8 text-end pt-4 mt-4">
+        <button type="button" class="btn btn-primary mx-2" (click)="docDocument('csv')">CSV <i class="fa fa-download"></i></button>
+        <button type="button" class="btn btn-primary" (click)="docDocument('xlsx')">XLSX <i class="fa fa-download"></i></button>
+    </div> -->
+</form>

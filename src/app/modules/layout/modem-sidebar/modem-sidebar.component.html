@@ -1,0 +1,296 @@
+<!-- ======= Sidebar ======= -->
+<!-- <aside id="sidebar" class="sidebar">
+	<ul class="sidebar-nav" id="sidebar-nav">
+	
+		<li
+			class="nav-item"
+			*ngFor="let menu of menus; let i= index;"
+		>
+			<a
+				class="nav-link collapsed"
+				[routerLink]="menu?.url"
+				*ngIf="menu?.isEnabled && (menu?.name == 'Dashboard')"
+			>
+			<i [ngClass]="menu?.icon"></i><span>{{menu?.name}}</span
+				><i class="bi bi-chevron-down ms-auto" *ngIf="menu?.child?.length > 0"></i>
+			</a>
+			<a
+				class="nav-link collapsed"
+				[attr.data-bs-target]="'#'+menu?.id"
+				data-bs-toggle="collapse"
+				href="#"
+				*ngIf="menu?.isEnabled && (menu?.name != 'Dashboard')"
+			>
+				<i [ngClass]="menu?.icon"></i><span>{{menu?.name}}</span
+				><i class="bi bi-chevron-down ms-auto" *ngIf="menu?.child?.length > 0"></i>
+			</a>
+
+			<ul
+				[id]="menu?.id"
+				class="nav-content collapse"
+				[attr.data-bs-parent]="'#'+menu?.id"
+				*ngIf="menu?.child?.length > 0"
+			>
+				<li	*ngFor="let subMenu of menu?.child">
+					<a
+						[routerLink]="subMenu?.url"
+						routerLinkActive="active"
+						*ngIf="subMenu?.view !=false || subMenu?.action !=false"
+					>
+						<i class="bi bi-circle"></i><span>{{subMenu?.name}}</span>
+						<span class="badge bg-info" style="margin-left: 19px" *ngIf="subMenu?.name == 'Fake'">{{
+							statusCount?.fake || 0
+						}}</span>
+						<span class="badge bg-primary" style="margin-left: 19px" *ngIf="subMenu?.name == 'Success'">{{
+							statusCount?.success || 0
+						}}</span>
+						<span class="badge bg-warning" style="margin-left: 19px" *ngIf="subMenu?.name == 'Pending'">{{
+							statusCount?.pending || 0
+						}}</span>
+						<span class="badge bg-danger" style="margin-left: 19px" *ngIf="subMenu?.name == 'Rejected'">{{
+							statusCount?.rejected || 0
+						}}</span>
+						<span class="badge bg-success" style="margin-left: 19px" *ngIf="subMenu?.name == 'Approved'">{{
+							statusCount?.approved || 0
+						}}</span>
+						<span class="badge bg-danger" style="margin-left: 19px"  *ngIf="subMenu?.name == 'Danger'">{{
+							statusCount?.danger || 0
+						}}</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</aside> -->
+<!-- <aside id="sidebar" class="sidebar">
+	<ul class="sidebar-nav" id="sidebar-nav">
+		<li
+			class="nav-item"
+			*ngFor="let menu of menus; let i= index;"
+		>
+			<a
+				class="nav-link collapsed"
+				[routerLink]="menu?.url"
+				*ngIf="menu?.showOption && (menu?.name == 'Dashboard')"
+			>
+			<i [ngClass]="menu?.icon"></i><span>{{menu?.name}}</span
+				><i class="bi bi-chevron-down ms-auto" *ngIf="menu?.permissions?.length > 0"></i>
+			</a>
+			<a
+				class="nav-link collapsed"
+				[attr.data-bs-target]="'#'+menu?.id"
+				data-bs-toggle="collapse"
+				href="#"
+				[ngClass]="menuName == menu?.name ? '' : 'removeCollapsed'"
+				*ngIf="menu?.showOption && (menu?.name != 'Dashboard')"
+				(click)="menuCollapsed(menu?.name)"
+			>
+				<i [ngClass]="menu?.icon"></i><span>{{menu?.name}}</span
+				><i class="bi bi-chevron-down ms-auto" *ngIf="menu?.permissions?.length > 0"></i>
+			</a>
+
+			<ul
+				[id]="menu?.id"
+				class="nav-content collapse"
+				[attr.data-bs-parent]="'#'+menu?.id"
+				[ngClass]="menuName == menu?.name ? 'show' : ''"
+				*ngIf="menu?.permissions?.length > 0"
+			>
+				<li	*ngFor="let subMenu of menu?.permissions">
+					<a
+						[routerLink]="subMenu?.url"
+						routerLinkActive="active"
+						*ngIf="subMenu?.showOption !=false"
+					>
+						<i class="bi bi-circle"></i><span>{{subMenu?.name}}</span>
+						<span class="badge bg-info" style="margin-left: 19px" *ngIf="subMenu?.name == 'Fake'">{{
+							statusCount?.fake || 0
+						}}</span>
+						<span class="badge bg-primary" style="margin-left: 19px" *ngIf="subMenu?.name == 'Success'">{{
+							statusCount?.success || 0
+						}}</span>
+						<span class="badge bg-warning" style="margin-left: 19px" *ngIf="subMenu?.name == 'Pending'">{{
+							statusCount?.pending || 0
+						}}</span>
+						<span class="badge bg-danger" style="margin-left: 19px" *ngIf="subMenu?.name == 'Rejected'">{{
+							statusCount?.rejected || 0
+						}}</span>
+						<span class="badge bg-success" style="margin-left: 19px" *ngIf="subMenu?.name == 'Approved'">{{
+							statusCount?.approved || 0
+						}}</span>
+						<span class="badge bg-danger" style="margin-left: 19px"  *ngIf="subMenu?.name == 'Danger'">{{
+							statusCount?.danger || 0
+						}}</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</aside> -->
+
+<aside id="sidebar" class="sidebar">
+  <ul id="sidebar-nav" class="sidebar-nav">
+    <li class="nav-item">
+      <a
+        class="nav-link collapsed"
+        routerLink="/admin/dashboard"
+        title="{{ 'dashboard' | translate }}"
+        (click)="closeSidebar()"
+        ><i class="bi bi-grid"></i><span>{{ "dashboard" | translate }}</span></a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link collapsed"
+        routerLink="/admin/b2b-payments"
+        title="{{ 'B2B Payments' | translate }}"
+        (click)="closeSidebar()"
+        ><i class="fa fa-money" aria-hidden="true"></i>
+        <span>{{ "B2B Payments" | translate }}</span></a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        data-bs-toggle="collapse"
+        href="#"
+        title="Pending Request"
+        class="nav-link collapsed"
+        data-bs-target="#pending-nav"
+        routerLinkActive="active"
+        [ngClass]="menuName == 'Pending Request' ? '' : 'removeCollapsed'"
+        (click)="menuCollapsed('Pending Request')"
+        ><i class="bi bi-layers-fill"></i><span>Pending Request</span>
+        <!-- <span
+						class="badge bg-primary"
+						style="margin-left: 19px"
+						>{{pendinCounts?.total || 0}}</span> -->
+        <!-- <span
+          style="margin-left: 19px"
+          [ngClass]="
+            pendinCounts?.total > 0 ? 'badge bg-danger' : 'badge bg-success'
+          "
+          >{{ pendinCounts?.total || 0 }}</span
+        > -->
+
+        <i class="bi bi-chevron-down ms-auto"></i
+      ></a>
+      <ul
+        class="nav-content collapse"
+        id="pending-nav"
+        data-bs-parent="#pending-nav"
+        [ngClass]="menuName == 'Pending Request' ? 'show' : ''"
+      >
+        <li>
+          <a
+            routerLink="/admin/deposit"
+            routerLinkActive="active"
+            (click)="closeSidebar()"
+            ><i class="bi bi-circle"></i
+            ><span>{{ "deposits" | translate }}</span>
+            <!-- <span
+							class="badge bg-primary"
+							style="margin-left: 19px"
+							>{{pendinCounts?.deposit || 0}}</span> -->
+            <!-- <span
+              style="margin-left: 19px"
+              [ngClass]="
+                pendinCounts?.deposit > 0
+                  ? 'badge bg-danger'
+                  : 'badge bg-success'
+              "
+              >{{ pendinCounts?.deposit || 0 }}</span
+            > -->
+          </a>
+        </li>
+        <li>
+          <a
+            routerLink="/admin/withdrawals"
+            routerLinkActive="active"
+            (click)="closeSidebar()"
+            ><i class="bi bi-circle"></i
+            ><span>{{ "withdrawals" | translate }}</span>
+            <!-- <span 
+						class="badge bg-primary"
+						style="margin-left: 19px"
+						>{{pendinCounts?.withdraw || 0}}</span> -->
+            <!-- <span
+              style="margin-left: 19px"
+              [ngClass]="
+                pendinCounts?.withdraw > 0
+                  ? 'badge bg-danger'
+                  : 'badge bg-success'
+              "
+              >{{ pendinCounts?.withdraw || 0 }}</span
+            > -->
+          </a>
+        </li>
+
+        <li></li>
+      </ul>
+    </li>
+
+    <!-- <li class="nav-item">
+			<a
+			
+				data-bs-toggle="collapse"
+				href="#"
+				class="nav-link"
+				data-bs-target="#incomplete-nav"
+				aria-expanded="true"
+				><i
+					class="bi bi-layers-fill"
+				></i
+				><span>Incomplete Requests</span
+				><i
+				
+					class="bi bi-chevron-down ms-auto"
+				></i>
+			</a>
+			<ul
+			
+				class="nav-content show collapse"
+				id="incomplete-nav"
+				ng-reflect-ng-class="show"
+				data-bs-parent="#incomplete-nav"
+			>
+			<li>
+				<a
+				
+					routerlinkactive="active"
+					routerLink="/admin/incomplete-request/deposits"
+					><i
+					
+						class="bi bi-circle"
+					></i
+					><span>{{ 'deposits' | translate }}</span></a
+				>
+			</li>
+			<li>
+				<a
+				
+					routerlinkactive="active"
+					routerLink="/admin/incomplete-request/withdrawals"
+					><i
+					
+						class="bi bi-circle"
+					></i
+					><span>{{ 'withdrawals' | translate }}</span></a
+				>
+			</li>
+				<li>
+					<a
+					
+						routerlinkactive="active"
+						routerLink="/admin/incomplete-request/refund-requests"
+						><i
+						
+							class="bi bi-circle"
+						></i
+						><span>{{ 'refunds' | translate }}</span></a
+					>
+				</li>
+			</ul>
+		</li> -->
+  </ul>
+</aside>
+<!-- End Sidebar -->

@@ -1,0 +1,354 @@
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+  <div class="d-flex align-items-center justify-content-between header-logo">
+    <a
+      href="/admin/withdrawals"
+      class="logo d-flex align-items-center"
+      *ngIf="themeMode == 'dark-style'"
+    >
+      <img src="assets/img/white-logo.png" alt="" />
+    </a>
+    <a
+      href="/admin/withdrawals"
+      class="logo d-flex align-items-center"
+      *ngIf="themeMode == 'light-style'"
+    >
+      <img src="assets/img/logo.png" alt="" />
+    </a>
+  </div>
+  <!-- End Logo -->
+
+  <!-- <div class="search-bar">
+		<form
+			class="search-form d-flex align-items-center"
+			method="POST"
+			action="#"
+		>
+			<input
+				type="text"
+				name="query"
+				placeholder="Search"
+				title="Enter search keyword"
+			/>
+			<button type="submit" title="Search">
+				<i class="bi bi-search"></i>
+			</button>
+		</form>
+	</div> -->
+  <!-- End Search Bar -->
+  <section
+    class="section px-md-4 px-2 d-lg-block d-none"
+    *ngIf="userProfile?.original_user_id"
+  >
+    <div class="text-center loginback">
+      You are login with {{ userProfile?.userDetail?.first_name }}
+      {{ userProfile?.userDetail?.last_name }}:
+      <a
+        href="javaScript:void(0)"
+        (click)="loginWithSuperadmin(userProfile?.original_user_id)"
+      >
+        Login back to with Admin</a
+      >
+    </div>
+  </section>
+  <div class="search-bar ms-auto flex-shrink-0">
+    <fieldset class="d-flex text-end">
+      <div class="form-check head-icon px-4">
+        <!-- <select
+          class="form-select requiredField"
+          (change)="setProjectName($event)"
+          [(ngModel)]="countryName"
+          style="width: 150px"
+        >
+          <option selected disabled value="">Country...</option>
+          <option value="{{ serverType }}_bangladesh" *ngIf="isSandbox">
+            {{ serverType }} Bangladesh
+          </option>
+          <option value="{{ serverType }}_egypt" *ngIf="isSandbox">
+            {{ serverType }} Egypt
+          </option>
+          <option value="{{ serverType }}_india" *ngIf="isSandbox">
+            {{ serverType }} India
+          </option>
+          <option value="{{ serverType }}_nepal">Nepal</option> 
+          <option value="{{ serverType }}_pakistan" *ngIf="isSandbox">
+            {{ serverType }} Pakistan
+          </option>
+          <option value="bangladesh" *ngIf="!isSandbox">Bangladesh</option>
+          <option value="egypt">Egypt</option>
+          <option value="india">India</option>
+          <option value="pakistan">Pakistan</option> 
+        </select> -->
+        <!-- <a href="/admin/deposits" class="icon" *ngIf="pendingDepositTotal">
+          <i class="bi bi-box-arrow-down"></i>
+          <div class="count">
+            <span>{{ pendingDepositTotal }}</span>
+          </div>
+        </a>
+        <a href="/admin/withdrawals" class="icon" *ngIf="pendingWithdrawTotal">
+          <i class="bi bi-box-arrow-up"></i>
+          <div class="count">
+            <span>{{ pendingWithdrawTotal }}</span>
+          </div>
+        </a>
+        <a href="/admin/support-tickets" class="icon" *ngIf="supportTotal">
+          <i class="bi bi-headphones"></i>
+          <div class="count">
+            <span>{{ supportTotal }}</span>
+          </div>
+        </a> -->
+        <!-- <input class="form-check-input" type="radio" name="themeMode"  [(ngModel)]="themeMode"  id="gridRadios2" value="dark-style" (change)="changeThemeMode($event,'dark-style')"> -->
+        <i class="bi bi-list toggle-sidebar-btn" (click)="toggleSidebar()"></i>
+        <i
+          *ngIf="themeMode == 'light-style'"
+          class="fa fa-moon-o"
+          aria-hidden="true"
+          title="Dark Mode"
+          (click)="changeThemeMode($event, 'dark-style')"
+        ></i>
+        <i
+          *ngIf="themeMode == 'dark-style'"
+          class="fa fa-lightbulb-o"
+          aria-hidden="true"
+          title="Light Mode"
+          (click)="changeThemeMode($event, 'light-style')"
+        ></i>
+        <!-- <i
+          class="fa fa-moon-o"
+          aria-hidden="true"
+          title="Dark Mode"
+          (click)="changeThemeMode($event, 'dark-style')"
+        ></i> -->
+        <!-- <label class="form-check-label" for="gridRadios2">
+				  Dark
+				</label> -->
+      </div>
+      <!-- <div class="">
+        <div>{{ "current_balance" | translate }}:</div>
+        <strong
+          >{{ currentBalance | appAmountFormat
+          }}{{ "country_symbol" | translate }}</strong
+        >
+        <i
+          [ngClass]="activeClass"
+          class="fa fa-refresh custom-refresh px-2"
+          aria-hidden="true"
+          (click)="refreshBalance()"
+        ></i>
+      </div> -->
+    </fieldset>
+  </div>
+
+  <nav class="header-nav">
+    <ul class="d-flex align-items-center">
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link nav-icon search-bar-toggle" href="#">
+          <i class="bi bi-search"></i>
+        </a>
+      </li>
+      <!-- End Search Icon-->
+      <!-- End Messages Nav -->
+      <!-- <li class="nav-item pe-3" *ngIf="isShow">
+				{{ 'current_balance' | translate }}: <strong>{{ currentBalance }}</strong>
+				<i
+					[ngClass]="activeClass"
+					class="fa fa-refresh custom-refresh px-2"
+					aria-hidden="true"
+					(click)="refreshBalance()"
+				></i>
+			</li> -->
+      <li class="nav-item dropdown pe-3">
+        <a
+          class="nav-link nav-profile d-flex align-items-center pe-0"
+          href="#"
+          data-bs-toggle="dropdown"
+        >
+          <img
+            src="assets/img/profile-img.jpg"
+            alt="Profile"
+            class="rounded-circle"
+          />
+          <span class="d-none d-md-block dropdown-toggle ps-2">{{
+            this.userProfile?.userDetail?.full_name
+          }}</span> </a
+        ><!-- End Profile Iamge Icon -->
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <!-- <li class="dropdown-header">
+            <h6>{{ this.userProfile?.userDetail?.full_name }}</h6>
+            <span>{{this.userProfile?.userRoles[0]}}</span>
+          </li> -->
+          <!-- <li>
+						<hr class="dropdown-divider" />
+					</li>
+
+					<li>
+						<a
+							class="dropdown-item d-flex align-items-center"
+							href="users-profile.html"
+						>
+							<i class="bi bi-person"></i>
+							<span>My Profile</span>
+						</a>
+					</li>
+					<li>
+						<hr class="dropdown-divider" />
+					</li>
+
+					<li>
+						<a
+							class="dropdown-item d-flex align-items-center"
+							href="users-profile.html"
+						>
+							<i class="bi bi-gear"></i>
+							<span>{{ 'acc_settings' | translate }}</span>
+						</a>
+					</li>
+					<li>
+						<hr class="dropdown-divider" />
+					</li>
+
+					<li>
+						<a
+							class="dropdown-item d-flex align-items-center"
+							href="pages-faq.html"
+						>
+							<i class="bi bi-question-circle"></i>
+							<span>Need Help?</span>
+						</a>
+					</li> -->
+          <!-- <li>
+            <hr class="dropdown-divider" />
+          </li> -->
+          <!-- <li>
+            <a
+              class="dropdown-item d-flex align-items-center"
+              href="/admin/profile"
+            >
+              <i class="bi bi-person"></i>
+              <span>My Profile</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item d-flex align-items-center"
+              href="/admin/balance"
+            >
+              <i class="bi-cash-stack"></i>
+              <span>{{ "balance" | translate }}</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item d-flex align-items-center"
+              href="/admin/commission"
+            >
+              <i class="bi-cash-stack"></i>
+              <span>{{ "commission" | translate }}</span>
+            </a>
+          </li> -->
+          <!-- <li>
+						<a class="dropdown-item d-flex align-items-center" href="/admin/overview">
+							<i class="bi bi-person"></i>
+							<span>Overview</span>
+						</a>
+					</li> -->
+          <!-- <li>
+						<a class="dropdown-item d-flex align-items-center" [routerLink]="'/admin/overview'" routerLinkActive="active">
+							<i class="bi bi-person"></i>
+							<span>overview</span>
+						</a>
+					</li> -->
+          <!-- <li class="" *ngIf="getPermisions('Sms Inbox','All SMS')">
+						<a
+							routerLink="/admin/sms-inboxs"
+							class=""
+							routerLinkActive="active"
+							><i class="bi bi-circle"></i><span>{{ 'all_sms' | translate }}</span></a
+						>
+					<li> -->
+          <li>
+            <a
+              class="dropdown-item d-flex align-items-center"
+              href="/admin/profile"
+            >
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <span>profile</span>
+            </a>
+          </li>
+          <!-- <li>
+            <a
+              class="dropdown-item d-flex align-items-center"
+              href="/admin/change-password"
+            >
+              <i class="bi bi-key"></i>
+              <span>{{ 'change_password' | translate }}</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item d-flex align-items-center"
+              href="/admin/balance"
+            >
+              <i class="bi-cash-stack"></i>
+              <span>{{ 'balance' | translate }}</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item d-flex align-items-center"
+              href="/admin/developer-settings"
+            >
+              <i class="bi bi-people"></i>
+              <span>Developers</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item d-flex align-items-center"
+              href="/admin/timezone"
+            >
+              <i class="bi bi-clock"></i>
+              <span>{{ 'timezone' | translate }}</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item d-flex align-items-center"
+              href="/admin/callbacks"
+            >
+              <i class="bi bi-grid"></i>
+              <span>Callbacks</span>
+            </a>
+          </li> -->
+          <!-- <li>
+						<a
+							class="dropdown-item d-flex align-items-center"
+							href="/admin/api-document"
+						>
+							<i class="bi bi-person"></i>
+							<span>API DOC</span>
+						</a>
+					</li> -->
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
+          <li>
+            <span
+              class="dropdown-item d-flex align-items-center"
+              (click)="logout()"
+            >
+              <i class="bi bi-box-arrow-right"></i>
+              <span>Sign Out</span>
+            </span>
+          </li>
+        </ul>
+        <!-- End Profile Dropdown Items -->
+      </li>
+      <!-- End Profile Nav -->
+    </ul>
+  </nav>
+  <!-- End Icons Navigation -->
+</header>
+
+<!-- End Header -->

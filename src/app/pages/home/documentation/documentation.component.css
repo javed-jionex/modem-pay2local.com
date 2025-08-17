@@ -1,0 +1,504 @@
+* {
+    font-family: 'Roboto', sans-serif;
+  
+  }
+  
+  .home-page {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #000;
+  }
+  .table tbody tr td {
+    background-color: #e9ecef;
+    color:  #222e3c !important;
+}
+  pre {
+    font-size: 14px !important;
+}
+.document h3 {
+    color: #1b9dd7;
+    border-bottom: 2px dotted #9f1bd7;
+}
+.document .danger {
+    color: red;
+}
+  .home-nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99;
+  }
+  
+  .home-nav.active {
+    background: #fff;
+    box-shadow: 0 0 15px 0 #ddd;
+  }
+  
+  div#darkModeToggleBtn {
+    position: fixed;
+    right: 0px;
+    top: 50%;
+    transform: translate(2px, -50%);
+    border: 2px solid #1b9dd7;
+    width: 36px;
+    font-size: 20px;
+    color: #1b9dd7;
+    text-align: center;
+    border-radius: 20px 0 0 20px;
+    background: #fff;
+  }
+  
+  .menu-logo .dark-mode {
+    display: none;
+  }
+  
+  nav {
+    padding: 15px 0;
+  }
+  
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .home-header a {
+    text-decoration: none;
+  }
+  
+  .home-header .row {
+    align-items: center;
+  }
+  
+  .menu-logo img {
+    max-width: 200px;
+  }
+  
+  .login-btn {
+    text-align: right;
+  }
+  
+  .login-btn a {
+    display: inline-block;
+    background: linear-gradient(45deg, var(--main-color), var(--second-color));
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 25px;
+    border: 2px solid #ffffff;
+  }
+  
+  .nav-menu-item a {
+    font-size: 20px;
+    padding: 0 20px;
+    color: #000;
+  }
+  
+  .home-banner {
+    background-image: url(src/assets/img/home-banner.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 150px;
+    padding-bottom: 100px;
+  }
+  
+  .home-banner .container {
+    height: 100%;
+  }
+  
+  .home-banner .container .row {
+    height: 100%;
+  }
+  
+  .banner-content h1 {
+    font-size: 48px;
+    font-weight: 400;
+  }
+  
+  .banner-content p {
+    margin: 50px 0;
+  }
+  
+  .image-secure-payment img {
+    width: 100%;
+  }
+  
+  .image-secure-payment {
+    background: #fff;
+    padding: 50px;
+    border-radius: 100%;
+    height: 270px;
+    width: 270px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .secure-payment {
+    padding: 150px 0;
+  }
+  
+  .secure-payment .content {
+    background: linear-gradient(45deg, var(--main-color), var(--second-color));
+    padding: 50px;
+    border-radius: 70px;
+  }
+  
+  .secure-payment .content-left {
+    text-align: end;
+    color: #fff;
+    margin: 0;
+  }
+  
+  .secure-payment .content-right {
+    color: #fff;
+    margin: 0;
+  }
+  
+  .secure-payment .head {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .secure-payment .head h2 {
+    font-size: 22px;
+    color: #1b9dd7;
+  }
+  
+  .secure-payment .head h3 {
+    font-size: 44px;
+    max-width: 600px;
+    margin: auto;
+    color: var(--main-txt-color);
+    margin-top: 20px;
+  }
+  
+  
+  .payment-options {
+    background: #1b9dd740;
+    padding: 100px 0;
+    border-radius: 70px;
+  }
+  
+  .payment-options .head {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .payment-options .head h2 {
+    font-size: 22px;
+    color: #1b9dd7;
+  }
+  
+  .payment-options .head h3 {
+    font-size: 44px;
+    max-width: 600px;
+    margin: auto;
+    color: var(--main-txt-color);
+    margin-top: 20px;
+  }
+  
+  .payment-option img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+  }
+  
+  .payment-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 140px;
+    box-shadow: 0 20px 15px 0 #ddd;
+    border-radius: 100%;
+    margin: auto;
+    overflow: hidden;
+    background: #fff;
+  }
+  
+  
+  
+  .country {
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px 0 #ddd;
+    margin: 0 10px;
+  }
+  
+  .primary-countries {
+    margin-bottom: 50px;
+  }
+  
+  .country-img img {
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 0 #ddd;
+  }
+  
+  .country-name h2 {
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    text-align: center;
+  }
+  
+  .country-img {
+    padding: 15px;
+    background: #fff;
+    border-radius: 10px;
+  }
+  
+  .globel-coverage .head h2 {
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--main-txt-color);
+  }
+  
+  .globel-coverage {
+    padding: 150px 0;
+  }
+  
+  .head-content h2 {
+    font-size: 22px;
+    color: #1b9dd7;
+  }
+  
+  .head-content {
+    text-align: center;
+    max-width: 750px;
+    margin: auto;
+    margin-bottom: 80px;
+  }
+  
+  .head-content h3 {
+    font-size: 44px;
+    max-width: 600px;
+    margin: auto;
+    color: var(--main-txt-color);
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .carrier-section {
+    margin-top: 150px;
+  }
+  
+  .carrier {
+    text-align: center;
+    background: linear-gradient(45deg, var(--main-color), var(--second-color));
+    color: #fff;
+    padding: 30px;
+    border-radius: 30px;
+    height: 100%;
+  }
+  
+  .crypto-deposit {
+    margin-bottom: 150px;
+  }
+  
+  .crypto-deposit .content h2 {
+    font-size: 44px;
+    color: var(--main-txt-color);
+    margin-bottom: 20px;
+  }
+  
+  .crypto-deposit .image img {
+    width: 100%;
+  }
+  
+  .footer-logo img {
+    width: 100%;
+  }
+  
+  footer {
+    background: linear-gradient(45deg, var(--main-color), var(--second-color));
+    padding: 50px 0;
+  }
+  
+  .footer-menu-item {
+    text-align: center;
+  }
+  
+  .footer-menu-item a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  
+  @media (max-width:1023px) {
+    .home-banner {
+      padding-top: 100px;
+      padding-bottom: 70px;
+    }
+  
+    .banner-content h1 {
+      font-size: 34px;
+    }
+  
+    .secure-payment {
+      padding: 70px 0;
+    }
+  
+    .crypto-deposit {
+      margin-bottom: 70px;
+    }
+  
+    .payment-options {
+      padding: 60px 0;
+    }
+  
+    .carrier-section {
+      margin-top: 70px;
+    }
+  
+    .globel-coverage {
+      padding: 70px 0;
+    }
+  
+    .secure-payment .head h3 {
+      font-size: 34px;
+    }
+  
+    .crypto-deposit .content h2 {
+      font-size: 34px;
+    }
+  
+    .payment-options .head h3 {
+      font-size: 34px;
+    }
+  
+    .head-content h3 {
+      font-size: 34px;
+    }
+  
+    .carrier-section .row .col-lg-3.col-md-6 {
+      margin-bottom: 20px;
+    }
+  }
+  
+  @media (max-width:767px) {
+    .menu-logo img {
+      max-width: 110px;
+    }
+  
+    .nav-menu-item a {
+      font-size: 14px;
+      padding: 0 0px;
+    }
+  
+    .login-btn a {
+      padding: 5px 14px;
+      font-size: 14px;
+    }
+  
+    .home-banner .banner-content {
+      text-align: center;
+    }
+  
+    .banner-content h1 {
+      font-size: 24px;
+    }
+  
+    .banner-content p {
+      margin: 30px 0;
+    }
+  
+    .home-banner {
+      padding-bottom: 0;
+    }
+  
+    .secure-payment {
+      padding: 40px 0;
+    }
+  
+    .secure-payment .content {
+      padding: 25px;
+      border-radius: 35px;
+    }
+  
+    .secure-payment .content-left {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+  
+    .secure-payment .content-right {
+      text-align: center;
+      margin-top: 30px;
+    }
+  
+    .crypto-deposit {
+      text-align: center;
+    }
+  
+    .payment-options {
+      padding: 30px 0;
+      border-radius: 25px;
+    }
+  
+    .payment-options .head {
+      margin-bottom: 10px;
+    }
+  
+    .payment-option {
+      width: 100px;
+      height: 100px;
+    }
+  
+    .secure-payment .head h2 {
+      font-size: 18px;
+    }
+  
+    .secure-payment .head h3 {
+      font-size: 24px;
+    }
+  
+    .crypto-deposit .content h2 {
+      font-size: 24px;
+    }
+    
+    .payment-options .head h2 {
+      font-size: 18px;
+    }
+  
+    .payment-options .head h3 {
+      font-size: 24px;
+    }
+  
+    .head-content h2 {
+      font-size: 18px;
+    }
+  
+    .head-content h3 {
+      font-size: 24px;
+    }
+  
+    .globel-coverage {
+      text-align: center;
+    }
+  
+    .footer-logo img {
+      max-width: 130px;
+      margin: auto;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }

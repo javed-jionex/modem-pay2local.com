@@ -1,0 +1,52 @@
+<div class="modal-header">
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="transmitDataOnClose()"
+  >
+    X
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row mb-4">
+    <div class="col-md-12 text-center pb-4">
+      <div
+        class="swal2-icon swal2-warning swal2-icon-show"
+        style="display: flex"
+      >
+        <div class="swal2-icon-content">!</div>
+      </div>
+      <h2>{{ "are_you_sure" | translate }}?</h2>
+      <div>You want to rejected</div>
+      <!-- <img [src]="modemList?.bank_image" width="65px" class="mt-2"> -->
+    </div>
+    <form autocomplete="off" class="actionForm mx-auto col-10 py-2">
+      <div class="col-md-12">
+        <input
+          type="text"
+          #notesInput
+          class="form-control requiredField"
+          id="validationDefault01"
+          placeholder="{{ 'notes' | translate }}"
+        />
+        <div *ngIf="!notesInput.value && errorMessage" class="text-danger">
+          {{ "note_is_req" | translate }}
+        </div>
+      </div>
+      <div class="col-md-12 text-end pt-4">
+        <button
+          type="button"
+          class="btn black me-2"
+          (click)="submitForm(notesInput.value)"
+        >
+          Yes
+        </button>
+        <button type="button" class="btn red" (click)="transmitDataOnClose()">
+          No
+        </button>
+      </div>
+    </form>
+    <!-- <div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div> -->
+  </div>
+</div>

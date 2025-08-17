@@ -1,0 +1,19 @@
+<app-modem-header
+  *ngIf="!isLoader"
+  (isLoader)="getLoader($event)"
+></app-modem-header>
+<app-modem-sidebar *ngIf="!isLoader"></app-modem-sidebar>
+<div *ngIf="!isLoader">
+  <router-outlet></router-outlet>
+</div>
+<div
+  class="loader country-switch-page"
+  *ngIf="isLoader"
+  class="country-switch-page"
+>
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status" style="width: 3rem; height: 3rem">
+      <span class="visually-hidden">{{ "loading" | translate }}...</span>
+    </div>
+  </div>
+</div>

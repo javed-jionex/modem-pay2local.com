@@ -1,0 +1,190 @@
+<main>
+  <div class="container">
+    <section
+      class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4"
+    >
+      <div class="container">
+        <div class="row justify-content-center">
+          <div
+            class="col-lg-6 col-md-6 d-flex flex-column align-items-center justify-content-center"
+          >
+            <div class="d-flex justify-content-center py-4">
+              <a href="#" class="logo d-flex align-items-center w-auto">
+                <img src="assets/img/logo.png" alt="" />
+                <!-- <span class="d-none d-lg-block">FionPay</span> -->
+              </a>
+            </div>
+            <!-- End Logo -->
+
+            <div class="card mb-3 pb-4">
+              <div class="card-body">
+                <div class="pt-4 pb-2">
+                  <h5 class="card-title text-center pb-0 fs-4">
+                    Merchant Sign Up
+                  </h5>
+                  <!-- <p class="text-center small">
+										{{ "login_description" | translate }}
+									</p> -->
+                </div>
+
+                <form
+                  class="row g-3 needs-validation"
+                  [formGroup]="signUpForm"
+                  #f="ngForm"
+                  (submit)="save(f.value)"
+                  autocomplete="off"
+                >
+                  <div class="col-md-6">
+                    <label for="yourUsername" class="form-label"
+                      >{{ 'business_name' | translate }}<span class="star">
+                        *</span
+                      ></label
+                    >
+                    <div class="input-group has-validation">
+                      <!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
+                      <input
+                        type="text"
+                        formControlName="business_name"
+                        class="form-control requiredField"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="yourUsername" class="form-label"
+                      >{{ "email" | translate
+                      }}<span class="star"> *</span></label
+                    >
+                    <div class="input-group has-validation">
+                      <!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
+                      <input
+                        type="email"
+                        formControlName="email"
+                        class="form-control requiredField"
+                      />
+                      <div
+                        class="error-message"
+                        *ngIf="signUpForm.controls['email']?.errors?.['pattern']"
+                      >
+                        <div class="child-error-message">
+                          {{ "email_invalid" | translate }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="yourUsername" class="form-label"
+                      >{{ 'first_name' | translate }}<span class="star">
+                        *</span
+                      ></label
+                    >
+                    <div class="input-group has-validation">
+                      <!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
+                      <input
+                        type="text"
+                        formControlName="first_name"
+                        class="form-control requiredField"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="yourUsername" class="form-label"
+                      >{{ 'last_name' | translate }}<span class="star"> *</span>
+                    </label>
+                    <div class="input-group has-validation">
+                      <!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
+                      <input
+                        type="text"
+                        formControlName="last_name"
+                        class="form-control requiredField"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="yourUsername" class="form-label"
+                      >Number <span class="star"> *</span></label
+                    >
+                    <div class="input-group has-validation">
+                      <!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
+                      <input
+                        type="number"
+                        formControlName="phone"
+                        class="form-control requiredField"
+                        (keypress)="onKeyPress($event)"
+                        min="0"
+                      />
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-5 pe-0">
+										<label
+											for="validationDefault03"
+											class="form-label"
+											>Pin<span class="star">
+												*</span
+											></label
+										>
+										<input
+											type="hidden"
+											formControlName="pin"
+											class="form-control requiredField"
+											id="validationDefaultUsername"
+											aria-describedby="inputGroupPrepend2"
+										/>
+									</div> -->
+
+                  <!-- <div class="col-md-1 px-1 mt-4">
+										<button
+											type="button"
+											(click)="generatePin('gen')"
+											class="btn btn-primary custom-button-gentrate"
+										>
+											<i class="bi bi-arrow-repeat"></i>
+										</button>
+									</div> -->
+                  <div class="col-md-6">
+                    <label for="yourUsername" class="form-label"
+                      >{{ "merchant_type" | translate
+                      }}<span class="star"> *</span>
+                    </label>
+                    <div class="input-group has-validation">
+                      <select
+                        class="form-select requiredField"
+                        formControlName="merchant_type"
+                      >
+                        <option selected disabled value="">Choose...</option>
+                        <option value="Value">Deposit & Withdrawal</option>
+                        <option value="Only Deposit">
+                          {{ "deposit" | translate }}
+                        </option>
+                        <option value="Only Withdrawal">
+                          {{ "withdrawal" | translate }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="yourPassword" class="form-label"
+                      >Password <span class="star">*</span></label
+                    >
+                    <input
+                      type="password"
+                      formControlName="password"
+                      class="form-control requiredField"
+                      id="yourPassword"
+                    />
+                  </div>
+
+                  <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-primary col-3">
+                      Sign Up
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<!-- End #main -->

@@ -1,0 +1,49 @@
+#dashboard-tabs .border-left-primary {
+  /* border-left: 0.25rem solid #4e73df!important; */
+  border: 1px dashed #4e73df;
+}
+#dashboard-tabs .border-left-secondary {
+  /* border-left: 0.25rem solid #6c757d!important; */
+  border: 1px dashed #6c757d;
+}
+#dashboard-tabs .border-left-success {
+  /* border-left: 0.25rem solid #1cc88a!important; */
+  border: 1px dashed #1cc88a;
+}
+
+#dashboard-tabs .border-left-warning {
+  /* border-left: 0.25rem solid #f6c23e!important; */
+  border: 1px dashed #f6c23e;
+}
+#dashboard-tabs .border-left-dark {
+  /* border-left: 0.25rem solid #212c52!important; */
+  border: 1px dashed #212c52;
+}
+#dashboard-tabs .border-left-info {
+  /* border-left: 0.25rem solid #0dcbf2!important; */
+  border: 1px dashed #0dcbf2;
+}
+#dashboard-tabs .border-left-blue {
+  /* border-left: 0.25rem solid #3e7ef6!important; */
+  border: 1px dashed #3e7ef6;
+}
+#dashboard-tabs .border-left-danger {
+  /* border-left: 0.25rem solid #f6443e!important; */
+  border: 1px dashed #f6443e;
+}
+
+.sendlink {
+  cursor: pointer;
+}
+.form-check.form-switch {
+  display: inline-block;
+  margin-left: 8px;
+}
+.spinner-border.text-primary {
+  position: absolute;
+  top: 50%;
+  --bs-spinner-width: 4rem;
+  --bs-spinner-height: 4rem;
+  --bs-spinner-vertical-align: -0.125em;
+  --bs-spinner-border-width: 0.5em;
+}

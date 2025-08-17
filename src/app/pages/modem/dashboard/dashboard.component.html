@@ -1,0 +1,165 @@
+<div class="col-12 text-center">
+  <div
+    class="spinner-border text-primary"
+    role="status"
+    *ngIf="isDisplayed"
+  ></div>
+</div>
+<main id="main" class="main" *ngIf="!isDisplayed">
+  <!-- Super Admin Section -->
+
+  <div class="row" id="dashboard-tabs">
+    <div class="col-xl-3 col-md-4 mb-3">
+      <div class="card border-left-primary shadow h-90 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                Full Name
+              </div>
+              <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">{{tabsData.pending_deposits}}</div> -->
+            </div>
+            <!-- <div class="col-auto">
+              <i class="bi bi-modem icon-primary"></i>
+            </div> -->
+          </div>
+          <p>{{ listData?.first_name }} {{ listData?.last_name }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-4 mb-3">
+      <div class="card border-left-primary shadow h-90 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                {{ "balance" | translate }}
+              </div>
+            </div>
+          </div>
+          <p>
+            {{ listData?.balance }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-4 mb-3">
+      <div class="card border-left-primary shadow h-90 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                {{ "hold_balance" | translate }}
+              </div>
+              <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">{{tabsData.pending_payments}}</div> -->
+            </div>
+          </div>
+          <p>
+            {{ listData?.hold_balance }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-4 mb-3">
+      <a routerLink="/admin/support-tickets">
+        <div class="card border-left-info shadow h-90 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-uppercase mb-1">
+                  {{ "available_balance" | translate }}
+                </div>
+              </div>
+            </div>
+            <p>
+              {{ listData?.available_balance }}
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-xl-3 col-md-4 mb-3">
+      <div class="card border-left-primary shadow h-90 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                Service Type
+              </div>
+            </div>
+          </div>
+          <p>
+            {{ formatLabel(listData?.type_of_modem) }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-4 mb-3">
+      <div class="card border-left-primary shadow h-90 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                Payment Accept
+              </div>
+            </div>
+          </div>
+          <p>
+            <select
+              class="form-select"
+              [(ngModel)]="serviceType"
+              name="serviceType"
+              (change)="paymentAccept()"
+            >
+              <option selected disabled value="">Choose...</option>
+              <option value="cash out">Cash Out</option>
+              <option value="cash in">Cash In</option>
+              <option value="both">Both</option>
+            </select>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-4 mb-3">
+      <div class="card border-left-primary shadow h-90 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                {{ "available" | translate }}
+              </div>
+            </div>
+          </div>
+          <p style="cursor: pointer">
+            <select
+              class="form-select"
+              [(ngModel)]="statusType"
+              name="statusType"
+              (change)="changeStatus()"
+            >
+              <option selected disabled value="">Choose...</option>
+              <option value="true">Online</option>
+              <option value="false">Offline</option>
+            </select>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-4 mb-3">
+      <div class="card border-left-primary shadow h-90 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                {{ "login" | translate }}
+              </div>
+            </div>
+          </div>
+          <p>
+            {{ "Active" }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

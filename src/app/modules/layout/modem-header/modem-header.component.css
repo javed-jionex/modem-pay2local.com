@@ -1,0 +1,16 @@
+.custom-refresh.active {
+  transition: 2.5s;
+  -o-transform: rotate(720deg);
+  -ms-transform: rotate(720deg);
+  -moz-transform: rotate(720deg);
+  -webkit-transform: rotate(720deg);
+  transform: rotate(720deg);
+}
+.custom-refresh {
+  color: #4cdbea;
+  font-size: 18px;
+}
+
+.header-nav .profile {
+  padding: 10px 0;
+}

@@ -1,0 +1,693 @@
+.form-section {
+    background-image: url("/assets/img/handshake-partners.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+  }
+  
+/* * {
+  font-family: 'Roboto', sans-serif;
+
+} */
+
+.home-page {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #000;
+  }
+  
+  .dropdown{
+    cursor: pointer;
+  }
+  .dropdown:hover .sub-nav{
+    display: block;
+  }
+  .dropdown .sub-nav {
+    display: none;
+    position: absolute;
+    width: max-content;
+    padding: 20px 0;
+    top: 27px;
+    box-shadow: 0px 10px 15px 0 #ddd;
+    list-style: none;
+    background: #fff;
+  }
+  .dropdown::after {
+    content: '\f107';
+    font-family: "FontAwesome";
+  }
+  .dropdown:hover::after{
+    content: '\f106';
+  }
+  .dropdown .sub-nav  .sub-nav-item a{
+    font-size: 16px;
+  }
+  
+  .sub-nav-item {
+    padding-bottom: 10px;
+  }
+  
+  .home-nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    background: #fff;
+  }
+  
+  .home-nav.active {
+    background: #fff;
+    box-shadow: 0 0 15px 0 #ddd;
+  }
+  
+  div#darkModeToggleBtn {
+    position: fixed;
+    right: 0px;
+    top: 50%;
+    transform: translate(2px, -50%);
+    border: 2px solid #1b9dd7;
+    width: 36px;
+    font-size: 20px;
+    color: #1b9dd7;
+    text-align: center;
+    border-radius: 20px 0 0 20px;
+    background: #fff;
+  }
+  
+  .menu-logo .dark-mode {
+    display: none;
+  }
+  
+  nav {
+    padding: 15px 0;
+  }
+  
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .home-header a {
+    text-decoration: none;
+  }
+  
+  .home-header .row {
+    align-items: center;
+  }
+  
+  .menu-logo img {
+    max-width: 200px;
+  }
+  
+  .login-btn {
+    text-align: right;
+  }
+  
+  .login-btn a {
+    display: inline-block;
+    background: linear-gradient(45deg, var(--main-color), var(--second-color));
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 25px;
+    border: 2px solid #ffffff;
+  }
+  
+  .nav-menu-item a {
+    font-size: 20px;
+    padding: 0 20px;
+    color: #000;
+  }
+  
+  .home-banner {
+    background-image: url(src/assets/img/hmmm.jpg);
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 150px;
+    padding-bottom: 100px;
+    height: 100vh;
+  }
+  
+  .home-banner .container {
+    height: 100%;
+  }
+  
+  .home-banner .container .row {
+    height: 100%;
+  }
+  
+  .banner-content h1 {
+    font-size: 58px;
+    font-weight: 600;
+    color: #fff;
+  }
+  
+  .banner-content p {
+    margin: 50px 0;
+    color: #fff;
+  }
+  
+  .image-secure-payment img {
+    width: 100%;
+  }
+  
+  .image-secure-payment {
+    background: #fff;
+    padding: 50px;
+    border-radius: 100%;
+    height: 270px;
+    width: 270px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .advatages i {
+    font-size: 60px;
+    color: #1b9dd7;
+  }
+  
+  .advatages .content-wrapper {
+    text-align: center;
+    padding: 30px;
+    border-radius: 15px;
+  }
+  .content-wrapper h3 {
+    margin: 15px 0;
+  }
+  .secure-payment {
+    padding: 100px 0;
+  }
+  
+  .secure-payment .content {
+    background: linear-gradient(45deg, var(--main-color), var(--second-color));
+    padding: 50px;
+    border-radius: 30px;
+  }
+  
+  .secure-payment .content-left {
+    text-align: end;
+    color: #fff;
+    margin: 0;
+  }
+  
+  .secure-payment .content-right {
+    color: #fff;
+    margin: 0;
+  }
+  
+  .secure-payment .head {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .secure-payment .head h2 {
+    font-size: 20px;
+    color: #1b9dd7;
+    font-weight: 700;
+  }
+  
+  .secure-payment .head h3 {
+    font-size: 40px;
+    max-width: 600px;
+    margin: auto;
+    color: var(--main-txt-color);
+    margin-top: 20px;
+    font-weight: 600;
+  }
+  
+  
+  .payment-options {
+    background: #1b9dd740;
+    padding: 100px 0;
+  }
+  
+  .payment-options .head {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .payment-options .head h2 {
+    font-size: 20px;
+    color: #1b9dd7;
+    font-weight: 700;
+  }
+  
+  .payment-options .head h3 {
+    font-size: 40px;
+    max-width: 600px;
+    margin: auto;
+    color: var(--main-txt-color);
+    margin-top: 20px;
+    font-weight: 600;
+  }
+  
+  .payment-option img {
+    width: 65%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .payment-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 140px;
+    box-shadow: 0 20px 15px 0 #ddd;
+    border-radius: 100%;
+    margin: auto;
+    overflow: hidden;
+    background: #fff;
+  }
+  
+  
+  
+  .country {
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px 0 #ddd;
+    margin: 0 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .country-name {
+    margin-top: auto;
+  }
+  
+  .globel-coverage .row {
+    row-gap: 20px;
+  }
+  
+  .primary-countries {
+    margin-bottom: 70px;
+  }
+  
+  .Upcoming-Countries {
+    margin-bottom: 70px;
+  }
+  
+  .country-img img {
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 0 #ddd;
+    object-fit: cover;
+  }
+  
+  .country-name h2 {
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    text-align: center;
+  }
+  
+  .country-img {
+    border-radius: 10px;
+  }
+  
+  .globel-coverage .head h2 {
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--main-txt-color);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .slider-twoo {
+    justify-content: center;
+  }
+  
+  .globel-coverage {
+    padding: 150px 0;
+  }
+  
+  .head-content h2 {
+    font-size: 20px;
+    color: #1b9dd7;
+    font-weight: 700;
+  }
+  
+  .advatages {
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+  
+  .head-content {
+    text-align: center;
+    max-width: 750px;
+    margin: auto;
+    margin-bottom: 40px;
+  }
+  
+  .head-content h3 {
+    font-size: 40px;
+    max-width: 600px;
+    margin: auto;
+    color: var(--main-txt-color);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  .carrier-section {
+    margin-top: 100px;
+  }
+  
+  .carrier {
+    text-align: center;
+    background: linear-gradient(45deg, var(--main-color), var(--second-color));
+    color: #fff;
+    padding: 30px 20px;
+    border-radius: 15px;
+    height: 100%;
+  }
+  .carrier p{
+    font-size: 14px;
+  }
+  
+  .carrier h2 {
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .crypto-deposit {
+    margin-bottom: 100px;
+  }
+  
+  .crypto-deposit .content h2 {
+    font-size: 40px;
+    color: var(--main-txt-color);
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  .crypto-deposit .image img {
+    width: 100%;
+  }
+  
+  #become_a_partner {
+    background-image: url("/assets/img/handshake-partners.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+  }
+  
+  .form-section .container-wrapper {
+    background: #00000045;
+    max-width: 100%;
+    padding-top: 180px;
+    padding-bottom: 100px;
+  }
+  
+  .contact-info li a {
+    color: #fff;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .contact-info h3 {
+    font-weight: 700;
+    color: #fff;
+    font-size: 20px;
+  }
+  
+  .contact-info li {
+    margin-bottom: 30px;
+  }
+  
+  .contact-info h2 {
+    color: #fff;
+    font-weight: 700;
+  }
+  
+  i:before {
+    font-family: "FontAwesome";
+    font-style: initial;
+  }
+  
+  .form-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .contact-info ul {
+    padding: 0;
+    list-style: none;
+    margin-top: 40px;
+  }
+  
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  
+  .form-field label {
+    color: #fff;
+    font-weight: 700;
+  }
+  
+  .form-field input {
+    padding: 5px 10px;
+    height: 45px;
+    border: none;
+    border-bottom: 4px solid #1b9dd7;
+    border-radius: 5px;
+  }
+  
+  .form-field input:focus {
+    border: none;
+    border-bottom: 4px solid #1b9dd7;
+    outline: none;
+  }
+  
+  .form-field textarea {
+    height: 100px;
+    padding: 5px 10px;
+    border: none;
+    border-bottom: 4px solid #1b9dd7;
+    border-radius: 5px;
+  }
+  
+  .form-field textarea:focus {
+    border: none;
+    border-bottom: 4px solid #1b9dd7;
+    outline: none;
+  }
+  
+  .form-wrapper form {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .form-btn-field button {
+    background: linear-gradient(45deg, var(--main-color), var(--second-color));
+    color: #fff;
+    width: 100%;
+    height: 45px;
+    border: none;
+    font-weight: 600;
+  }
+  
+  .footer-logo img {
+    width: 100%;
+  }
+  
+  footer {
+    background: linear-gradient(45deg, var(--main-color), var(--second-color));
+    padding: 50px 0;
+  }
+  
+  .footer-menu-item {
+    text-align: center;
+  }
+  
+  .footer-menu-item a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  
+  @media (max-width:1023px) {
+    .home-banner {
+      padding-top: 100px;
+      padding-bottom: 70px;
+    }
+  
+    .banner-content h1 {
+      font-size: 34px;
+    }
+  
+    .secure-payment {
+      padding: 70px 0;
+    }
+  
+    .crypto-deposit {
+      margin-bottom: 70px;
+    }
+  
+    .payment-options {
+      padding: 60px 0;
+    }
+  
+    .carrier-section {
+      margin-top: 70px;
+    }
+  
+    .globel-coverage {
+      padding: 70px 0;
+    }
+  
+    .secure-payment .head h3 {
+      font-size: 34px;
+    }
+  
+    .crypto-deposit .content h2 {
+      font-size: 34px;
+    }
+  
+    .payment-options .head h3 {
+      font-size: 34px;
+    }
+  
+    .head-content h3 {
+      font-size: 34px;
+    }
+  
+    .carrier-section .row .col-lg-3.col-md-6 {
+      margin-bottom: 20px;
+    }
+  }
+  
+  @media (max-width:767px) {
+    .menu-logo img {
+      max-width: 110px;
+    }
+  
+    .nav-menu-item a {
+      font-size: 14px;
+      padding: 0 0px;
+    }
+  
+    .login-btn a {
+      padding: 5px 14px;
+      font-size: 14px;
+    }
+  
+    .home-banner .banner-content {
+      text-align: center;
+    }
+  
+    .banner-content h1 {
+      font-size: 24px;
+    }
+  
+    .banner-content p {
+      margin: 30px 0;
+    }
+  
+    .home-banner {
+      padding-bottom: 0;
+    }
+  
+    .secure-payment {
+      padding: 40px 0;
+    }
+  
+    .secure-payment .content {
+      padding: 25px;
+      border-radius: 35px;
+    }
+  
+    .secure-payment .content-left {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+  
+    .secure-payment .content-right {
+      text-align: center;
+      margin-top: 30px;
+    }
+  
+    .crypto-deposit {
+      text-align: center;
+    }
+  
+    .payment-options {
+      padding: 30px 0;
+      border-radius: 25px;
+    }
+  
+    .payment-options .head {
+      margin-bottom: 30px;
+    }
+  
+    .payment-option {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 16px;
+    }
+  
+    .secure-payment .head h2 {
+      font-size: 18px;
+    }
+  
+    .secure-payment .head h3 {
+      font-size: 24px;
+    }
+  
+    .crypto-deposit .content h2 {
+      font-size: 24px;
+    }
+  
+    .payment-options .head h2 {
+      font-size: 18px;
+    }
+  
+    .payment-options .head h3 {
+      font-size: 24px;
+    }
+  
+    .head-content h2 {
+      font-size: 18px;
+    }
+  
+    .head-content h3 {
+      font-size: 24px;
+    }
+  
+    .globel-coverage {
+      text-align: center;
+    }
+  
+    .footer-logo img {
+      max-width: 130px;
+      margin: auto;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
