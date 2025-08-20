@@ -12,63 +12,63 @@ export class LocalStorageMerchantService {
 
   sendUserProfile(data: any) {
     localStorage.setItem(
-      this.projectName + "merchantUserProfile",
+      this.projectName + "modemUserProfile",
       JSON.stringify(data)
     );
   }
   getUserProfile() {
     let userProfile: any =
-      localStorage.getItem(this.projectName + "merchantUserProfile") || null;
+      localStorage.getItem(this.projectName + "modemUserProfile") || null;
     userProfile = JSON.parse(userProfile);
     return userProfile;
   }
   removeUerProfile() {
-    localStorage.removeItem(this.projectName + "merchantUserProfile");
+    localStorage.removeItem(this.projectName + "modemUserProfile");
   }
   sendpinCode(data: any) {
     localStorage.setItem(
-      this.projectName + "merchantPinCode",
+      this.projectName + "modemPinCode",
       JSON.stringify(data)
     );
   }
   getPinCode() {
     let userPincode: any =
-      localStorage.getItem(this.projectName + "merchantPinCode") || null;
+      localStorage.getItem(this.projectName + "modemPinCode") || null;
     userPincode = JSON.parse(userPincode);
     return userPincode;
   }
   sendProjectName(data: any) {
     localStorage.setItem(
-      this.projectName + "merchantProjectName",
+      this.projectName + "modemProjectName",
       JSON.stringify(data)
     );
   }
   getProjectName() {
-    let merchantProjectName: any =
-      localStorage.getItem(this.projectName + "merchantProjectName") || null;
-    merchantProjectName = JSON.parse(merchantProjectName);
-    return merchantProjectName;
+    let modemProjectName: any =
+      localStorage.getItem(this.projectName + "modemProjectName") || null;
+    modemProjectName = JSON.parse(modemProjectName);
+    return modemProjectName;
   }
   removeProjectName() {
-    localStorage.removeItem(this.projectName + "merchantProjectName");
+    localStorage.removeItem(this.projectName + "modemProjectName");
   }
   removePindCode() {
-    localStorage.removeItem(this.projectName + "merchantPinCode");
+    localStorage.removeItem(this.projectName + "modemPinCode");
   }
   sendAdminPermisson(data: any) {
     localStorage.setItem(
-      this.projectName + "merchantPermission",
+      this.projectName + "modemPermission",
       JSON.stringify(data)
     );
   }
   getAdminPermisson() {
     let adminPermisson: any =
-      localStorage.getItem(this.projectName + "merchantPermission") || null;
+      localStorage.getItem(this.projectName + "modemPermission") || null;
     adminPermisson = JSON.parse(adminPermisson);
     return adminPermisson;
   }
   removeAdminPermisson() {
-    localStorage.removeItem(this.projectName + "merchantPermission");
+    localStorage.removeItem(this.projectName + "modemPermission");
   }
   sendThemeMode(data: any) {
     localStorage.setItem(this.projectName + "darkMode", JSON.stringify(data));
