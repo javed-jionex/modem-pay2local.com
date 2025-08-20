@@ -4,6 +4,6 @@ export const environment = {
   backendHost: "",
   loginHost: "",
   domain: "https://pay2local.com/",
-  project: "pay2local",
+  project: "modemPay2bd",
   serverType: "local", //local_india OR sandbox_india OR prod_india
 };
