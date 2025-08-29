@@ -33,7 +33,7 @@ export class TokenLoginComponent {
       .subscribe((res: any) => {
         if (res?.message == "Success") {
           this.alertService.success("Success", "Logged In successfully");
-          this.localStorageMerchantService.sendProjectName(res.country);
+          //this.localStorageMerchantService.sendProjectName(res.country);
           this.localStorageMerchantService.sendUserProfile(res.data);
           this.router.navigate(["/admin/dashboard"]);
         } else {

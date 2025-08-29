@@ -49,13 +49,12 @@ export class LoginService {
       "Content-Type": "application/json",
       Accept: "application/json",
       "Access-Control-Allow-Origin": "*",
+      Authorization: `Bearer ${token}`,
     });
-    let data = {
-      token: token,
-    };
+    let data = {};
     const requestOptions = { headers: headers };
-    return this.http.post(
-      this.loginApiURL + `api/v1/merchants/decode_token`,
+    return this.http.put(
+      this.loginApiURL + `api/v1/modem_web/profiles/decode_token_and_login`,
       data,
       requestOptions
     );
