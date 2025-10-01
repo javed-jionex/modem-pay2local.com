@@ -3,6 +3,8 @@ import { Router } from "@angular/router";
 import { GlobalRoutesService } from "@services/globalRoutes/global-routes.service";
 import { CommonService } from "@services/modem/common/common.service";
 import { LocalStorageMerchantService } from "@services/modem/localstorage/local.service";
+import { DepositService } from "@services/modem/pending-request/deposits/deposits.service";
+import { WithdrawalService } from "@services/modem/pending-request/withdrawals/withdrawals.service";
 
 @Component({
   selector: "app-modem-sidebar",
@@ -16,7 +18,7 @@ export class ModemSidebarComponent {
   menus: any;
   menuName: string = "";
   actionPermission: any;
-  depositsCount: any;
+  depositCount: any;
   withdrawalCount: any;
   totalPendingRequestCount: number = 0;
   paymentCount: any;
@@ -28,7 +30,9 @@ export class ModemSidebarComponent {
     private elementRef: ElementRef,
     private renderer: Renderer2,
     private localStorageMerchantService: LocalStorageMerchantService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private depositService: DepositService,
+    private withdrawalService: WithdrawalService
   ) {
     //	this.getCountsObject()
   }
@@ -41,6 +45,7 @@ export class ModemSidebarComponent {
     // });
     // this.getPendingRequestCount();
     // this.getSupportDataCount();
+    this.paymentsRequestList();
   }
   closeSidebar() {
     const body = this.elementRef.nativeElement.ownerDocument.body;
@@ -90,6 +95,14 @@ export class ModemSidebarComponent {
   //     }
   //   });
   // }
+  paymentsRequestList() {
+    this.depositService.list().subscribe((res: any) => {
+      this.depositCount = res?.data?.length ?? 0;
+    });
+    this.withdrawalService.list().subscribe((res: any) => {
+      this.withdrawalCount = res?.data?.length ?? 0;
+    });
+  }
   getPermisions(name: any, child?: any): any {
     let status = false;
     let parentPermission;

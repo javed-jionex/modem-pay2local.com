@@ -187,19 +187,16 @@
             (click)="closeSidebar()"
             ><i class="bi bi-circle"></i
             ><span>{{ "deposits" | translate }}</span>
-            <!-- <span
-							class="badge bg-primary"
-							style="margin-left: 19px"
-							>{{pendinCounts?.deposit || 0}}</span> -->
-            <!-- <span
+            <!-- <span class="badge bg-primary" style="margin-left: 19px">{{
+              depositCount || 0
+            }}</span> -->
+            <span
               style="margin-left: 19px"
               [ngClass]="
-                pendinCounts?.deposit > 0
-                  ? 'badge bg-danger'
-                  : 'badge bg-success'
+                depositCount > 0 ? 'badge bg-danger' : 'badge bg-success'
               "
-              >{{ pendinCounts?.deposit || 0 }}</span
-            > -->
+              >{{ depositCount || 0 }}</span
+            >
           </a>
         </li>
         <li>
@@ -213,15 +210,13 @@
 						class="badge bg-primary"
 						style="margin-left: 19px"
 						>{{pendinCounts?.withdraw || 0}}</span> -->
-            <!-- <span
+            <span
               style="margin-left: 19px"
               [ngClass]="
-                pendinCounts?.withdraw > 0
-                  ? 'badge bg-danger'
-                  : 'badge bg-success'
+                withdrawalCount > 0 ? 'badge bg-danger' : 'badge bg-success'
               "
-              >{{ pendinCounts?.withdraw || 0 }}</span
-            > -->
+              >{{ withdrawalCount || 0 }}</span
+            >
           </a>
         </li>
 
