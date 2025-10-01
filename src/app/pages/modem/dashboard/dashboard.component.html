@@ -44,6 +44,67 @@
       </div>
     </div>
     <div class="col-xl-3 col-md-4 mb-3">
+      <a routerLink="/admin/deposits">
+        <div class="card border-left-success shadow h-90 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-uppercase mb-1">
+                  PR Deposit
+                </div>
+                <div
+                  [ngClass]="
+                    depositCount > 0 ? 'badge bg-danger' : 'badge bg-success'
+                  "
+                >
+                  {{ depositCount }}
+                </div>
+                <!-- <div
+								class="h5 mb-0 font-weight-bold text-gray-800 text-success"
+							>
+								 {{ list?.pending_deposit_requests  }}
+							</div> -->
+              </div>
+              <div class="col-auto">
+                <i class="bi bi-bank icon-success"></i>
+              </div>
+            </div>
+            <!-- <p class="text-success">
+							<i class="bx bxs-up-arrow align-middle"></i>Only Success + Approved
+						</p> -->
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-xl-3 col-md-4 mb-3">
+      <a routerLink="/admin/withdrawals">
+        <div class="card border-left-success shadow h-90 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-uppercase mb-1">
+                  PR Withdraw
+                </div>
+                <div
+                  [ngClass]="
+                    withdrawalCount > 0 ? 'badge bg-danger' : 'badge bg-success'
+                  "
+                >
+                  {{ withdrawalCount }}
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="bi bi-bank icon-success"></i>
+              </div>
+            </div>
+            <!-- <p class="text-success">
+							<i class="bx bxs-up-arrow align-middle"></i>Only Success + Approved
+						</p> -->
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-xl-3 col-md-4 mb-3">
       <div class="card border-left-primary shadow h-90 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">

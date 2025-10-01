@@ -3,6 +3,8 @@ import { CommonModule } from "@angular/common";
 import { LoginService } from "@services/modem/login/login.service";
 import { DashboardService } from "@services/modem/dashboard/dashboard.service";
 import { AlertService } from "@services/alert/alert.service";
+import { DepositService } from "@services/modem/pending-request/deposits/deposits.service";
+import { WithdrawalService } from "@services/modem/pending-request/withdrawals/withdrawals.service";
 
 @Component({
   selector: "app-dashboard",
@@ -14,13 +16,18 @@ export class DashboardComponent {
   listData: any;
   serviceType = "";
   statusType = "";
+  withdrawalCount: number = 0;
+  depositCount: number = 0;
   constructor(
     private profileService: LoginService,
     private dashboardService: DashboardService,
+    private depositService: DepositService,
+    private withdrawalService: WithdrawalService,
     private alertService: AlertService
   ) {}
   ngOnInit() {
     this.getDetails();
+    this.paymentsRequestList();
   }
   getDetails() {
     this.profileService.profile().subscribe((res: any) => {
@@ -73,6 +80,14 @@ export class DashboardComponent {
         this.getDetails();
         this.alertService.success("", res?.response?.message);
       }
+    });
+  }
+  paymentsRequestList() {
+    this.depositService.list().subscribe((res: any) => {
+      this.depositCount = res?.data?.length ?? 0;
+    });
+    this.withdrawalService.list().subscribe((res: any) => {
+      this.withdrawalCount = res?.data?.length ?? 0;
     });
   }
 }
