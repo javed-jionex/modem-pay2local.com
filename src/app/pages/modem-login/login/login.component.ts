@@ -15,11 +15,14 @@ import { finalize } from "rxjs";
 export class LoginComponent {
   protected aFormGroup!: FormGroup;
   loginForm!: FormGroup;
+  bankForm!: FormGroup;
   siteKey: string = "6LfPrFwmAAAAAE82Ym7ByQfAZXdl07EtaCIjLjS9";
   capchaPass: boolean = false;
   loadingLogin = false;
   serverType: string = environment.serverType;
   custNumber: any;
+  loginType: string = "Login";
+  bankList: any;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -42,6 +45,9 @@ export class LoginComponent {
       phone_number: ["", Validators.required],
       pincode: ["", Validators.required],
       // country: ["bangladesh"],
+    });
+    this.bankForm = this.fb.group({
+      bank_id: ["", Validators.required],
     });
     let userProfile: any = this.localStorageMerchantService.getUserProfile();
     let token = userProfile?.token;
@@ -66,6 +72,45 @@ export class LoginComponent {
             // this.localStorageMerchantService.sendpinCode(res.data);
             // this.router.navigate(["/admin/pin-code"]);
             this.localStorageMerchantService.sendUserProfile(res.data);
+            this.router.navigate(["/admin/dashboard"]);
+          } else if (res?.status == 205) {
+            this.bankList = res.data.banks;
+            this.loginType = "Bank";
+            this.localStorageMerchantService.sendBankData(res.data);
+            this.alertService.success("", res.message);
+          } else if (res?.status == 403) {
+            this.alertService.error("Error", res.message);
+          } else {
+            this.alertService.error(
+              "Error",
+              "username or password is incorrect"
+            );
+          }
+        },
+        (error: any) => {
+          this.alertService.error("Error", "username or password is incorrect");
+        }
+      );
+  }
+  saveBank(data: any) {
+    if (this.bankForm.invalid) {
+      return;
+    }
+    let userProfile: any = this.localStorageMerchantService.getBankData();
+    let token = userProfile?.temp_token;
+    let valData = {
+      temp_token: token,
+      bank_id: this.bankForm.value.bank_id,
+    };
+    this.loadingLogin = true;
+    this.loginService
+      .Banklogin(valData)
+      .pipe(finalize(() => (this.loadingLogin = false)))
+      .subscribe(
+        (res: any) => {
+          if (res?.status == 200) {
+            this.localStorageMerchantService.sendUserProfile(res.data);
+            this.localStorageMerchantService.removeBankData();
             this.router.navigate(["/admin/dashboard"]);
           } else if (res?.status == 403) {
             this.alertService.error("Error", res.message);

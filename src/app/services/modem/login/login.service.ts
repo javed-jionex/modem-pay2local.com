@@ -29,6 +29,19 @@ export class LoginService {
       requestOptions
     );
   }
+  Banklogin(data: any) {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      "Access-Control-Allow-Origin": "*",
+    });
+    const requestOptions = { headers: headers };
+    return this.http.post(
+      `${this.loginApiURL}api/v1/modem_web/auth/verify_bank_and_login`,
+      data,
+      requestOptions
+    );
+  }
   pinCode(data: any, token: any) {
     console.log(this.configService.getBackendHost());
     const headers = new HttpHeaders({

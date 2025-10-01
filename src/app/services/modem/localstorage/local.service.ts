@@ -16,14 +16,29 @@ export class LocalStorageMerchantService {
       JSON.stringify(data)
     );
   }
+  sendBankData(data: any) {
+    localStorage.setItem(
+      this.projectName + "modemBankData",
+      JSON.stringify(data)
+    );
+  }
   getUserProfile() {
     let userProfile: any =
       localStorage.getItem(this.projectName + "modemUserProfile") || null;
     userProfile = JSON.parse(userProfile);
     return userProfile;
   }
+  getBankData() {
+    let userProfile: any =
+      localStorage.getItem(this.projectName + "modemBankData") || null;
+    userProfile = JSON.parse(userProfile);
+    return userProfile;
+  }
   removeUerProfile() {
     localStorage.removeItem(this.projectName + "modemUserProfile");
+  }
+  removeBankData() {
+    localStorage.removeItem(this.projectName + "modemBankData");
   }
   sendpinCode(data: any) {
     localStorage.setItem(

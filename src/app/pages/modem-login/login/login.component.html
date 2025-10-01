@@ -16,7 +16,7 @@
             </div>
             <!-- End Logo -->
 
-            <div class="card mb-3 pb-4">
+            <div class="card mb-3 pb-4" *ngIf="loginType == 'Login'">
               <div class="card-body">
                 <div class="pt-4 pb-2">
                   <h5 class="card-title text-center pb-0 fs-4">Modem Login</h5>
@@ -122,7 +122,44 @@
                 </form>
               </div>
             </div>
+            <div class="card mb-3 pb-4" *ngIf="loginType == 'Bank'">
+              <div class="card-body">
+                <div class="pt-4 pb-2">
+                  <h5 class="card-title text-center pb-0 fs-4">Modem Login</h5>
+                  <p class="text-center small">Please select bank to Login</p>
+                </div>
 
+                <form
+                  class="row g-3 needs-validation"
+                  [formGroup]="bankForm"
+                  #f="ngForm"
+                  (submit)="saveBank(f.value)"
+                  autocomplete="off"
+                >
+                  <label for="inputPassword4" class="form-label">{{
+                    "bank_type" | translate
+                  }}</label>
+                  <select
+                    class="form-select requiredField"
+                    name="bank_id"
+                    formControlName="bank_id"
+                  >
+                    <option selected disabled value="">Choose...</option>
+                    <option *ngFor="let item of bankList" [value]="item?.id">
+                      {{ item?.bank_name }}
+                    </option>
+                  </select>
+                  <div class="col-12">
+                    <app-button [loading]="loadingLogin" buttonClass="w-100"
+                      >Verify</app-button
+                    >
+                  </div>
+                  <!-- <div class="col-12">
+                      <p class="small mb-0">Don't have account? <a href="pages-register.html">Create an account</a></p>
+                    </div> -->
+                </form>
+              </div>
+            </div>
             <div class="credits">
               <!-- All the links in the footer should remain intact. -->
               <!-- You can delete the links only if you purchased the pro version. -->
