@@ -82,6 +82,15 @@
                   </div>
                   <div class="col-6 text-start">
                     {{ displayedData?.amount }}
+                    <span
+                      class="copy"
+                      (click)="
+                        copyMerchant(
+                          Math.floor(displayedData?.amount || 0).toString()
+                        )
+                      "
+                      >{{ "copy" | translate }}</span
+                    >
                   </div>
                 </div>
               </div>
@@ -103,7 +112,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-12 mt-3 mb-3">
+              <!-- <div class="col-md-12 mt-3 mb-3">
                 <div class="row text-center">
                   <div class="col-md-12">
                     <button
@@ -123,8 +132,8 @@
                     </button>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-6" style="margin: auto">
+              </div> -->
+              <div class="col-md-7" style="margin: auto">
                 <form
                   class="row g-3"
                   [formGroup]="actionForm"
@@ -161,7 +170,14 @@
                   </div> -->
                   <div class="col-12 text-center">
                     <button type="submit" class="btn btn-primary me-2">
-                      {{ "save" | translate }}
+                      {{ "Approve" | translate }}
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger rejected"
+                      (click)="isType('reject')"
+                    >
+                      {{ "Reject" | translate }}
                     </button>
                   </div>
                 </form>
@@ -192,8 +208,15 @@
                   </div>
 
                   <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-primary me-2">
-                      {{ "save" | translate }}
+                    <button
+                      type="button"
+                      class="btn btn-primary me-2"
+                      (click)="isType('approve')"
+                    >
+                      {{ "Approve" | translate }}
+                    </button>
+                    <button type="submit" class="btn btn-danger rejected me-2">
+                      {{ "Reject" | translate }}
                     </button>
                   </div>
                 </form>

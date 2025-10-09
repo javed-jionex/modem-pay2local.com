@@ -32,13 +32,14 @@ export class WithdrawalsComponent {
   errorMessageTransaction: string = "";
   totalBlance: any;
   actionPermission: any;
-  formType: string = "";
+  formType: string = "approve";
   withdrawalID: any;
   maxTrxID: number = 0;
   minTrxID: number = 0;
   isAutoRefresh: boolean = true;
   seconds: number = 3;
   timerSubscription: any;
+  Math = Math;
   constructor(
     private withdrawalService: WithdrawalService,
     private fb: FormBuilder,
