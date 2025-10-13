@@ -51,7 +51,7 @@ export class WithdrawalsComponent {
     private alertService: AlertService
   ) {}
   ngOnInit() {
-    this.permissionService.sendMethod(this.routers.snapshot.data);
+    // this.permissionService.sendMethod(this.routers.snapshot.data);
     this.paymentsRequestList();
     this.userProfile = this.localStorageMerchantService.getUserProfile();
     // this.initForm();
@@ -316,5 +316,17 @@ export class WithdrawalsComponent {
     document.execCommand("copy");
     document.body.removeChild(selBox);
     this.alertService.success("Success", "Coppied !");
+  }
+  viewRecord(ID: any) {
+    this.withdrawalService
+      .viewWithdrawalsRecord({ id: ID })
+      .subscribe((res: any) => {
+        if (res.status == 200) {
+          this.alertService.success("", res.message);
+          this.paymentsRequestList();
+        } else {
+          this.alertService.warning("", res.message);
+        }
+      });
   }
 }

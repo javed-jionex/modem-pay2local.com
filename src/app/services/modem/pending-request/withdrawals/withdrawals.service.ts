@@ -29,4 +29,11 @@ export class WithdrawalService {
       data
     );
   }
+  viewWithdrawalsRecord(data: any) {
+    return this.http.put(
+      this.configService.getBackendHost() +
+        `api/v1/modem_web/payments/view_withdraw_request`,
+      data
+    );
+  }
 }

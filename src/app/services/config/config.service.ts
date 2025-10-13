@@ -70,7 +70,7 @@ export class ConfigService {
         return "https://api.pay2eg.com/";
       default:
         this.localizationService.setLanguage("bn");
-        return "https://api.pay2bd.com/";
+        return "https://bdapi.allnilam.com/";
       //return "https://bdapi.allnilam.com/";
     }
   }
