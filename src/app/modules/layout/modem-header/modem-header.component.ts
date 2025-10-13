@@ -63,7 +63,7 @@ export class ModemHeaderComponent {
     this.countryName = this.localStorageMerchantService.getProjectName();
     console.log(this.countryName);
     let subString = "sandbox";
-    let isFind = this.countryName.includes(subString);
+    let isFind = this.countryName?.includes(subString);
     if (isFind) {
       this.isSandbox = true;
     } else {
