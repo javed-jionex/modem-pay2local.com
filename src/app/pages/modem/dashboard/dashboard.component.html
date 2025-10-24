@@ -15,6 +15,57 @@
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-uppercase mb-1">
+                Payment Accept
+              </div>
+            </div>
+          </div>
+          <p>
+            <select
+              class="form-select"
+              [(ngModel)]="serviceType"
+              name="serviceType"
+              (change)="paymentAccept()"
+            >
+              <option selected disabled value="">Choose...</option>
+              <option value="cash out">Cash Out</option>
+              <option value="cash in">Cash In</option>
+              <option value="both">Both</option>
+            </select>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-4 mb-3">
+      <div class="card border-left-primary shadow h-90 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                {{ "available" | translate }}
+              </div>
+            </div>
+          </div>
+          <p style="cursor: pointer">
+            <select
+              class="form-select"
+              [(ngModel)]="statusType"
+              name="statusType"
+              (change)="changeStatus()"
+            >
+              <option selected disabled value="">Choose...</option>
+              <option value="true">Online</option>
+              <option value="false">Offline</option>
+            </select>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-4 mb-3">
+      <div class="card border-left-primary shadow h-90 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
                 Full Name
               </div>
               <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">{{tabsData.pending_deposits}}</div> -->
@@ -155,57 +206,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-3 col-md-4 mb-3">
-      <div class="card border-left-primary shadow h-90 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-uppercase mb-1">
-                Payment Accept
-              </div>
-            </div>
-          </div>
-          <p>
-            <select
-              class="form-select"
-              [(ngModel)]="serviceType"
-              name="serviceType"
-              (change)="paymentAccept()"
-            >
-              <option selected disabled value="">Choose...</option>
-              <option value="cash out">Cash Out</option>
-              <option value="cash in">Cash In</option>
-              <option value="both">Both</option>
-            </select>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-3 col-md-4 mb-3">
-      <div class="card border-left-primary shadow h-90 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-uppercase mb-1">
-                {{ "available" | translate }}
-              </div>
-            </div>
-          </div>
-          <p style="cursor: pointer">
-            <select
-              class="form-select"
-              [(ngModel)]="statusType"
-              name="statusType"
-              (change)="changeStatus()"
-            >
-              <option selected disabled value="">Choose...</option>
-              <option value="true">Online</option>
-              <option value="false">Offline</option>
-            </select>
-          </p>
-        </div>
-      </div>
-    </div>
+
     <div class="col-xl-3 col-md-4 mb-3">
       <div class="card border-left-primary shadow h-90 py-2">
         <div class="card-body">

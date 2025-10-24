@@ -45,6 +45,14 @@ const routes: Routes = [
         loadChildren: () =>
           import("@pages/modem/b2-b/b2-b.module").then((m) => m.B2BModule),
       },
+      {
+        path: "transactions",
+        data: { moduleName: "Transactions", name: "View" },
+        loadChildren: () =>
+          import("@pages/modem/transactions/transactions.module").then(
+            (m) => m.TransactionsModule
+          ),
+      },
     ],
   },
 ];

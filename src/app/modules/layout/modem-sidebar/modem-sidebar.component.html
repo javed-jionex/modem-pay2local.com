@@ -223,7 +223,45 @@
         <li></li>
       </ul>
     </li>
-
+    <li class="nav-item">
+      <a
+        data-bs-toggle="collapse"
+        href="#"
+        title="{{ 'transactions' | translate }}"
+        class="nav-link collapsed"
+        data-bs-target="#transaction-nav"
+        [ngClass]="menuName == 'Transactions' ? '' : 'removeCollapsed'"
+        (click)="menuCollapsed('Transactions')"
+        ><i class="fa fa-exchange"></i
+        ><span>{{ "transactions" | translate }}</span
+        ><i class="bi bi-chevron-down ms-auto"></i
+      ></a>
+      <ul
+        class="nav-content collapse"
+        id="transaction-nav"
+        data-bs-parent="#transaction-nav"
+        [ngClass]="menuName == 'Transactions' ? 'show' : ''"
+      >
+        <li>
+          <a
+            routerLink="/admin/transactions/deposits"
+            routerLinkActive="active"
+            (click)="closeSidebar()"
+            ><i class="bi bi-circle"></i
+            ><span>{{ "deposits" | translate }}</span></a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/admin/transactions/withdrawals"
+            routerLinkActive="active"
+            (click)="closeSidebar()"
+            ><i class="bi bi-circle"></i
+            ><span>{{ "withdrawals" | translate }}</span></a
+          >
+        </li>
+      </ul>
+    </li>
     <!-- <li class="nav-item">
 			<a
 			

@@ -1,0 +1,7 @@
+.section .table-scroll {
+    min-height: 150px !important;
+    overflow-x: scroll;
+}
+.section table {
+    white-space: pre;
+}

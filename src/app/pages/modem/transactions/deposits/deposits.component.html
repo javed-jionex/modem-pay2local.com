@@ -1,0 +1,337 @@
+<main id="main" class="main">
+  <div class="pagetitle_wrap">
+    <div class="pagetitle">
+      <h1>{{ "deposits" | translate }}</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">{{ "transactions" | translate }}</li>
+          <li class="breadcrumb-item active">{{ "deposits" | translate }}</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <!-- End Page Title -->
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="row mb-4 text-start">
+                <app-deposits-transactions-search
+                  [itemsPerPage]="itemsPerPage"
+                  [pageNumber]="pageNumber"
+                  (depositSearchData)="search($event)"
+                  (fileDownload)="downloadDocument($event)"
+                  [isFileDownload]="isFileDownload"
+                ></app-deposits-transactions-search>
+              </div>
+            </div>
+            <!-- <div class="row">
+							<div class="col-md-6 mb-4 text-start">
+								<app-payments-search [itemsPerPage]="itemsPerPage" [pageNumber]="pageNumber"
+									(paymentSearchData)="search($event)"></app-payments-search>
+							</div>
+						</div> -->
+            <div class="table-scroll">
+              <table
+                class="table table-striped table-bordered"
+                id="dash-all-transactions"
+              >
+                <thead>
+                  <th>#</th>
+                  <th>{{ "merchant_id" | translate }}</th>
+                  <!-- <th>{{ 'unique_id' | translate }}</th> -->
+                  <!-- <th>{{ "customer_no" | translate }}</th> -->
+                  <th>{{ "service_type" | translate }}</th>
+                  <th>{{ "request_type" | translate }}</th>
+                  <th>{{ "bank_no" | translate }}</th>
+                  <th>TrxID</th>
+                  <th>{{ "phone" | translate }}</th>
+                  <!-- <th>Cur</th> -->
+                  <!-- <th>{{ "comment" | translate }}</th> -->
+                  <th>{{ "date" | translate }}</th>
+                  <th>{{ "processing_time" | translate }}</th>
+                  <!--
+                  <th>{{ "approved_time" | translate }}</th>
+                  -->
+                  <!-- <th>Comm.</th> -->
+                  <th>{{ "amount" | translate }}</th>
+                  <th>{{ "status" | translate }}</th>
+                  <th *ngIf="actionPermission | checkPermissionPure : 'Action'">
+                    Action
+                  </th>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of displayedData
+                        | paginate
+                          : {
+                              itemsPerPage: itemsPerPage,
+                              currentPage: pageNumber,
+                              totalItems: totalRows
+                            };
+                      let i = index
+                    "
+                  >
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ item.merchant_unique_id }}</td>
+                    <!-- <td>{{ item.transaction_id }}</td> -->
+                    <!-- <td>{{ item.customer }}</td> -->
+                    <td>{{ item.service_type }}</td>
+                    <td>{{ item.request_type }}</td>
+                    <td>{{ item.modem_number }}</td>
+                    <!-- <td *ngIf="item.status == 'Approved'">{{ item.trx_id }}</td>
+                    <td *ngIf="item.status == 'Rejected'"></td> -->
+
+                    <!-- <td>{{ item.currency }}</td>
+                    <td>{{ item.notes }}</td> -->
+                    <td>{{ item?.transaction_id }}</td>
+                    <td>{{ item?.cust_phone }}</td>
+                    <td>
+                      {{ item.process_time | timezoneDate }}
+                    </td>
+                    <td>
+                      <!-- {{
+                        item.created_at | dateDurationTwo : item.approved_time
+                      }} -->
+                      {{ item.process_time | timezoneDate }}
+                    </td>
+                    <!--<td>
+                      {{ item.approved_time | timezoneDate }}
+                    </td> -->
+                    <!-- <td><span>-</span>{{ item.commission_fee }}</td> -->
+                    <td><span>+</span>{{ item.amount | appNumberFormat }}</td>
+                    <td *ngIf="item.status == 'rejected'">
+                      <span class="badge bg-danger">{{
+                        "rejected" | translate
+                      }}</span>
+                    </td>
+                    <td *ngIf="item.status == 'approved'">
+                      <span class="badge bg-success">{{
+                        "approved" | translate
+                      }}</span>
+                    </td>
+                    <td
+                      *ngIf="actionPermission | checkPermissionPure : 'Action'"
+                    >
+                      <a class="custom-icons">
+                        <i
+                          class="fa fa-eye"
+                          aria-hidden="true"
+                          (click)="showData(mymodal, item)"
+                        ></i>
+                      </a>
+                    </td>
+                  </tr>
+                  <tr *ngIf="totalBlance && getLastPageNumber() == pageNumber">
+                    <th colspan="6">{{ "total" | translate }}</th>
+                    <th><span>-</span>{{ totalCommission }}</th>
+                    <th><span>+</span>{{ totalBlance | appNumberFormat }}</th>
+                    <!-- <th>&nbsp;</th>
+                    <th>&nbsp;</th> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="text-center col-md-12">
+              <div
+                class="spinner-border text-primary text-center"
+                role="status"
+                *ngIf="isDisplayed"
+              ></div>
+            </div>
+            <div
+              class="text-center recordnotfound"
+              *ngIf="displayedData.length == 0"
+            >
+              Record not found
+            </div>
+            <div class="text-end pt-4">
+              <pagination-controls
+                (pageChange)="onPageChange($event)"
+              ></pagination-controls>
+            </div>
+            <!-- End Table with stripped rows -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <div
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">×</span>
+      </div>
+    </div>
+    <div class="modal-body">
+      <table
+        class="table table-striped table-bordered"
+        id="dash-all-transactions"
+      >
+        <tbody>
+          <tr *ngIf="showingData?.customer">
+            <td>{{ "customer_number" | translate }}</td>
+            <td>
+              {{ showingData?.customer }}
+            </td>
+          </tr>
+          <tr *ngIf="showingData?.upi_id">
+            <td>UPI ID</td>
+            <td>
+              {{ showingData?.upi_id }}
+            </td>
+          </tr>
+          <tr *ngIf="showingData?.bank_name">
+            <td>Bank Name</td>
+            <td>
+              {{ showingData?.bank_name }}
+            </td>
+          </tr>
+          <tr *ngIf="showingData?.account_holder_name">
+            <td>Account Holder Name</td>
+            <td>
+              {{ showingData?.account_holder_name }}
+            </td>
+          </tr>
+          <tr *ngIf="showingData?.account_number">
+            <td>Account Number</td>
+            <td>
+              {{ showingData?.account_number }}
+            </td>
+          </tr>
+          <tr *ngIf="showingData?.ifsc_code">
+            <td>IFSC Code</td>
+            <td>
+              {{ showingData?.ifsc_code }}
+            </td>
+          </tr>
+          <tr>
+            <td>{{ "service_type" | translate }}</td>
+            <td>
+              {{ showingData?.modem_type }}
+            </td>
+          </tr>
+          <tr>
+            <td>{{ "bank_type" | translate }}</td>
+            <td>
+              {{ showingData?.bank }}
+            </td>
+          </tr>
+
+          <tr>
+            <td>{{ "amount" | translate }}</td>
+            <td>
+              {{ showingData?.amount }}
+            </td>
+          </tr>
+          <tr>
+            <td>{{ "currency" | translate }}</td>
+            <td>
+              {{ showingData?.currency }}
+            </td>
+          </tr>
+          <tr>
+            <td>{{ "merchant_id" | translate }}</td>
+            <td>
+              {{ showingData?.merchant_id }}
+            </td>
+          </tr>
+          <tr>
+            <td>{{ "bank_no" | translate }}</td>
+            <td>
+              {{ showingData?.modem_number }}
+            </td>
+          </tr>
+          <!-- <tr>
+						<td>Fees Amount</td>
+						<td>
+							{{ showingData?.commission_fee || '00.0' }}
+						</td>
+					</tr> -->
+          <!-- <tr>
+						<td>{{ 'notes' | translate }}</td>
+						<td>
+							{{ showingData?.notes }}
+						</td>
+					</tr> -->
+          <tr>
+            <td>{{ "status" | translate }}</td>
+            <td>
+              <span
+                class="badge bg-danger"
+                *ngIf="showingData?.status === 'Rejected'"
+              >
+                {{ "rejected" | translate }}</span
+              >
+              <span
+                class="badge bg-success text-dark"
+                *ngIf="showingData?.status === 'Approved'"
+                >{{ "approved" | translate }}</span
+              >
+              <span
+                class="badge bg-warning text-dark"
+                *ngIf="showingData?.status === 'In Progress'"
+                >In Progress</span
+              >
+            </td>
+          </tr>
+          <!-- <tr>
+						<td>{{ 'date' | translate }}</td>
+						<td>
+							{{
+								showingData.date | timezoneDate
+							}}
+						</td>
+					</tr> -->
+          <tr>
+            <td>{{ "unique_id" | translate }}</td>
+            <td>{{ showingData.transaction_id }}</td>
+          </tr>
+          <tr>
+            <td>TrxID</td>
+            <td>{{ showingData.trx_id }}</td>
+          </tr>
+          <tr>
+            <td>{{ "commission" | translate }}</td>
+            <td>{{ showingData.commission_fee }}</td>
+          </tr>
+          <tr>
+            <td>comment</td>
+            <td>{{ showingData.notes }}</td>
+          </tr>
+          <tr>
+            <td>{{ "create_time" | translate }}</td>
+            <td>
+              {{ showingData.date | timezoneDate }}
+            </td>
+          </tr>
+
+          <tr>
+            <td>{{ "processing_time" | translate }}</td>
+            <td>
+              {{
+                showingData.date | dateDurationTwo : showingData.approved_time
+              }}
+            </td>
+          </tr>
+
+          <tr>
+            <td>{{ "approved_time" | translate }}</td>
+            <td>
+              {{ showingData.approved_time | timezoneDate }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- <div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+	  </div> -->
+  </ng-template>
+</main>
