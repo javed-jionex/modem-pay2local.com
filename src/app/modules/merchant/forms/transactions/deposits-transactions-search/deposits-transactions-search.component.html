@@ -105,7 +105,11 @@
     <label for="inputNanme4" class="form-label">{{
       "service_type" | translate
     }}</label>
-    <select class="form-select" formControlName="modem_type">
+    <select
+      class="form-select"
+      formControlName="modem_type"
+      (change)="modemType($event)"
+    >
       <option selected disabled value="">Choose...</option>
       <!-- <option value="Personal">
 				Personal

@@ -33,7 +33,7 @@ export class DepositsComponent {
   ) {}
   ngOnInit() {
     //this.permissionService.sendMethod(this.routers.snapshot.data);
-    //this.paymentsList();
+    this.paymentsList();
     this.userProfile = this.localStorageMerchantService.getUserProfile();
     setTimeout(() => {
       // this.getPermisions();
@@ -50,6 +50,7 @@ export class DepositsComponent {
       start_date: this.searchParm?.start_date || null,
       end_date: this.searchParm?.end_date || null,
     };
+    console.log(data);
     this.isDisplayed = true;
     this.depositsService.list(data).subscribe((res: any) => {
       this.displayedData = res?.data;
@@ -135,4 +136,24 @@ export class DepositsComponent {
 
   //   this.isFileDownload = filteredData[0]?.action;
   // }
+  formatLabel(value: string): string {
+    if (!value) return "";
+
+    // Replace underscores with spaces
+    const spaced = value.replace(/_/g, " ");
+
+    // Capitalize each word
+    return spaced
+      .split(" ")
+      .map((word) => {
+        // If word is lowercase with digits (like "p2p"), convert to uppercase
+        if (/^[a-z0-9]+$/.test(word)) {
+          return word.toUpperCase();
+        }
+
+        // Capitalize first letter only
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      })
+      .join(" ");
+  }
 }
