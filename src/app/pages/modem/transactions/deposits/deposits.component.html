@@ -47,7 +47,7 @@
                   <th>{{ "request_type" | translate }}</th>
                   <th>{{ "bank_no" | translate }}</th>
                   <th>TrxID</th>
-                  <th>{{ "phone" | translate }}</th>
+                  <!-- <th>{{ "phone" | translate }}</th> -->
                   <!-- <th>Cur</th> -->
                   <!-- <th>{{ "comment" | translate }}</th> -->
                   <th>{{ "date" | translate }}</th>
@@ -88,9 +88,9 @@
                     <!-- <td>{{ item.currency }}</td>
                     <td>{{ item.notes }}</td> -->
                     <td>{{ item?.transaction_id }}</td>
-                    <td>{{ item?.cust_phone }}</td>
+                    <!-- <td>{{ item?.cust_phone }}</td> -->
                     <td>
-                      {{ item.process_time | timezoneDate }}
+                      {{ item.created_at | timezoneDate }}
                     </td>
                     <td>
                       <!-- {{
@@ -111,6 +111,11 @@
                     <td *ngIf="item.status == 'approved'">
                       <span class="badge bg-success">{{
                         "approved" | translate
+                      }}</span>
+                    </td>
+                    <td *ngIf="item.status == 'pending'">
+                      <span class="badge bg-warning">{{
+                        "pending" | translate
                       }}</span>
                     </td>
                     <td

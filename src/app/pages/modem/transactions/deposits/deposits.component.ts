@@ -33,7 +33,7 @@ export class DepositsComponent {
   ) {}
   ngOnInit() {
     //this.permissionService.sendMethod(this.routers.snapshot.data);
-    this.paymentsList();
+    //  this.paymentsList();
     this.userProfile = this.localStorageMerchantService.getUserProfile();
     setTimeout(() => {
       // this.getPermisions();

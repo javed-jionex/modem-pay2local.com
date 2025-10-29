@@ -42,17 +42,18 @@
               >
                 <thead>
                   <th>#</th>
-                  <th>{{ "merchant_id" | translate }}</th>
+                  <!-- <th>{{ "merchant_id" | translate }}</th> -->
                   <!-- <th>{{ 'unique_id' | translate }}</th> -->
                   <!-- <th>{{ "customer_no" | translate }}</th> -->
-                  <th>{{ "service_type" | translate }}</th>
-                  <th>{{ "request_type" | translate }}</th>
-                  <th>{{ "bank_no" | translate }}</th>
+                  <!-- <th>{{ "service_type" | translate }}</th> -->
+                  <!-- <th>{{ "request_type" | translate }}</th> -->
+                  <!-- <th>{{ "bank_no" | translate }}</th> -->
                   <th>TrxID</th>
-                  <th>{{ "phone" | translate }}</th>
+                  <th>{{ "customer_no" | translate }}</th>
                   <!-- <th>Cur</th> -->
                   <!-- <th>{{ "comment" | translate }}</th> -->
                   <th>{{ "date" | translate }}</th>
+                  <th>{{ "duration" | translate }}</th>
                   <th>{{ "processing_time" | translate }}</th>
                   <!--
                   <th>{{ "approved_time" | translate }}</th>
@@ -78,12 +79,12 @@
                     "
                   >
                     <td>{{ i + 1 }}</td>
-                    <td>{{ item.merchant_unique_id }}</td>
+                    <!-- <td>{{ item.merchant_unique_id }}</td> -->
                     <!-- <td>{{ item.transaction_id }}</td> -->
                     <!-- <td>{{ item.customer }}</td> -->
-                    <td>{{ formatLabel(item.service_type) }}</td>
-                    <td>{{ item.request_type }}</td>
-                    <td>{{ item.modem_number }}</td>
+                    <!-- <td>{{ formatLabel(item.service_type) }}</td> -->
+                    <!-- <td>{{ item.request_type }}</td> -->
+                    <!-- <td>{{ item.modem_number }}</td> -->
                     <!-- <td *ngIf="item.status == 'Approved'">{{ item.trx_id }}</td>
                     <td *ngIf="item.status == 'Rejected'"></td> -->
 
@@ -92,17 +93,17 @@
                     <td>{{ item?.transaction_id }}</td>
                     <td>{{ item?.cust_phone }}</td>
                     <td>
-                      {{ item.process_time | timezoneDate }}
+                      {{ item.created_at | timezoneDate }}
                     </td>
                     <td>
-                      <!-- {{
-                        item.created_at | dateDurationTwo : item.approved_time
-                      }} -->
+                      {{
+                        item.created_at | dateDurationTwo : item.process_time
+                      }}
+                      <!-- {{ item.process_time | timezoneDate }} -->
+                    </td>
+                    <td>
                       {{ item.process_time | timezoneDate }}
                     </td>
-                    <!--<td>
-                      {{ item.approved_time | timezoneDate }}
-                    </td> -->
                     <!-- <td><span>-</span>{{ item.commission_fee }}</td> -->
                     <td><span>+</span>{{ item.amount | appNumberFormat }}</td>
                     <td *ngIf="item.status == 'rejected'">
@@ -115,9 +116,12 @@
                         "approved" | translate
                       }}</span>
                     </td>
-                    <td
-                      *ngIf="actionPermission | checkPermissionPure : 'Action'"
-                    >
+                    <td *ngIf="item.status == 'pending'">
+                      <span class="badge bg-warning">{{
+                        "pending" | translate
+                      }}</span>
+                    </td>
+                    <td>
                       <a class="custom-icons">
                         <i
                           class="fa fa-eye"
@@ -178,50 +182,44 @@
       >
         <tbody>
           <tr>
-            <td>{{ "customer_number" | translate }}</td>
+            <td>{{ "unique_id" | translate }}</td>
             <td>
-              {{ showingData?.customer }}
+              {{ showingData?.merchant_unique_id }}
             </td>
           </tr>
           <tr>
             <td>{{ "service_type" | translate }}</td>
             <td>
-              {{ showingData?.modem_type }}
+              {{ formatLabel(showingData?.service_type) }}
             </td>
           </tr>
           <tr>
-            <td>{{ "bank_type" | translate }}</td>
+            <td>{{ "request_type" | translate }}</td>
             <td>
-              {{ showingData?.bank }}
+              {{ showingData?.request_type }}
             </td>
           </tr>
           <tr>
             <td>{{ "amount" | translate }}</td>
             <td>-{{ showingData?.amount | appNumberFormat }}</td>
           </tr>
+
           <tr>
-            <td>Commission</td>
+            <td>{{ "Approved BY" | translate }}</td>
             <td>
-              -{{ showingData?.commission_fee }}
-              <button
-                type="button"
-                class="btn btn-primary mx-2"
-                (click)="updateMerchantCommission()"
-              >
-                Commission Update
-              </button>
+              {{ showingData?.approved_by }}
             </td>
           </tr>
           <tr>
-            <td>{{ "currency" | translate }}</td>
+            <td>{{ "Payment Mode" | translate }}</td>
             <td>
-              {{ showingData?.currency }}
+              {{ showingData?.payment_mode }}
             </td>
           </tr>
           <tr>
-            <td>{{ "merchant_id" | translate }}</td>
+            <td>{{ "amount" | translate }}</td>
             <td>
-              {{ showingData?.merchant_id }}
+              {{ showingData?.amount }}
             </td>
           </tr>
           <tr>
@@ -236,68 +234,51 @@
 							{{ showingData?.commission_fee || '00.0' }}
 						</td>
 					</tr> -->
-          <tr *ngIf="showingData?.notes">
-            <td>Comments</td>
-            <td>
-              {{ showingData?.notes }}
-            </td>
-          </tr>
+
           <tr>
             <td>{{ "status" | translate }}</td>
             <td>
               <span
                 class="badge bg-danger"
-                *ngIf="showingData?.status === 'Rejected'"
+                *ngIf="showingData?.status === 'rejected'"
               >
                 {{ "rejected" | translate }}</span
               >
               <span
                 class="badge bg-success text-dark"
-                *ngIf="showingData?.status === 'Approved'"
+                *ngIf="showingData?.status === 'approved'"
                 >{{ "approved" | translate }}</span
+              >
+              <span
+                class="badge bg-warning text-dark"
+                *ngIf="showingData?.status === 'pending'"
+                >{{ "pending" | translate }}</span
               >
             </td>
           </tr>
-          <!-- <tr>
-						<td>{{ 'date' | translate }}</td>
-						<td>
-							{{
-							showingData.date | timezoneDate
-							}}
-						</td>
-					</tr> -->
-          <tr>
-            <td>{{ "merchant_id" | translate }}</td>
-            <td>
-              {{ showingData.merchant_id }}
-            </td>
-          </tr>
-          <tr>
-            <td>{{ "unique_id" | translate }}</td>
-            <td>{{ showingData.transaction_id }}</td>
-          </tr>
           <tr>
             <td>TrxID</td>
-            <td>{{ showingData.trx_id }}</td>
+            <td>{{ showingData.transaction_id }}</td>
           </tr>
           <tr>
             <td>{{ "create_time" | translate }}</td>
             <td>
-              {{ showingData.date | timezoneDate }}
+              {{ showingData.created_at | timezoneDate }}
+            </td>
+          </tr>
+          <tr>
+            <td>{{ "duration" | translate }}</td>
+            <td>
+              {{
+                showingData.created_at
+                  | dateDurationTwo : showingData.process_time
+              }}
             </td>
           </tr>
           <tr>
             <td>{{ "processing_time" | translate }}</td>
             <td>
-              {{
-                showingData.date | dateDurationTwo : showingData.approved_time
-              }}
-            </td>
-          </tr>
-          <tr>
-            <td>{{ "approved_time" | translate }}</td>
-            <td>
-              {{ showingData.approved_time | timezoneDate }}
+              {{ showingData.process_time | timezoneDate }}
             </td>
           </tr>
         </tbody>

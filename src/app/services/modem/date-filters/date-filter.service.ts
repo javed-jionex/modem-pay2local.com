@@ -38,7 +38,7 @@ export class DateFilterService {
 
   /**** This function useing for Global timezone */
   dailyEndDate(): string {
-    let timezone: any = localStorage.getItem("commonTimezone");
+    let timezone: any = localStorage.getItem("commonTimezone") || "GMT+00:00";
     const now = new Date();
 
     // Extract GMT offset
@@ -96,7 +96,7 @@ export class DateFilterService {
   //   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   // }
   monthlyEndDate(): string {
-    let timezone: any = localStorage.getItem("commonTimezone");
+    let timezone: any = localStorage.getItem("commonTimezone") || "GMT+00:00";
     const now = moment();
 
     // Extract GMT offset
