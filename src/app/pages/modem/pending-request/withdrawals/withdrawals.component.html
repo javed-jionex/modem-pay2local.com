@@ -16,9 +16,64 @@
 
   <section class="section">
     <div class="row">
-      <div class="col-xl-12" style="margin-top: 50px">
+      <div class="col-xl-12">
+        <div class="cardsRowA mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="cardWrap">
+                <div class="cardIcon total">
+                  <i class="bi bi-people-fill"></i>
+                </div>
+                <div class="cardInfo">
+                  <h3>10</h3>
+                  <h2>Total Requests</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="cardWrap">
+                <div class="cardIcon monthly">
+                  <i class="bi bi-bank2"></i>
+                </div>
+                <div class="cardInfo">
+                  <h3>0</h3>
+                  <h2>Total Amount</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="cardWrap">
+                <div class="cardIcon today">
+                  <i class="bi bi-bank2"></i>
+                </div>
+                <div class="cardInfo">
+                  <h3>0</h3>
+                  <h2>Total P2C QR Withdrawals</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="cardWrap">
+                <div class="cardIcon mBlue">
+                  <i class="bi bi-bank2"></i>
+                </div>
+                <div class="cardInfo">
+                  <h3>0</h3>
+                  <h2>Total P2P Agent Withdrawals</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- <h3>Cash In</h3> -->
-        <div class="card withdraw-card col-md-6">
+        <div class="card withdraw-card">
           <div class="card-body profile-overview">
             <p *ngIf="!displayedData?.cust_phone" style="text-align: center">
               Record not found
