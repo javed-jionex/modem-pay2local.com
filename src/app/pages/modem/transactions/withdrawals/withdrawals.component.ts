@@ -43,9 +43,8 @@ export class WithdrawalsComponent {
     let data = {
       page_size: this.itemsPerPage,
       page_number: this.pageNumber,
-      status: this.searchParm?.status || null,
+      status: this.searchParm?.status || "all",
       request_type: "withdraw",
-      service_type: this.searchParm?.modem_type || null,
       start_date: this.searchParm?.start_date || null,
       end_date: this.searchParm?.end_date || null,
     };
@@ -54,7 +53,7 @@ export class WithdrawalsComponent {
       this.displayedData = res?.data;
       this.isDisplayed = false;
       this.totalRows = res?.total_rows;
-      this.totalBlance = res?.total_amount;
+      this.totalBlance = res?.total_sum;
       this.totalCommission = res?.total_commission;
     });
     setTimeout(() => {

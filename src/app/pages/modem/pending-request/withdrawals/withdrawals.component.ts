@@ -92,7 +92,7 @@ export class WithdrawalsComponent {
       this.isLoading = false;
       if (res.status == 200) {
         this.displayedData = res.data;
-        console.log(this.displayedData);
+        // console.log(this.displayedData);
         if (this.displayedData?.bank_name == "Nagad") {
           this.maxTrxID = 8;
           this.minTrxID = 8;

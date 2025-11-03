@@ -42,28 +42,17 @@
               >
                 <thead>
                   <th>#</th>
-                  <!-- <th>{{ "merchant_id" | translate }}</th> -->
-                  <!-- <th>{{ 'unique_id' | translate }}</th> -->
-                  <!-- <th>{{ "customer_no" | translate }}</th> -->
-                  <!-- <th>{{ "service_type" | translate }}</th> -->
-                  <!-- <th>{{ "request_type" | translate }}</th> -->
-                  <!-- <th>{{ "bank_no" | translate }}</th> -->
+
                   <th>TrxID</th>
                   <th>{{ "customer_no" | translate }}</th>
-                  <!-- <th>Cur</th> -->
-                  <!-- <th>{{ "comment" | translate }}</th> -->
+
                   <th>{{ "date" | translate }}</th>
-                  <th>{{ "duration" | translate }}</th>
+                  <!-- <th>{{ "duration" | translate }}</th> -->
                   <th>{{ "processing_time" | translate }}</th>
-                  <!--
-                  <th>{{ "approved_time" | translate }}</th>
-                  -->
-                  <!-- <th>Comm.</th> -->
+
                   <th>{{ "amount" | translate }}</th>
                   <th>{{ "status" | translate }}</th>
-                  <th *ngIf="actionPermission | checkPermissionPure : 'Action'">
-                    Action
-                  </th>
+                  <th>Action</th>
                 </thead>
                 <tbody>
                   <tr
@@ -79,48 +68,37 @@
                     "
                   >
                     <td>{{ i + 1 }}</td>
-                    <!-- <td>{{ item.merchant_unique_id }}</td> -->
-                    <!-- <td>{{ item.transaction_id }}</td> -->
-                    <!-- <td>{{ item.customer }}</td> -->
-                    <!-- <td>{{ formatLabel(item.service_type) }}</td> -->
-                    <!-- <td>{{ item.request_type }}</td> -->
-                    <!-- <td>{{ item.modem_number }}</td> -->
-                    <!-- <td *ngIf="item.status == 'Approved'">{{ item.trx_id }}</td>
-                    <td *ngIf="item.status == 'Rejected'"></td> -->
 
-                    <!-- <td>{{ item.currency }}</td>
-                    <td>{{ item.notes }}</td> -->
                     <td>{{ item?.transaction_id }}</td>
                     <td>{{ item?.cust_phone }}</td>
                     <td>
-                      {{ item.created_at | timezoneDate }}
+                      {{ item.approved_time | timezoneDate }}
                     </td>
-                    <td>
+                    <!-- <td>
                       {{
                         item.created_at | dateDurationTwo : item.process_time
                       }}
-                      <!-- {{ item.process_time | timezoneDate }} -->
-                    </td>
+                    </td> -->
                     <td>
                       {{ item.process_time | timezoneDate }}
                     </td>
-                    <!-- <td><span>-</span>{{ item.commission_fee }}</td> -->
+
                     <td><span>+</span>{{ item.amount | appNumberFormat }}</td>
-                    <td *ngIf="item.status == 'rejected'">
+                    <td *ngIf="item.status == 'Rejected'">
                       <span class="badge bg-danger">{{
                         "rejected" | translate
                       }}</span>
                     </td>
-                    <td *ngIf="item.status == 'approved'">
+                    <td *ngIf="item.status == 'Approved'">
                       <span class="badge bg-success">{{
                         "approved" | translate
                       }}</span>
                     </td>
-                    <td *ngIf="item.status == 'pending'">
+                    <!-- <td *ngIf="item.status == 'pending'">
                       <span class="badge bg-warning">{{
                         "pending" | translate
                       }}</span>
-                    </td>
+                    </td> -->
                     <td>
                       <a class="custom-icons">
                         <i
@@ -132,8 +110,8 @@
                     </td>
                   </tr>
                   <tr *ngIf="totalBlance && getLastPageNumber() == pageNumber">
-                    <th colspan="6">{{ "total" | translate }}</th>
-                    <th><span>-</span>{{ totalCommission }}</th>
+                    <th colspan="5">{{ "total" | translate }}</th>
+                    <!-- <th><span>-</span>{{ totalCommission }}</th> -->
                     <th><span>+</span>{{ totalBlance | appNumberFormat }}</th>
                     <!-- <th>&nbsp;</th>
                     <th>&nbsp;</th> -->
