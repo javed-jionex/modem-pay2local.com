@@ -40,6 +40,7 @@ export class WithdrawalsComponent {
   seconds: number = 3;
   timerSubscription: any;
   Math = Math;
+  isLoading: boolean = false;
   constructor(
     private withdrawalService: WithdrawalService,
     private fb: FormBuilder,
@@ -51,11 +52,11 @@ export class WithdrawalsComponent {
     private alertService: AlertService
   ) {}
   ngOnInit() {
-    this.permissionService.sendMethod(this.routers.snapshot.data);
+    // this.permissionService.sendMethod(this.routers.snapshot.data);
     this.paymentsRequestList();
     this.userProfile = this.localStorageMerchantService.getUserProfile();
     // this.initForm();
-    this.setTimer();
+    // this.setTimer();
     setTimeout(() => {
       this.getPermisions();
     }, 1500);
@@ -73,6 +74,7 @@ export class WithdrawalsComponent {
     });
   }
   paymentsRequestList() {
+    this.isLoading = true;
     let data = {
       page_size: this.itemsPerPage,
       page_number: this.pageNumber,
@@ -87,26 +89,30 @@ export class WithdrawalsComponent {
     };
     this.isDisplayed = true;
     this.withdrawalService.list().subscribe((res: any) => {
-      this.displayedData = res.data;
-      if (this.displayedData?.bank_name == "Nagad") {
-        this.maxTrxID = 8;
-        this.minTrxID = 8;
-      } else {
-        this.maxTrxID = 10;
-        this.minTrxID = 10;
-      }
-      this.initForm();
-      if (this.displayedData?.cust_phone) {
-        this.isAutoRefresh = false;
-        this.setTimer();
-      } else {
-        if (this.isAutoRefresh != true) {
-          this.isAutoRefresh = true;
-          this.setTimer();
+      this.isLoading = false;
+      if (res.status == 200) {
+        this.displayedData = res.data;
+        console.log(this.displayedData);
+        if (this.displayedData?.bank_name == "Nagad") {
+          this.maxTrxID = 8;
+          this.minTrxID = 8;
+        } else {
+          this.maxTrxID = 10;
+          this.minTrxID = 10;
         }
+        this.initForm();
+        // if (this.displayedData?.cust_phone) {
+        //   this.isAutoRefresh = false;
+        //   this.setTimer();
+        // } else {
+        //   if (this.isAutoRefresh != true) {
+        //     this.isAutoRefresh = true;
+        //     this.setTimer();
+        //   }
+        // }
+        this.withdrawalID = this.displayedData?.id;
+        this.isDisplayed = false;
       }
-      this.withdrawalID = this.displayedData?.id;
-      this.isDisplayed = false;
 
       // this.dashboardService.pedingCountRF(true);
     });
@@ -114,7 +120,57 @@ export class WithdrawalsComponent {
       this.isDisplayed = false;
     }, 2000);
   }
+  isObjectEmpty(obj: any): boolean {
+    return obj && Object.keys(obj).length === 0;
+  }
+  fetchPRWithdrawal() {
+    this.isLoading = true;
+    let data = {
+      page_size: this.itemsPerPage,
+      page_number: this.pageNumber,
+      // mobile_banking_id: this.searchParm?.mobile_banking_id || null,
+      // transaction_id: this.searchParm?.transaction_id || null,
+      // cust_phone: this.searchParm?.cust_phone || null,
+      // merchant_id: this.searchParm?.merchant_id || null,
+      // start_date: this.searchParm?.start_date || null,
+      // export_type: "list",
+      // end_date: this.searchParm?.end_date || null,
+      // modem_type: this.searchParm?.modem_type || null,
+    };
+    this.isDisplayed = true;
+    this.withdrawalService.getListOnClick().subscribe((res: any) => {
+      this.isLoading = false;
+      if (res.status == 200) {
+        this.displayedData = res.data;
+        if (this.displayedData?.bank_name == "Nagad") {
+          this.maxTrxID = 8;
+          this.minTrxID = 8;
+        } else {
+          this.maxTrxID = 10;
+          this.minTrxID = 10;
+        }
+        this.initForm();
+        // if (this.displayedData?.cust_phone) {
+        //   this.isAutoRefresh = false;
+        //   this.setTimer();
+        // } else {
+        //   if (this.isAutoRefresh != true) {
+        //     this.isAutoRefresh = true;
+        //     this.setTimer();
+        //   }
+        // }
+        this.withdrawalID = this.displayedData?.id;
+        this.isDisplayed = false;
+      } else if (res.status == "no_requests_available") {
+        this.alertService.warning("", res.message);
+      }
 
+      // this.dashboardService.pedingCountRF(true);
+    });
+    setTimeout(() => {
+      this.isDisplayed = false;
+    }, 2000);
+  }
   search(data: any) {
     this.searchParm = data;
     this.itemsPerPage = this.searchParm?.page_size;
@@ -205,6 +261,7 @@ export class WithdrawalsComponent {
         if (res?.status === 200) {
           this.alertService.success("success", res?.message);
           this.paymentsRequestList();
+          this.displayedData = "";
         } else {
           this.alertService.error("error", res?.message);
         }
@@ -219,6 +276,7 @@ export class WithdrawalsComponent {
       if (res?.status === 200) {
         this.alertService.success("success", res?.message);
         this.paymentsRequestList();
+        this.displayedData = "";
       } else {
         this.alertService.error("error", res?.message);
       }
@@ -316,5 +374,20 @@ export class WithdrawalsComponent {
     document.execCommand("copy");
     document.body.removeChild(selBox);
     this.alertService.success("Success", "Coppied !");
+  }
+  viewRecord(ID: any) {
+    this.withdrawalService
+      .viewWithdrawalsRecord({ id: ID })
+      .subscribe((res: any) => {
+        if (res.status == 200) {
+          this.alertService.success("", res.message);
+          this.paymentsRequestList();
+        } else {
+          this.alertService.warning("", res.message);
+        }
+      });
+  }
+  getWithdrawalData() {
+    this.fetchPRWithdrawal();
   }
 }

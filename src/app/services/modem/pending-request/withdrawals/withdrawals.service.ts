@@ -15,6 +15,12 @@ export class WithdrawalService {
         `api/v1/modem_web/payments/get_pending_withdraw`
     );
   }
+  getListOnClick() {
+    return this.http.get(
+      this.configService.getBackendHost() +
+        `api/v1/modem_web/payments/request_withdraw`
+    );
+  }
   reject(data: any) {
     return this.http.put(
       this.configService.getBackendHost() +
@@ -26,6 +32,13 @@ export class WithdrawalService {
     return this.http.put(
       this.configService.getBackendHost() +
         `api/v1/modem_web/payments/approve_withdraw`,
+      data
+    );
+  }
+  viewWithdrawalsRecord(data: any) {
+    return this.http.put(
+      this.configService.getBackendHost() +
+        `api/v1/modem_web/payments/view_withdraw_request`,
       data
     );
   }

@@ -20,10 +20,26 @@
         <!-- <h3>Cash In</h3> -->
         <div class="card withdraw-card col-md-6">
           <div class="card-body profile-overview">
-            <p *ngIf="!displayedData?.cust_phone" style="text-align: center">
-              Record not found
+            <p
+              *ngIf="
+                !displayedData ||
+                (displayedData && isObjectEmpty(displayedData))
+              "
+              style="text-align: center"
+            >
+              <app-button
+                buttonClass="btn btn-primary"
+                [loading]="isLoading"
+                [disabled]="isLoading"
+                (click)="getWithdrawalData()"
+              >
+                Fetch PR Withdraw
+              </app-button>
             </p>
-            <div class="row my-0" *ngIf="displayedData?.cust_phone">
+            <div
+              class="row my-0"
+              *ngIf="displayedData && !isObjectEmpty(displayedData)"
+            >
               <div class="col-md-12 mt-3 text-center">
                 <h3>Withdrawals</h3>
                 <img
@@ -47,72 +63,141 @@
                   *ngIf="displayedData?.bank_name == 'Upay'"
                 />
               </div>
-              <div class="col-md-12 mt-3">
-                <div class="row">
-                  <div class="col-6 label text-end">Payee Number:</div>
-                  <div class="col-6 text-start">
-                    <!-- <img
+              <div class="row" *ngIf="displayedData?.status == 'assigned'">
+                <div class="col-md-12 mt-3">
+                  <div class="row">
+                    <div class="col-6 label text-end">Payee Number:</div>
+                    <div class="col-6 text-start">
+                      <!-- <img
                       src="../../../../../assets/img/phonecall.png"
                       style="width: 30px"
                     /> -->
-                    {{ displayedData?.cust_phone }}
-                    <span
-                      class="copy"
-                      (click)="copyMerchant(displayedData?.cust_phone)"
-                      >{{ "copy" | translate }}</span
-                    >
+                      **********
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="col-md-12 mt-3">
-                <div class="row">
-                  <div class="col-6 text-end label">
-                    {{ "Bank" | translate }}:
-                  </div>
-                  <div class="col-6 text-start">
-                    {{ displayedData?.bank_name }}
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12 mt-3">
-                <div class="row">
-                  <div class="col-6 label text-end">
-                    {{ "amount" | translate }}:
-                  </div>
-                  <div class="col-6 text-start">
-                    {{ displayedData?.amount }}
-                    <span
-                      class="copy"
-                      (click)="
-                        copyMerchant(
-                          Math.floor(displayedData?.amount || 0).toString()
-                        )
-                      "
-                      >{{ "copy" | translate }}</span
-                    >
+                <div class="col-md-12 mt-3">
+                  <div class="row">
+                    <div class="col-6 text-end label">
+                      {{ "Bank" | translate }}:
+                    </div>
+                    <div class="col-6 text-start">
+                      {{ displayedData?.bank_name }}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-12 mt-3">
-                <div class="row">
-                  <div class="col-6 label text-end">
-                    {{ "service_type" | translate }}:
-                  </div>
-                  <div class="col-6 text-start">
-                    {{ formatLabel(displayedData?.service_type) }}
+                <div class="col-md-12 mt-3">
+                  <div class="row">
+                    <div class="col-6 label text-end">
+                      {{ "amount" | translate }}:
+                    </div>
+                    <div class="col-6 text-start">**********</div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-12 mt-3">
-                <div class="row">
-                  <div class="col-6 text-end label">Date:</div>
-                  <div class="col-6 text-start">
-                    {{ displayedData?.date | timezoneDate }}
+                <div class="col-md-12 mt-3">
+                  <div class="row">
+                    <div class="col-6 label text-end">
+                      {{ "service_type" | translate }}:
+                    </div>
+                    <div class="col-6 text-start">
+                      {{ formatLabel(displayedData?.service_type) }}
+                    </div>
                   </div>
                 </div>
+                <div class="col-md-12 mt-3">
+                  <div class="row">
+                    <div class="col-6 text-end label">Date:</div>
+                    <div class="col-6 text-start">
+                      {{ displayedData?.date | timezoneDate }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 text-center mt-4">
+                  <button
+                    type="button"
+                    class="btn btn-primary me-2"
+                    (click)="viewRecord(this.displayedData?.id)"
+                  >
+                    {{ "View" | translate }}
+                  </button>
+                </div>
               </div>
-              <!-- <div class="col-md-12 mt-3 mb-3">
+              <div class="row" *ngIf="displayedData?.status != 'assigned'">
+                <div class="col-md-12 mt-3">
+                  <div class="row">
+                    <div class="col-6 label text-end">Payee Number:</div>
+                    <div class="col-6 text-start">
+                      <!-- <img
+                      src="../../../../../assets/img/phonecall.png"
+                      style="width: 30px"
+                    /> -->
+                      {{ displayedData?.cust_phone }}
+                      <span
+                        class="copy"
+                        (click)="copyMerchant(displayedData?.cust_phone)"
+                        >{{ "copy" | translate }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 mt-3">
+                  <div class="row">
+                    <div class="col-6 text-end label">
+                      {{ "Bank" | translate }}:
+                    </div>
+                    <div class="col-6 text-start">
+                      {{ displayedData?.bank_name }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                  <div class="row">
+                    <div class="col-6 label text-end">
+                      {{ "amount" | translate }}:
+                    </div>
+                    <div class="col-6 text-start">
+                      {{ displayedData?.amount }}
+                      <span
+                        class="copy"
+                        (click)="
+                          copyMerchant(
+                            Math.floor(displayedData?.amount || 0).toString()
+                          )
+                        "
+                        >{{ "copy" | translate }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                  <div class="row">
+                    <div class="col-6 label text-end">
+                      {{ "service_type" | translate }}:
+                    </div>
+                    <div class="col-6 text-start">
+                      {{ formatLabel(displayedData?.service_type) }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                  <div class="row">
+                    <div class="col-6 text-end label">Date:</div>
+                    <div class="col-6 text-start">
+                      {{ displayedData?.date | timezoneDate }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 mt-3 mb-2">
+                  <div class="row">
+                    <div class="col-6 text-end label">View Date:</div>
+                    <div class="col-6 text-start">
+                      {{ displayedData?.view_time | timezoneDate }}
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-md-12 mt-3 mb-3">
                 <div class="row text-center">
                   <div class="col-md-12">
                     <button
@@ -133,17 +218,17 @@
                   </div>
                 </div>
               </div> -->
-              <div class="col-md-7" style="margin: auto">
-                <form
-                  class="row g-3"
-                  [formGroup]="actionForm"
-                  #f="ngForm"
-                  (submit)="saveApprove(f.value)"
-                  autocomplete="off"
-                  *ngIf="formType == 'approve'"
-                >
-                  <div class="col-12">
-                    <!-- <select
+                <div class="col-md-7" style="margin: auto">
+                  <form
+                    class="row g-3"
+                    [formGroup]="actionForm"
+                    #f="ngForm"
+                    (submit)="saveApprove(f.value)"
+                    autocomplete="off"
+                    *ngIf="formType == 'approve'"
+                  >
+                    <div class="col-12">
+                      <!-- <select
       class="form-select requiredField"
       formControlName="modem_type"
       (change)="modemType($event)"
@@ -153,73 +238,77 @@
       <option value="p2c_api">P2C API</option>
       <option value="p2p_agent">P2P Agent</option>
     </select> -->
-                    <input
-                      class="form-control requiredField"
-                      formControlName="transaction_id"
-                      placeholder="123****"
-                      maxlength="{{ maxTrxID }}"
-                      (input)="checkMaxLimit(maxTrxID, $event)"
-                    />
-                  </div>
-                  <!-- <div class="col-12">
+                      <input
+                        class="form-control requiredField"
+                        formControlName="transaction_id"
+                        placeholder="123****"
+                        maxlength="{{ maxTrxID }}"
+                        (input)="checkMaxLimit(maxTrxID, $event)"
+                      />
+                    </div>
+                    <!-- <div class="col-12">
                     <input
                       class="form-control requiredField"
                       formControlName="notes"
                       placeholder="Notes"
                     />
                   </div> -->
-                  <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-primary me-2">
-                      {{ "Approve" | translate }}
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-danger rejected"
-                      (click)="isType('reject')"
-                    >
-                      {{ "Reject" | translate }}
-                    </button>
-                  </div>
-                </form>
-                <form
-                  class="row g-3"
-                  [formGroup]="rejectForm"
-                  #r="ngForm"
-                  (submit)="saveReject(r.value)"
-                  autocomplete="off"
-                  *ngIf="formType == 'reject'"
-                >
-                  <div class="col-12">
-                    <select
-                      class="form-select requiredField"
-                      formControlName="notes"
-                    >
-                      <option selected disabled value="">Choose...</option>
-                      <option value="Daily Limit Exceed">
-                        Daily Limit Exceed
-                      </option>
-                      <option value="Monthly Limit Exceed">
-                        Monthly Limit Exceed
-                      </option>
-                      <option value="Detail are incorrect">
-                        Detail are incorrect
-                      </option>
-                    </select>
-                  </div>
+                    <div class="col-12 text-center">
+                      <button type="submit" class="btn btn-primary me-2">
+                        {{ "Approve" | translate }}
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger rejected"
+                        (click)="isType('reject')"
+                      >
+                        {{ "Reject" | translate }}
+                      </button>
+                    </div>
+                  </form>
+                  <form
+                    class="row g-3"
+                    [formGroup]="rejectForm"
+                    #r="ngForm"
+                    (submit)="saveReject(r.value)"
+                    autocomplete="off"
+                    *ngIf="formType == 'reject'"
+                  >
+                    <div class="col-12">
+                      <select
+                        class="form-select requiredField"
+                        formControlName="notes"
+                      >
+                        <option selected disabled value="">Choose...</option>
+                        <option value="Daily Limit Exceed">
+                          Daily Limit Exceed
+                        </option>
+                        <option value="Monthly Limit Exceed">
+                          Monthly Limit Exceed
+                        </option>
+                        <option value="Detail are incorrect">
+                          Detail are incorrect
+                        </option>
+                      </select>
+                    </div>
 
-                  <div class="col-12 text-center">
-                    <button
-                      type="button"
-                      class="btn btn-primary me-2"
-                      (click)="isType('approve')"
-                    >
-                      {{ "Approve" | translate }}
-                    </button>
-                    <button type="submit" class="btn btn-danger rejected me-2">
-                      {{ "Reject" | translate }}
-                    </button>
-                  </div>
-                </form>
+                    <div class="col-12 text-center">
+                      <button
+                        type="button"
+                        class="btn btn-primary me-2"
+                        (click)="isType('approve')"
+                      >
+                        {{ "Approve" | translate }}
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn btn-danger rejected me-2"
+                      >
+                        {{ "Reject" | translate }}
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>

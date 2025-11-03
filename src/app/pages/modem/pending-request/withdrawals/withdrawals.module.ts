@@ -10,6 +10,7 @@ import { SharedModule } from "src/app/pipes/sharedModule";
 import { NumberPipeModule } from "@modules/pipe/numberpipe/number.pipe.module";
 import { CheckPermissionPurePipeModule } from "@modules/pipe/checkpermission/check-permission-pure.pipe.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ButtonComponent } from "@components/elements/button/button.component";
 
 @NgModule({
   declarations: [WithdrawalsComponent],
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     CheckPermissionPurePipeModule,
     FormsModule,
     ReactiveFormsModule,
+    ButtonComponent,
   ],
 })
 export class WithdrawalsModule {}
