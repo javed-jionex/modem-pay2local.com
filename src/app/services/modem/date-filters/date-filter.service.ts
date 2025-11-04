@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "@environment/environment";
-import * as moment from "moment-timezone";
 import { Subject } from "rxjs";
 
 @Injectable({
@@ -35,38 +34,40 @@ export class DateFilterService {
 
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
+  /***** This function using for default time */
+  // dailyEndDate(): string {
+  //   const now = new Date();
+  //   const year = now.getFullYear();
+  //   const month = this.padZero(now.getMonth() + 1);
+  //   const day = this.padZero(now.getDate());
+  //   const hours = this.padZero(now.getHours());
+  //   const minutes = this.padZero(now.getMinutes());
+  //   const seconds = this.padZero(now.getSeconds());
 
-  /**** This function useing for Global timezone */
+  //   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  // }
+
+  /**** This function useing for Bangladesh timezone */
   dailyEndDate(): string {
-    let timezone: any = localStorage.getItem("commonTimezone") || "GMT+00:00";
     const now = new Date();
-
-    // Extract GMT offset
-    const offsetMatch = timezone?.match(/GMT([+-]\d{2}):(\d{2})/);
-    if (!offsetMatch) {
-      throw new Error(`Invalid time zone specified: ${timezone}`);
-    }
-    const sign = offsetMatch[1][0]; // '+' or '-'
-    const hoursOffset = parseInt(offsetMatch[1].slice(1), 10);
-    const minutesOffset = parseInt(offsetMatch[2], 10);
-
-    // Calculate the total offset in minutes
-    const totalOffsetMinutes =
-      (hoursOffset * 60 + minutesOffset) * (sign === "+" ? 1 : -1);
-
-    // Adjust the current date by the total offset
-    const adjustedDate = new Date(now.getTime() + totalOffsetMinutes * 60000);
-
+    const options: any = {
+      timeZone: "Asia/Dhaka",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    };
+    // Convert to BST (GMT+06:00) and format the date
+    const bdtNow = new Intl.DateTimeFormat("en-GB", options).format(now);
     // Reformat the output to the desired format: YYYY-MM-DD HH:mm:ss
-    const year = adjustedDate.getUTCFullYear();
-    const month = String(adjustedDate.getUTCMonth() + 1).padStart(2, "0");
-    const day = String(adjustedDate.getUTCDate()).padStart(2, "0");
-    const hours = String(adjustedDate.getUTCHours()).padStart(2, "0");
-    const minutes = String(adjustedDate.getUTCMinutes()).padStart(2, "0");
-    const seconds = String(adjustedDate.getUTCSeconds()).padStart(2, "0");
-
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    const [date, time] = bdtNow.split(", ");
+    const [day, month, year] = date.split("/");
+    return `${year}-${month}-${day} ${time}`;
   }
+
   /** Monthly Format */
   monthlyStartDate(): string {
     const now = new Date();
@@ -76,10 +77,9 @@ export class DateFilterService {
     const hours = "00";
     const minutes = "00";
     const seconds = "00";
-
     return `${year}-${month}-1 ${hours}:${minutes}:${seconds}`;
   }
-
+  /**** Monthly End Date using default date */
   // monthlyEndDate(): string {
   //   const now = new Date();
   //   const nextMonthDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -95,33 +95,35 @@ export class DateFilterService {
 
   //   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   // }
+  /**** Monthly End Date for Bangladesh */
   monthlyEndDate(): string {
-    let timezone: any = localStorage.getItem("commonTimezone") || "GMT+00:00";
-    const now = moment();
+    const now = new Date();
+    const nextMonthDate = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+    nextMonthDate.setDate(0); // Set to the last day of the current month
 
-    // Extract GMT offset
-    const offsetMatch = timezone.match(/GMT([+-]\d{2}):(\d{2})/);
-    if (!offsetMatch) {
-      throw new Error(`Invalid time zone specified: ${timezone}`);
-    }
+    const options: any = {
+      timeZone: "Asia/Dhaka",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    };
 
-    const sign = offsetMatch[1][0]; // '+' or '-'
-    const hoursOffset = parseInt(offsetMatch[1].slice(1), 10);
-    const minutesOffset = parseInt(offsetMatch[2], 10);
+    // Convert to BST (GMT+06:00) and format the date
+    const bdtEndOfMonth = new Intl.DateTimeFormat("en-GB", options).format(
+      nextMonthDate
+    );
 
-    // Calculate the total offset in minutes
-    const totalOffsetMinutes =
-      (hoursOffset * 60 + minutesOffset) * (sign === "+" ? 1 : -1);
+    // Reformat the output to the desired format: YYYY-MM-DD HH:mm:ss
+    const [date, time] = bdtEndOfMonth.split(", ");
+    const [day, month, year] = date.split("/");
 
-    // Adjust the time to the given GMT offset
-    const adjustedTime = moment(now).add(totalOffsetMinutes, "minutes");
-
-    // Set the adjusted date to the last day of the next month
-    adjustedTime.add(1, "month").endOf("month");
-
-    // Format the date as 'YYYY-MM-DD HH:mm:ss'
-    return adjustedTime.format("YYYY-MM-DD 23:59:59");
+    return `${year}-${month}-${day} 23:59:59`; // Set time to 23:59:59
   }
+
   padZero(num: number): string {
     return num < 10 ? `0${num}` : `${num}`;
   }
