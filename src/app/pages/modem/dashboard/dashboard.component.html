@@ -127,78 +127,61 @@
         </div>
       </div>
     </div> -->
-    <div class="col-xl-3 col-md-4 mb-3">
-      <!-- <a routerLink="/admin/support-tickets"> -->
-      <div class="card border-left-info shadow h-90 py-2">
+    <div class="cardCol">
+      <div class="card border-left-primary shadow h-90 py-2">
         <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-uppercase mb-1">
-                {{ "Today Deposit" | translate }}
-              </div>
-            </div>
+          <div class="cardIcon today">
+            <i class="bi bi-arrow-down"></i>
           </div>
-          <p>
-            {{ listData?.transactions?.today_deposit }}
-          </p>
+          <div class="cardInfo">
+            <h2>{{ "Today Deposit" | translate }}</h2>
+            <h3>{{ listData?.transactions?.today_deposit }}</h3>
+          </div>
         </div>
       </div>
-      <!-- </a> -->
     </div>
-    <div class="col-xl-3 col-md-4 mb-3">
-      <!-- <a routerLink="/admin/support-tickets"> -->
-      <div class="card border-left-info shadow h-90 py-2">
+    <div class="cardCol">
+      <div class="card border-left-primary shadow h-90 py-2">
         <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-uppercase mb-1">
-                {{ "Today Withdraw" | translate }}
-              </div>
-            </div>
+          <div class="cardIcon today">
+            <i class="bi bi-arrow-up"></i>
           </div>
-          <p>
-            {{ listData?.transactions?.today_withdraw }}
-          </p>
+          <div class="cardInfo">
+            <h2>{{ "Today Withdraw" | translate }}</h2>
+            <h3>{{ listData?.transactions?.today_withdraw }}</h3>
+          </div>
         </div>
       </div>
-      <!-- </a> -->
     </div>
-    <div class="col-xl-3 col-md-4 mb-3">
-      <!-- <a routerLink="/admin/support-tickets"> -->
-      <div class="card border-left-info shadow h-90 py-2">
+
+    <div class="cardCol">
+      <div class="card border-left-primary shadow h-90 py-2">
         <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-uppercase mb-1">
-                {{ "Monthly Deposit" | translate }}
-              </div>
-            </div>
+          <div class="cardIcon monthly">
+            <i class="bi bi-arrow-down"></i>
           </div>
-          <p>
-            {{ listData?.transactions?.monthly_deposit }}
-          </p>
+          <div class="cardInfo">
+            <h2>{{ "Monthly Deposit" | translate }}</h2>
+            <h3>{{ listData?.transactions?.monthly_deposit }}</h3>
+          </div>
         </div>
       </div>
-      <!-- </a> -->
     </div>
-    <div class="col-xl-3 col-md-4 mb-3">
-      <!-- <a routerLink="/admin/support-tickets"> -->
-      <div class="card border-left-info shadow h-90 py-2">
+
+    <div class="cardCol">
+      <div class="card border-left-primary shadow h-90 py-2">
         <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-uppercase mb-1">
-                {{ "Monthly Withdraw" | translate }}
-              </div>
-            </div>
+          <div class="cardIcon monthly">
+            <i class="bi bi-arrow-up"></i>
           </div>
-          <p>
-            {{ listData?.transactions?.today_withdraw }}
-          </p>
+          <div class="cardInfo">
+            <h2>{{ "Monthly Withdraw" | translate }}</h2>
+            <h3>{{ listData?.transactions?.today_withdraw }}</h3>
+          </div>
         </div>
       </div>
-      <!-- </a> -->
     </div>
+
     <div class="cardCol">
       <div class="card border-left-primary shadow h-90 py-2">
         <div class="card-body">
