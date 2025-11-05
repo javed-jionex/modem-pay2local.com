@@ -28,6 +28,7 @@
               "src/styles.css",
               "node_modules/aos/dist/aos.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "node_modules/datatables.net-dt/css/jquery.dataTables.css",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/slick-carousel/slick/slick.css",
@@ -70,7 +71,8 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.development.ts"
                 }
-              ],"budgets": [
+              ],
+              "budgets": [
                 {
                   "type": "initial",
                   "maximumWarning": "5000kb",
@@ -82,7 +84,8 @@
                   "maximumError": "40kb"
                 }
               ]
-            }, "staging": {
+            },
+            "staging": {
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -108,7 +111,7 @@
                 }
               ]
             },
-             "local": {
+            "local": {
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,

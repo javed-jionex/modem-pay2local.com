@@ -132,19 +132,21 @@
   <ul id="sidebar-nav" class="sidebar-nav">
     <li class="nav-item">
       <a
-        class="nav-link collapsed"
+        class="nav-link collapsed regularMenuLink"
         routerLink="/admin/dashboard"
+        routerLinkActive="active"
         title="{{ 'dashboard' | translate }}"
-        (click)="closeSidebar()"
+        (click)="clearActiveParent(); closeSidebar()"
         ><i class="bi bi-grid"></i><span>{{ "dashboard" | translate }}</span></a
       >
     </li>
     <li class="nav-item">
       <a
-        class="nav-link collapsed"
+        class="nav-link collapsed regularMenuLink"
         routerLink="/admin/b2b-payments"
+        routerLinkActive="active"
         title="{{ 'B2B Payments' | translate }}"
-        (click)="closeSidebar()"
+        (click)="clearActiveParent(); closeSidebar()"
         ><i class="fa fa-money" aria-hidden="true"></i>
         <span>{{ "B2B Payments" | translate }}</span></a
       >
@@ -154,7 +156,8 @@
         data-bs-toggle="collapse"
         href="#"
         title="Pending Request"
-        class="nav-link collapsed"
+        data-name="Pending Request"
+        class="nav-link collapsed parentMenuLink"
         data-bs-target="#pending-nav"
         routerLinkActive="active"
         [ngClass]="menuName == 'Pending Request' ? '' : 'removeCollapsed'"
@@ -184,7 +187,8 @@
           <a
             routerLink="/admin/deposit"
             routerLinkActive="active"
-            (click)="closeSidebar()"
+            class="childMenuLink"
+            (click)="setActiveParent('Pending Request'); closeSidebar()"
             ><i class="bi bi-circle"></i
             ><span>{{ "deposits" | translate }}</span>
             <!-- <span class="badge bg-primary" style="margin-left: 19px">{{
@@ -203,7 +207,8 @@
           <a
             routerLink="/admin/withdrawals"
             routerLinkActive="active"
-            (click)="closeSidebar()"
+            class="childMenuLink"
+            (click)="setActiveParent('Pending Request'); closeSidebar()"
             ><i class="bi bi-circle"></i
             ><span>{{ "withdrawals" | translate }}</span>
             <!-- <span 
@@ -228,7 +233,8 @@
         data-bs-toggle="collapse"
         href="#"
         title="{{ 'transactions' | translate }}"
-        class="nav-link collapsed"
+        data-name="Transactions"
+        class="nav-link collapsed parentMenuLink"
         data-bs-target="#transaction-nav"
         [ngClass]="menuName == 'Transactions' ? '' : 'removeCollapsed'"
         (click)="menuCollapsed('Transactions')"
@@ -246,7 +252,8 @@
           <a
             routerLink="/admin/transactions/deposits"
             routerLinkActive="active"
-            (click)="closeSidebar()"
+            class="childMenuLink"
+            (click)="setActiveParent('Transactions'); closeSidebar()"
             ><i class="bi bi-circle"></i
             ><span>{{ "deposits" | translate }}</span></a
           >
@@ -255,7 +262,8 @@
           <a
             routerLink="/admin/transactions/withdrawals"
             routerLinkActive="active"
-            (click)="closeSidebar()"
+            class="childMenuLink"
+            (click)="setActiveParent('Transactions'); closeSidebar()"
             ><i class="bi bi-circle"></i
             ><span>{{ "withdrawals" | translate }}</span></a
           >

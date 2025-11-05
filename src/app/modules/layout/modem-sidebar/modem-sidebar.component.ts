@@ -24,6 +24,7 @@ export class ModemSidebarComponent {
   paymentCount: any;
   pendinCounts: any = [];
   supportCount: any = [];
+  activeParent: string | null = null;
   constructor(
     private router: Router,
     private globalRoutes: GlobalRoutesService,
@@ -66,6 +67,55 @@ export class ModemSidebarComponent {
   // }
   menuCollapsed(name: any) {
     this.menuName = name;
+  }
+
+  // Click on child → activate parent
+  setActiveParent(parentName: string) {
+    this.clearAllParents();
+    this.activateParent(parentName);
+
+    // Save in localStorage
+    localStorage.setItem("activeParent", parentName);
+  }
+
+  // Clear all active/collapsed parents
+  clearAllParents() {
+    const body = this.elementRef.nativeElement.ownerDocument.body;
+
+    const allParents = body.querySelectorAll(".parentMenuLink");
+    allParents.forEach((parent: any) => {
+      this.renderer.removeClass(parent, "active");
+      this.renderer.addClass(parent, "collapsed");
+      this.renderer.setAttribute(parent, "aria-expanded", "true");
+    });
+  }
+
+  // Activate a specific parent menu
+  activateParent(parentName: string) {
+    const body = this.elementRef.nativeElement.ownerDocument.body;
+    const parentElement = body.querySelector(
+      `.parentMenuLink[data-name="${parentName}"]`
+    );
+    if (parentElement) {
+      this.renderer.addClass(parentElement, "active");
+      this.renderer.removeClass(parentElement, "collapsed");
+      this.renderer.setAttribute(parentElement, "aria-expanded", "false");
+    }
+
+    this.activeParent = parentName;
+  }
+
+  // Click on regular menu
+  clearActiveParent() {
+    const body = this.elementRef.nativeElement.ownerDocument.body;
+    this.clearAllParents();
+    localStorage.removeItem("activeParent");
+    this.activeParent = null;
+
+    const allCollapses = body.querySelectorAll(".collapse");
+    allCollapses.forEach((collapse: any) =>
+      this.renderer.removeClass(collapse, "show")
+    );
   }
 
   // mouseOver() {
