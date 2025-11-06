@@ -61,7 +61,11 @@
         [owlDateTime]="startDt"
         readonly
       />
-      <owl-date-time #startDt [showSecondsTimer]="isTime"></owl-date-time>
+      <owl-date-time
+        #startDt
+        appBdtStartAt
+        [showSecondsTimer]="isTime"
+      ></owl-date-time>
     </div>
 
     <div class="col">
@@ -77,7 +81,11 @@
         [owlDateTime]="endDt"
         readonly
       />
-      <owl-date-time #endDt [showSecondsTimer]="isTime"></owl-date-time>
+      <owl-date-time
+        #endDt
+        appBdtStartAt
+        [showSecondsTimer]="isTime"
+      ></owl-date-time>
     </div>
 
     <div class="col">

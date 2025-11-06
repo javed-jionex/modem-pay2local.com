@@ -8,6 +8,7 @@ import {
   OwlNativeDateTimeModule,
 } from "@danielmoncada/angular-datetime-picker";
 import { SharedModule } from "src/app/pipes/sharedModule";
+import { BDTSharedModule } from "src/app/directive/shared.module";
 
 @NgModule({
   declarations: [DepositsTransactionsSearchComponent],
@@ -19,6 +20,7 @@ import { SharedModule } from "src/app/pipes/sharedModule";
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     SharedModule,
+    BDTSharedModule,
   ],
   exports: [DepositsTransactionsSearchComponent],
 })

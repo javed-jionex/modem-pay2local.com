@@ -33,7 +33,7 @@
     "datatables.net": "^1.13.7",
     "datatables.net-dt": "^1.13.7",
     "jquery": "^3.7.1",
-    "moment-timezone": "^0.5.45",
+    "moment-timezone": "^0.5.48",
     "ng-multiselect-dropdown": "^1.0.0",
     "ng2-charts": "^5.0.3",
     "ngx-bootstrap": "^12.0.0",
