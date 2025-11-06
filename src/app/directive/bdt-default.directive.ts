@@ -1,19 +1,26 @@
-import { Directive, AfterViewInit } from "@angular/core";
+import { Directive, AfterViewInit, NgZone } from "@angular/core";
 import { OwlDateTimeComponent } from "@danielmoncada/angular-datetime-picker";
+import * as moment from "moment-timezone";
 
 @Directive({
   selector: "[appBdtStartAt]",
 })
 export class BdtStartAtDirective implements AfterViewInit {
-  constructor(private owlDateTime: OwlDateTimeComponent<Date>) {}
+  constructor(
+    private owlDateTime: OwlDateTimeComponent<Date>,
+    private ngZone: NgZone
+  ) {}
 
   ngAfterViewInit(): void {
-    // wait for component to be ready
-    setTimeout(() => {
-      const now = new Date();
-      const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-      const bdt = new Date(utc + 6 * 60 * 60 * 1000);
-      this.owlDateTime.startAt = bdt;
+    this.ngZone.runOutsideAngular(() => {
+      setTimeout(() => {
+        const bdtMoment = moment.tz("Asia/Dhaka");
+        const offsetDiff = bdtMoment.utcOffset() - moment().utcOffset();
+        const BdtTime = moment().add(offsetDiff, "minutes").toDate();
+        this.owlDateTime.startAt = BdtTime;
+        (this.owlDateTime as any)._pickerMoment = BdtTime;
+        this.ngZone.run(() => {});
+      }, 50);
     });
   }
 }
