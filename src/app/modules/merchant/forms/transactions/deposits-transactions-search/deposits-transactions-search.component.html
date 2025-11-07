@@ -1,28 +1,27 @@
 <form
-  class=""
+  class="row g-3"
   [formGroup]="settingSearchForm"
   #f="ngForm"
   (submit)="search(f.value)"
   autocomplete="off"
 >
-  <div class="filter">
-    <div class="col">
-      <div class="dataTables_length">
-        <label class="form-label">{{ "show_entries" | translate }}</label>
-        <select
-          [(ngModel)]="itemsPerPage"
-          formControlName="page_size"
-          class="form-select"
-        >
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-      </div>
+  <div class="col-2">
+    <div class="dataTables_length">
+      <label class="form-label">{{ "show_entries" | translate }}</label>
+      <select
+        [(ngModel)]="itemsPerPage"
+        formControlName="page_size"
+        class="form-select"
+      >
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
     </div>
-    <!-- <div class="col">
+  </div>
+  <!-- <div class="col-2">
 		<label for="inputPassword4" class="form-label">{{ 'start_date' | translate }}</label>
 		<input
 			type="text"
@@ -35,7 +34,7 @@
 			#d1="ngbDatepicker"
 		/>
 	</div>
-    <div class="col">
+    <div class="col-2">
 		<label for="inputPassword4" class="form-label">{{ 'end_date' | translate }}</label>
 		<input
 			type="text"
@@ -48,47 +47,47 @@
 			#d2="ngbDatepicker"
 		/>
 	</div> -->
-    <div class="col">
-      <label for="inputPassword4" class="form-label">{{
-        "start_date" | translate
-      }}</label>
-      <input
-        placeholder="yyyy-dd-mm"
-        [max]="today"
-        [owlDateTimeTrigger]="startDt"
-        class="form-control requiredField"
-        formControlName="start_date"
-        [owlDateTime]="startDt"
-        readonly
-      />
-      <owl-date-time
-        #startDt
-        appBdtStartAt
-        [showSecondsTimer]="isTime"
-      ></owl-date-time>
-    </div>
+  <div class="col-2">
+    <label for="inputPassword4" class="form-label">{{
+      "start_date" | translate
+    }}</label>
+    <input
+      placeholder="yyyy-dd-mm"
+      [max]="today"
+      [owlDateTimeTrigger]="startDt"
+      class="form-control requiredField"
+      formControlName="start_date"
+      [owlDateTime]="startDt"
+      readonly
+    />
+    <owl-date-time
+      #startDt
+      appBdtStartAt
+      [showSecondsTimer]="isTime"
+    ></owl-date-time>
+  </div>
 
-    <div class="col">
-      <label for="inputPassword4" class="form-label">{{
-        "end_date" | translate
-      }}</label>
-      <input
-        placeholder="yyyy-dd-mm"
-        [max]="today"
-        [owlDateTimeTrigger]="endDt"
-        class="form-control requiredField"
-        formControlName="end_date"
-        [owlDateTime]="endDt"
-        readonly
-      />
-      <owl-date-time
-        #endDt
-        appBdtStartAt
-        [showSecondsTimer]="isTime"
-      ></owl-date-time>
-    </div>
+  <div class="col-2">
+    <label for="inputPassword4" class="form-label">{{
+      "end_date" | translate
+    }}</label>
+    <input
+      placeholder="yyyy-dd-mm"
+      [max]="today"
+      [owlDateTimeTrigger]="endDt"
+      class="form-control requiredField"
+      formControlName="end_date"
+      [owlDateTime]="endDt"
+      readonly
+    />
+    <owl-date-time
+      #endDt
+      appBdtStartAt
+      [showSecondsTimer]="isTime"
+    ></owl-date-time>
+  </div>
 
-    <!-- <div class="col">
+  <!-- <div class="col-2">
 		<label for="inputPassword4" class="form-label">{{ "currency" | translate }}</label>
 		<select class="form-select" formControlName="currency">
 			<option selected disabled value="">Choose...</option>
@@ -98,41 +97,36 @@
 			</option>
 		</select>
 	</div> -->
-    <div class="col">
-      <label for="inputPassword4" class="form-label">{{
-        "status" | translate
-      }}</label>
-      <select class="form-select" formControlName="status">
-        <option selected disabled value="">Choose...</option>
+  <div class="col-2">
+    <label for="inputPassword4" class="form-label">{{
+      "status" | translate
+    }}</label>
+    <select class="form-select" formControlName="status">
+      <option selected disabled value="">Choose...</option>
 
-        <option value="all">All</option>
-        <option value="approved">{{ "approved" | translate }}</option>
-        <option value="rejected">{{ "rejected" | translate }}</option>
-      </select>
-    </div>
-    <div class="col">
-      <label for="inputNanme4" class="form-label">{{
-        "service_type" | translate
-      }}</label>
-      <select
-        class="form-select"
-        formControlName="modem_type"
-        (change)="modemType($event)"
-      >
-        <option selected disabled value="">Choose...</option>
-        <!-- <option value="Personal">
-				Personal
-			</option> -->
-        <!-- <option value="Merchant">{{ "merchant" | translate }}</option>
-      <option value="Agent">{{ "agent" | translate }}</option> -->
-        <option value="p2c_qr">P2C QR</option>
-        <option value="p2c_api">P2C API</option>
-        <option value="p2p_agent">P2P Agent</option>
-      </select>
-    </div>
+      <option value="all">All</option>
+      <option value="approved">{{ "approved" | translate }}</option>
+      <option value="rejected">{{ "rejected" | translate }}</option>
+    </select>
   </div>
+  <!-- <div class="col-2">
+    <label for="inputNanme4" class="form-label">{{
+      "service_type" | translate
+    }}</label>
+    <select
+      class="form-select"
+      formControlName="modem_type"
+      (change)="modemType($event)"
+    >
+      <option selected disabled value="">Choose...</option>
+     
+      <option value="p2c_qr">P2C QR</option>
+      <option value="p2c_api">P2C API</option>
+      <option value="p2p_agent">P2P Agent</option>
+    </select>
+  </div> -->
 
-  <div class="text-end col">
+  <div class="text-start col-3 pt-4 mt-4">
     <button type="submit" class="btn btn-primary">Search</button>
     <button
       type="button"

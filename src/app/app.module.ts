@@ -47,7 +47,7 @@ if (environment) {
     ReactiveFormsModule,
     HttpClientModule,
     ToastrModule.forRoot({
-      maxOpened: 2, // Limit the number of open toasts to 2
+      maxOpened: 1, // Limit the number of open toasts to 2
       autoDismiss: true, // Automatically dismiss the oldest toast when the limit is reached
     }),
     BrowserAnimationsModule,

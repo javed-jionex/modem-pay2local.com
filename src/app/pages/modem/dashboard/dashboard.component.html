@@ -8,15 +8,16 @@
 <main id="main" class="main" *ngIf="!isDisplayed">
   <!-- Super Admin Section -->
 
-  <div class="cardsRow mb-4" id="dashboard-tabs">
-    <div class="cardCol">
+  <div class="row" id="dashboard-tabs">
+    <div class="col-xl-3 col-md-4 mb-3">
       <div class="card border-left-primary shadow h-90 py-2">
         <div class="card-body">
-          <div class="cardIcon total">
-            <i class="bi bi-hand-index-thumb-fill"></i>
-          </div>
-          <div class="cardInfo">
-            <h2>Payment Accept</h2>
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                Payment Accept
+              </div>
+            </div>
           </div>
           <p>
             <select
@@ -34,14 +35,15 @@
         </div>
       </div>
     </div>
-    <div class="cardCol">
+    <div class="col-xl-3 col-md-4 mb-3">
       <div class="card border-left-primary shadow h-90 py-2">
         <div class="card-body">
-          <div class="cardIcon today">
-            <i class="bi bi-toggles"></i>
-          </div>
-          <div class="cardInfo">
-            <h2>{{ "available" | translate }}</h2>
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                {{ "available" | translate }}
+              </div>
+            </div>
           </div>
           <p style="cursor: pointer">
             <select
@@ -58,58 +60,97 @@
         </div>
       </div>
     </div>
-    <div class="cardCol">
+    <div class="col-xl-3 col-md-4 mb-3">
       <div class="card border-left-primary shadow h-90 py-2">
         <div class="card-body">
-          <div class="cardIcon monthly">
-            <i class="bi bi-person-fill"></i>
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                Full Name
+              </div>
+              <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">{{tabsData.pending_deposits}}</div> -->
+            </div>
+            <!-- <div class="col-auto">
+              <i class="bi bi-modem icon-primary"></i>
+            </div> -->
           </div>
-          <div class="cardInfo">
-            <h2>Full Name</h2>
-            <h3>{{ listData?.first_name }} {{ listData?.last_name }}</h3>
-          </div>
+          <p>{{ listData?.first_name }} {{ listData?.last_name }}</p>
         </div>
       </div>
     </div>
-    <div class="cardCol">
+    <div class="col-xl-3 col-md-4 mb-3">
       <div class="card border-left-primary shadow h-90 py-2">
         <div class="card-body">
-          <div class="cardIcon mBlue">
-            <i class="bi bi-bank2"></i>
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                {{ "balance" | translate }}
+              </div>
+            </div>
           </div>
-          <div class="cardInfo">
-            <h2>{{ "balance" | translate }}</h2>
-            <h3>{{ listData?.limit }}</h3>
-          </div>
+          <p>
+            {{ listData?.limit }}
+          </p>
         </div>
       </div>
     </div>
-    <div class="cardCol">
-      <a routerLink="/admin/deposit">
+    <div class="col-xl-3 col-md-4 mb-3">
+      <a routerLink="/admin/deposits">
         <div class="card border-left-success shadow h-90 py-2">
           <div class="card-body">
-            <div class="cardIcon mGreen">
-              <i class="bi bi-arrow-down"></i>
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-uppercase mb-1">
+                  PR Deposit
+                </div>
+                <div
+                  [ngClass]="
+                    depositCount > 0 ? 'badge bg-danger' : 'badge bg-success'
+                  "
+                >
+                  {{ depositCount }}
+                </div>
+                <!-- <div
+								class="h5 mb-0 font-weight-bold text-gray-800 text-success"
+							>
+								 {{ list?.pending_deposit_requests  }}
+							</div> -->
+              </div>
+              <div class="col-auto">
+                <i class="bi bi-bank icon-success"></i>
+              </div>
             </div>
-            <div class="cardInfo">
-              <h2>PR Deposit</h2>
-              <h3>{{ depositCount }}</h3>
-            </div>
+            <!-- <p class="text-success">
+							<i class="bx bxs-up-arrow align-middle"></i>Only Success + Approved
+						</p> -->
           </div>
         </div>
       </a>
     </div>
-    <div class="cardCol">
+    <div class="col-xl-3 col-md-4 mb-3">
       <a routerLink="/admin/withdrawals">
         <div class="card border-left-success shadow h-90 py-2">
           <div class="card-body">
-            <div class="cardIcon mGreen">
-              <i class="bi bi-arrow-up"></i>
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-uppercase mb-1">
+                  PR Withdraw
+                </div>
+                <div
+                  [ngClass]="
+                    withdrawalCount > 0 ? 'badge bg-danger' : 'badge bg-success'
+                  "
+                >
+                  {{ withdrawalCount }}
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="bi bi-bank icon-success"></i>
+              </div>
             </div>
-            <div class="cardInfo">
-              <h2>PR Withdraw</h2>
-              <h3>{{ withdrawalCount }}</h3>
-            </div>
+            <!-- <p class="text-success">
+							<i class="bx bxs-up-arrow align-middle"></i>Only Success + Approved
+						</p> -->
           </div>
         </div>
       </a>
@@ -124,88 +165,114 @@
               </div>
             </div>
           </div>
+          <p>
+            {{ listData?.hold_balance }}
+          </p>
         </div>
       </div>
     </div> -->
-    <div class="cardCol">
-      <div class="card border-left-primary shadow h-90 py-2">
+    <div class="col-xl-3 col-md-4 mb-3">
+      <!-- <a routerLink="/admin/support-tickets"> -->
+      <div class="card border-left-info shadow h-90 py-2">
         <div class="card-body">
-          <div class="cardIcon today">
-            <i class="bi bi-arrow-down"></i>
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                {{ "Today Deposit" | translate }}
+              </div>
+            </div>
           </div>
-          <div class="cardInfo">
-            <h2>{{ "Today Deposit" | translate }}</h2>
-            <h3>{{ listData?.transactions?.today_deposit }}</h3>
-          </div>
+          <p>
+            {{ listData?.transactions?.today_deposit }}
+          </p>
         </div>
       </div>
+      <!-- </a> -->
     </div>
-    <div class="cardCol">
+    <div class="col-xl-3 col-md-4 mb-3">
+      <!-- <a routerLink="/admin/support-tickets"> -->
+      <div class="card border-left-info shadow h-90 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                {{ "Today Withdraw" | translate }}
+              </div>
+            </div>
+          </div>
+          <p>
+            {{ listData?.transactions?.today_withdraw }}
+          </p>
+        </div>
+      </div>
+      <!-- </a> -->
+    </div>
+    <div class="col-xl-3 col-md-4 mb-3">
+      <!-- <a routerLink="/admin/support-tickets"> -->
+      <div class="card border-left-info shadow h-90 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                {{ "Monthly Deposit" | translate }}
+              </div>
+            </div>
+          </div>
+          <p>
+            {{ listData?.transactions?.monthly_deposit }}
+          </p>
+        </div>
+      </div>
+      <!-- </a> -->
+    </div>
+    <div class="col-xl-3 col-md-4 mb-3">
+      <!-- <a routerLink="/admin/support-tickets"> -->
+      <div class="card border-left-info shadow h-90 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                {{ "Monthly Withdraw" | translate }}
+              </div>
+            </div>
+          </div>
+          <p>
+            {{ listData?.transactions?.today_withdraw }}
+          </p>
+        </div>
+      </div>
+      <!-- </a> -->
+    </div>
+    <div class="col-xl-3 col-md-4 mb-3">
       <div class="card border-left-primary shadow h-90 py-2">
         <div class="card-body">
-          <div class="cardIcon today">
-            <i class="bi bi-arrow-up"></i>
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                Service Type
+              </div>
+            </div>
           </div>
-          <div class="cardInfo">
-            <h2>{{ "Today Withdraw" | translate }}</h2>
-            <h3>{{ listData?.transactions?.today_withdraw }}</h3>
-          </div>
+          <p>
+            {{ formatLabel(listData?.type_of_modem) }}
+          </p>
         </div>
       </div>
     </div>
 
-    <div class="cardCol">
+    <div class="col-xl-3 col-md-4 mb-3">
       <div class="card border-left-primary shadow h-90 py-2">
         <div class="card-body">
-          <div class="cardIcon monthly">
-            <i class="bi bi-arrow-down"></i>
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+                {{ "login" | translate }}
+              </div>
+            </div>
           </div>
-          <div class="cardInfo">
-            <h2>{{ "Monthly Deposit" | translate }}</h2>
-            <h3>{{ listData?.transactions?.monthly_deposit }}</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cardCol">
-      <div class="card border-left-primary shadow h-90 py-2">
-        <div class="card-body">
-          <div class="cardIcon monthly">
-            <i class="bi bi-arrow-up"></i>
-          </div>
-          <div class="cardInfo">
-            <h2>{{ "Monthly Withdraw" | translate }}</h2>
-            <h3>{{ listData?.transactions?.today_withdraw }}</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cardCol">
-      <div class="card border-left-primary shadow h-90 py-2">
-        <div class="card-body">
-          <div class="cardIcon monthly">
-            <i class="bi bi-list-stars"></i>
-          </div>
-          <div class="cardInfo">
-            <h2>Service Type</h2>
-            <h3>{{ formatLabel(listData?.type_of_modem) }}</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cardCol">
-      <div class="card border-left-primary shadow h-90 py-2">
-        <div class="card-body">
-          <div class="cardIcon total">
-            <i class="bi bi-toggle-on"></i>
-          </div>
-          <div class="cardInfo">
-            <h2>{{ "login" | translate }}</h2>
-            <h3>{{ "Active" }}</h3>
-          </div>
+          <p>
+            {{ "Active" }}
+          </p>
         </div>
       </div>
     </div>

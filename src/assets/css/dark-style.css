@@ -10,13 +10,11 @@
 # General
 --------------------------------------------------------------*/
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
-
 :root {
   scroll-behavior: smooth;
   --color-one: #007250;
   --color-two: #1e1e2d;
   --color-three: #92929f;
-  --color-five: #22C55E;
 }
 
 body {
@@ -39,16 +37,15 @@ a:hover {
 .btn-primary {
   --bs-btn-bg: var(--color-one);
   --bs-btn-border-color: var(--color-one);
-  --bs-btn-hover-bg: var(--color-five);
+  --bs-btn-hover-bg: #30a6b6;
   --bs-btn-hover-border-color: var(--color-one);
   --bs-btn-active-bg: var(--color-one);
   --bs-btn-active-border-color: var(--color-one);
   --bs-btn-disabled-bg: var(--color-one);
   --bs-btn-disabled-border-color: var(--color-one);
-  padding: 14px 20px;
+  padding: 10px 20px;
   font-size: 14px;
-  border-radius: 8px;
-  height: 50px;
+  border-radius: 12px;
 }
 
 h1,
@@ -71,13 +68,11 @@ span {
   padding: 20px;
   transition: all 0.3s;
 }
-
 .form-check i {
   flex-shrink: 0;
   font-size: 30px;
   cursor: pointer;
 }
-
 @media (max-width: 1199px) {
   #main {
     padding: 12px;
@@ -97,26 +92,21 @@ span {
   font-weight: 600;
   color: #cdcdde;
 }
-
 .pagetitle_wrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
 }
-
 .pagetitle_wrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 14px;
 }
-
 .pagetitle_wrap .pagetitle {
   margin-bottom: 0;
-  flex: 1;
 }
-
 .pagetitle_wrap .pagetitle ol {
   margin-bottom: 0;
 }
@@ -162,10 +152,9 @@ span {
   color: #cdcdde !important;
 }
 
-#dashboard-tabs .card .row .col>div {
+#dashboard-tabs .card .row .col > div {
   color: #cdcdde;
 }
-
 #dashboard-tabs .card .row .col .badge.bg-danger {
   color: #ff0000;
 }
@@ -208,7 +197,7 @@ input[readonly] {
   background: var(--color-two) !important;
 }
 
-.multiselect-item-checkbox input[type="checkbox"]+div {
+.multiselect-item-checkbox input[type="checkbox"] + div {
   color: var(--color-three) !important;
 }
 
@@ -224,7 +213,6 @@ input[type="date"]::after {
 .modal-content {
   background-color: var(--color-two);
 }
-
 /*--------------------------------------------------------------
 # Override some default Bootstrap stylings
 --------------------------------------------------------------*/
@@ -277,10 +265,10 @@ input[type="date"]::after {
   font-size: 14px;
   line-height: 22px !important;
   line-height: 0;
-  color: #ffffff !important;
-  background: linear-gradient(45deg, #22C55E, #077256);
+  color: #e8c444 !important;
+  background: #3f3a2b;
   border-radius: 5px;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-content: center;
   height: 25px;
@@ -359,17 +347,16 @@ input[type="date"]::after {
 
 /* table */
 
-.table-striped>tbody>tr:nth-of-type(odd)>* {
+.table-striped > tbody > tr:nth-of-type(odd) > * {
   --bs-table-color-type: #e8e5dd;
   --bs-table-bg-type: transparent;
 }
 
 .table {
   background-color: transparent;
-  margin: 0;
 }
 
-.table> :not(caption)>*>* {
+.table > :not(caption) > * > * {
   background: transparent;
   border: none;
   padding: 14px 12px;
@@ -378,13 +365,12 @@ input[type="date"]::after {
 .table tbody tr td {
   color: var(--color-three) !important;
 }
-
 .table tbody tr th {
   color: #cdcdde;
 }
 
 .table thead {
-  background: #101018;
+  background: transparent;
 }
 
 .table thead th {
@@ -395,33 +381,24 @@ input[type="date"]::after {
 }
 
 .table thead th:nth-child(1) {
-  padding-left: 22px;
+  padding-left: 0;
 }
 
 .table thead th:nth-last-child(1) {
-  padding-right: 22px;
-  text-align: end;
-}
-
-
-.table th:nth-child(1) {
-  padding-left: 22px;
-}
-
-.table th:nth-last-child(1) {
-  padding-right: 22px;
+  padding-right: 0;
+  /* text-align: end; */
 }
 
 .table td:nth-child(1) {
-  padding-left: 22px;
+  padding-left: 0;
 }
 
 .table td:nth-last-child(1) {
-  padding-right: 22px;
-  text-align: end;
+  padding-right: 0;
+  /* text-align: end; */
 }
 
-.table-bordered> :not(caption)>* {
+.table-bordered > :not(caption) > * {
   border-color: #e8e5dd;
 }
 
@@ -433,40 +410,10 @@ input[type="date"]::after {
   border-bottom: none;
 }
 
-.modemBanks {
-  background: #101018;
-}
-
-.modemBanksDetails {
-  background: #1e1e2d;
-  border: 1px solid #323248;
-}
-
-.modemBanksDetails .info p {
-  color: #ffffff;
-}
-
-.balanceWrapper .balance h4 {
-  color: #ffffff;
-}
-
-.bankNumber h4 span {
-  color: #ffffff;
-}
-
-.bankstatus h4 {
-  color: #ffffff;
-}
-
-.badge.bg-success span {
-  color: #00b700;
-}
-
-
 /* Card */
 
 .card h3 {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   color: #cdcdde;
 }
@@ -505,15 +452,11 @@ input[type="date"]::after {
 }
 
 .card-body {
-  padding: 20px 22px;
+  padding: 1.5rem 2rem;
 }
 
 .card-img-overlay {
   background-color: rgba(255, 255, 255, 0.6);
-}
-
-.settingsWrapper .inner {
-  background: #0f1014;
 }
 
 /* Alerts */
@@ -677,7 +620,6 @@ input[type="date"]::after {
 .head-icon .icon {
   position: relative;
 }
-
 .head-icon .icon .count {
   position: absolute;
   top: 0;
@@ -719,7 +661,6 @@ input[type="date"]::after {
     visibility: visible;
     opacity: 1;
   }
-
   .sidebar {
     top: 80px;
   }
@@ -765,7 +706,7 @@ input[type="date"]::after {
   list-style: none;
 }
 
-.header-nav>ul {
+.header-nav > ul {
   margin: 0;
   padding: 0;
 }
@@ -897,22 +838,18 @@ input[type="date"]::after {
 .header-nav .profile .dropdown-item:hover {
   background-color: #f6f9ff;
 }
-
 @media (min-width: 768px) and (max-width: 1199px) {
   .header-logo {
     flex: 1;
     padding-right: 10px;
   }
-
   .nav-link.nav-icon.search-bar-toggle {
     display: none;
   }
-
   .header-nav .nav-profile span {
     display: none !important;
   }
 }
-
 /*--------------------------------------------------------------
 # Sidebar
 --------------------------------------------------------------*/
@@ -954,7 +891,6 @@ input[type="date"]::after {
 }
 
 @media (min-width: 1200px) {
-
   #main,
   #footer {
     margin-left: 275px;
@@ -968,7 +904,6 @@ input[type="date"]::after {
 }
 
 @media (min-width: 1200px) {
-
   .toggle-sidebar #main,
   .toggle-sidebar #footer {
     margin-left: 0;
@@ -992,7 +927,7 @@ input[type="date"]::after {
 }
 
 .sidebar-nav .nav-item {
-  margin: 8px 0;
+  margin: 5px 0;
 }
 
 .sidebar-nav .nav-heading {
@@ -1031,7 +966,6 @@ input[type="date"]::after {
 .sidebar-nav .nav-link.collapsed i {
   color: var(--color-one);
 }
-
 .sidebar-nav .nav-link.removeCollapsed {
   color: var(--color-three);
   background: inherit;
@@ -1040,7 +974,6 @@ input[type="date"]::after {
 .sidebar-nav .nav-link.removeCollapsed i {
   color: var(--color-one);
 }
-
 .sidebar-nav .nav-link:hover {
   color: #fff;
 }
@@ -1063,8 +996,8 @@ input[type="date"]::after {
 }
 
 .sidebar-nav .nav-content {
-  padding: 0;
-  margin-top: 8px;
+  padding: 5px 0 0 15px;
+  margin: 0;
   list-style: none;
 }
 
@@ -1076,7 +1009,6 @@ input[type="date"]::after {
   color: var(--color-three);
   padding: 10px 0 10px 10px;
   transition: 0.3s;
-  border-left: 4px solid #DDDDDD;
 }
 
 .sidebar-nav .nav-content a i {
@@ -1090,22 +1022,15 @@ input[type="date"]::after {
   color: #fff;
 }
 
-.sidebar-nav .nav-content a.active {
-  border-color: var(--color-one);
-  color: var(--color-one);
-  font-weight: 600;
-}
-
-.sidebar-nav .nav-item .nav-link.active {
-  color: #fff;
-  background: linear-gradient(45deg, var(--color-five), var(--color-one));
-  border-radius: 8px;
-}
-
-.sidebar-nav .nav-item .nav-link.active span {
+.sidebar-nav .nav-content .active span {
   color: #fff;
 }
 
+.sidebar-nav .nav-item .active {
+  color: #fff;
+  background-color: var(--color-one);
+  border-radius: 12px;
+}
 .sidebar-nav .nav-item .active i {
   color: #fff;
 }
@@ -1240,7 +1165,7 @@ input[type="date"]::after {
 }
 
 /* News & Updates */
-.dashboard .news .post-item+.post-item {
+.dashboard .news .post-item + .post-item {
   margin-top: 15px;
 }
 

@@ -10,18 +10,16 @@
 # General
 --------------------------------------------------------------*/
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
-
 :root {
   scroll-behavior: smooth;
   --color-one: #007250;
   --color-two: #f8f6f2;
-  --color-three: #4B5563;
-  --color-five: #22C55E;
+  --color-three: #716d66;
 }
 
 body {
   font-family: "Inter", sans-serif;
-  background: #f0f2f5;
+  background: #fff;
   color: #444444;
   padding-bottom: 46px;
 }
@@ -39,16 +37,15 @@ a:hover {
 .btn-primary {
   --bs-btn-bg: var(--color-one);
   --bs-btn-border-color: var(--color-one);
-  --bs-btn-hover-bg: var(--color-five);
+  --bs-btn-hover-bg: #30a6b6;
   --bs-btn-hover-border-color: var(--color-one);
   --bs-btn-active-bg: var(--color-one);
   --bs-btn-active-border-color: var(--color-one);
   --bs-btn-disabled-bg: var(--color-one);
   --bs-btn-disabled-border-color: var(--color-one);
-  padding: 14px 20px;
+  padding: 10px 20px;
   font-size: 14px;
-  border-radius: 8px;
-  height: 50px;
+  border-radius: 12px;
 }
 
 /*--------------------------------------------------------------
@@ -59,13 +56,11 @@ a:hover {
   padding: 20px;
   transition: all 0.3s;
 }
-
 .form-check i {
   flex-shrink: 0;
   font-size: 30px;
   cursor: pointer;
 }
-
 @media (max-width: 1199px) {
   #main {
     padding: 12px;
@@ -85,19 +80,15 @@ a:hover {
   font-weight: 600;
   color: #000;
 }
-
 .pagetitle_wrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 14px;
 }
-
 .pagetitle_wrap .pagetitle {
   margin-bottom: 0;
-  flex: 1;
 }
-
 .pagetitle_wrap .pagetitle ol {
   margin-bottom: 0;
 }
@@ -182,10 +173,10 @@ a:hover {
   font-size: 14px;
   line-height: 22px !important;
   line-height: 0;
-  color: #ffffff !important;
-  background: linear-gradient(45deg, #22C55E, #077256);
+  color: #e8c444 !important;
+  background: #3f3a2b;
   border-radius: 5px;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-content: center;
   height: 25px;
@@ -264,17 +255,16 @@ a:hover {
 
 /* table */
 
-.table-striped>tbody>tr:nth-of-type(odd)>* {
+.table-striped > tbody > tr:nth-of-type(odd) > * {
   --bs-table-color-type: #e8e5dd;
   --bs-table-bg-type: transparent;
 }
 
 .table {
   background-color: transparent;
-  margin: 0;
 }
 
-.table> :not(caption)>*>* {
+.table > :not(caption) > * > * {
   background: transparent;
   border: none;
   padding: 14px 12px;
@@ -283,13 +273,12 @@ a:hover {
 .table tbody tr td {
   color: var(--color-three) !important;
 }
-
 .table tbody tr th {
   color: #000000;
 }
 
 .table thead {
-  background: #f0f2f5;
+  background: transparent;
 }
 
 .table thead th {
@@ -300,34 +289,24 @@ a:hover {
 }
 
 .table thead th:nth-child(1) {
-  padding-left: 22px;
+  padding-left: 0;
 }
 
 .table thead th:nth-last-child(1) {
-  padding-right: 22px;
-  text-align: end;
+  padding-right: 0;
+  /* text-align: end; */
 }
-
-
-.table th:nth-child(1) {
-  padding-left: 22px;
-}
-
-.table th:nth-last-child(1) {
-  padding-right: 22px;
-}
-
 
 .table td:nth-child(1) {
-  padding-left: 22px;
+  padding-left: 0;
 }
 
 .table td:nth-last-child(1) {
-  padding-right: 22px;
-  text-align: end;
+  padding-right: 0;
+  /* text-align: end; */
 }
 
-.table-bordered> :not(caption)>* {
+.table-bordered > :not(caption) > * {
   border-color: #e8e5dd;
 }
 
@@ -339,44 +318,18 @@ a:hover {
   border-bottom: none;
 }
 
-.modemBanks {
-  background: #f0f2f5;
-}
-
-.modemBanksDetails {
-  background: #fff;
-  border: 1px solid #E5E7EB;
-}
-
-.modemBanksDetails .info p {
-  color: #000;
-}
-
-.balanceWrapper .balance h4 {
-  color: #000;
-}
-
-.bankNumber h4 span {
-  color: #000;
-}
-
-.bankstatus h4 {
-  color: #000;
-}
-
-
 /* Card */
 
-.card h4 {
-  font-size: 18px;
+.card h3 {
+  font-size: 20px;
   font-weight: 600;
 }
 
 .card {
   border-radius: 14px;
-  background: #fff;
-  border: 1px solid #E5E7EB !important;
-  box-shadow: 0 8px 32px 0 #0000001A !important;
+  background: #f8f6f24d;
+  border: 1px dashed #e8e5dd !important;
+  box-shadow: none !important;
 }
 
 .card-header,
@@ -406,23 +359,11 @@ a:hover {
 }
 
 .card-body {
-  padding: 20px 22px;
+  padding: 1.5rem 2rem;
 }
 
 .card-img-overlay {
   background-color: rgba(255, 255, 255, 0.6);
-}
-
-.cardsRow .cardInfo h2 {
-  color: #4B5563;
-}
-
-.cardsRowA .cardInfo h2 {
-  color: #4B5563;
-}
-
-.settingsWrapper .inner {
-  background: #F9FAFB;
 }
 
 /* Alerts */
@@ -560,7 +501,7 @@ a:hover {
 
 .header-logo {
   height: 100%;
-  /* background-color: var(--color-two); */
+  background-color: var(--color-two);
   padding-left: 20px;
   width: 275px;
 }
@@ -586,7 +527,6 @@ a:hover {
 .head-icon .icon {
   position: relative;
 }
-
 .head-icon .icon .count {
   position: absolute;
   top: 0;
@@ -603,7 +543,6 @@ a:hover {
   color: #fff;
   font-size: 12px;
 }
-
 .head-icon i {
   font-size: 20px !important;
   border: 1px solid #efe9e1;
@@ -612,8 +551,7 @@ a:hover {
   height: 40px;
   line-height: 40px;
   text-align: center;
-  color: var(--color-three) !important;
-  background: #E5E7EB;
+  color: var(--color-three) m !important;
   padding: 0 !important;
   border-radius: 8px;
 }
@@ -670,7 +608,7 @@ a:hover {
   list-style: none;
 }
 
-.header-nav>ul {
+.header-nav > ul {
   margin: 0;
   padding: 0;
 }
@@ -802,22 +740,18 @@ a:hover {
 .header-nav .profile .dropdown-item:hover {
   background-color: #f6f9ff;
 }
-
 @media (min-width: 768px) and (max-width: 1199px) {
   .header-logo {
     flex: 1;
     padding-right: 10px;
   }
-
   .nav-link.nav-icon.search-bar-toggle {
     display: none;
   }
-
   .header-nav .nav-profile span {
     display: none !important;
   }
 }
-
 /*--------------------------------------------------------------
 # Sidebar
 --------------------------------------------------------------*/
@@ -833,8 +767,7 @@ a:hover {
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
-  background-color: #fff;
-  border-right: 1px solid #E5E7EB;
+  background-color: var(--color-two);
 }
 
 @media (max-width: 1199px) {
@@ -860,7 +793,6 @@ a:hover {
 }
 
 @media (min-width: 1200px) {
-
   #main,
   #footer {
     margin-left: 275px;
@@ -871,18 +803,15 @@ a:hover {
   .toggle-sidebar .sidebar {
     left: 0;
   }
-
   .sidebar {
     top: 80px;
   }
-
   .header-logo {
     background-color: transparent;
   }
 }
 
 @media (min-width: 1200px) {
-
   .toggle-sidebar #main,
   .toggle-sidebar #footer {
     margin-left: 0;
@@ -906,7 +835,7 @@ a:hover {
 }
 
 .sidebar-nav .nav-item {
-  margin: 8px 0;
+  margin: 5px 0;
 }
 
 .sidebar-nav .nav-heading {
@@ -920,8 +849,8 @@ a:hover {
 .sidebar-nav .nav-link {
   display: flex;
   align-items: center;
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 500;
   color: #000;
   transition: 0.3;
   padding: 13px 15px;
@@ -945,7 +874,6 @@ a:hover {
 .sidebar-nav .nav-link.collapsed i {
   color: var(--color-one);
 }
-
 .sidebar-nav .nav-link.removeCollapsed {
   color: var(--color-three);
   background: inherit;
@@ -954,7 +882,6 @@ a:hover {
 .sidebar-nav .nav-link.removeCollapsed i {
   color: var(--color-one);
 }
-
 .sidebar-nav .nav-link:hover {
   color: #000;
 }
@@ -977,9 +904,8 @@ a:hover {
 }
 
 .sidebar-nav .nav-content {
-  padding: 0;
+  padding: 5px 0 0 15px;
   margin: 0;
-  margin-top: 8px;
   list-style: none;
 }
 
@@ -991,7 +917,6 @@ a:hover {
   color: var(--color-three);
   padding: 10px 0 10px 10px;
   transition: 0.3s;
-  border-left: 4px solid #DDDDDD;
 }
 
 .sidebar-nav .nav-content a i {
@@ -1006,23 +931,22 @@ a:hover {
 }
 
 .sidebar-nav .nav-content a.active {
-  border-color: var(--color-one);
-  color: var(--color-one);
-  font-weight: 600;
-}
-
-.sidebar-nav .nav-item .nav-link.active {
   color: #fff;
-  background: linear-gradient(45deg, var(--color-five), var(--color-one));
-  border-radius: 8px;
+  background-color: var(--color-one);
+  border-radius: 12px;
 }
 
+.sidebar-nav .nav-item .active {
+  color: #fff;
+  background-color: var(--color-one);
+  border-radius: 12px;
+}
 .sidebar-nav .nav-item .active i {
   color: #fff;
 }
 
 .sidebar-nav .nav-content a.active i {
-  background-color: var(--color-one);
+  background-color: #fff;
 }
 
 /*--------------------------------------------------------------
@@ -1151,7 +1075,7 @@ a:hover {
 }
 
 /* News & Updates */
-.dashboard .news .post-item+.post-item {
+.dashboard .news .post-item + .post-item {
   margin-top: 15px;
 }
 
