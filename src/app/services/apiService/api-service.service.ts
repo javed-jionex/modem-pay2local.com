@@ -4,7 +4,7 @@ import {
   HttpHeaders,
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ConfigService } from "@services/config/config.service";
+import { environment } from "@environment/environment";
 import { BehaviorSubject, Observable, of, throwError } from "rxjs";
 import { catchError, finalize, tap } from "rxjs/operators";
 
@@ -18,16 +18,16 @@ interface ApiResponse<T> {
   providedIn: "root",
 })
 export class ApiService {
-  // private apiUrl: string = environment.loginHost;
+  private apiUrl: string = environment.loginHost;
 
-  constructor(private http: HttpClient, private configService: ConfigService) {}
+  constructor(private http: HttpClient) {}
   public request<T>(
     method: "GET" | "POST" | "PUT" | "DELETE",
     endpoint: string,
     data: any = {},
     headers: HttpHeaders = new HttpHeaders()
   ): Observable<ApiResponse<T>> {
-    const url = `${this.configService.getBackendHost()}${endpoint}`;
+    const url = this.apiUrl + `${endpoint}`;
 
     // Subjects to keep track of loading, error, and data
     const response$ = new BehaviorSubject<ApiResponse<T>>({

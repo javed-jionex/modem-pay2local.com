@@ -15,6 +15,7 @@ export class ProfileComponent {
   closeResult: string = "";
   profileForm!: FormGroup;
   changePasswordForm!: FormGroup;
+  isDisplayed: boolean = false;
   constructor(
     private profileService: LoginService,
     private alertService: AlertService,
@@ -27,8 +28,10 @@ export class ProfileComponent {
   }
 
   profileList() {
+    this.isDisplayed = true;
     this.profileService.profile().subscribe((res: any) => {
       if (res.status == 200) {
+        this.isDisplayed = false;
         this.profileDetails = res.data;
       }
     });

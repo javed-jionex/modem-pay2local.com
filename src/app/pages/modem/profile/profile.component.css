@@ -53,3 +53,11 @@
   .profile .profile-edit img {
     max-width: 120px;
   }
+  .spinner-border.text-primary {
+  position: absolute;
+  top: 50%;
+  --bs-spinner-width: 4rem;
+  --bs-spinner-height: 4rem;
+  --bs-spinner-vertical-align: -0.125em;
+  --bs-spinner-border-width: 0.5em;
+}

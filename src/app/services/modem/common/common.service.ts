@@ -3,21 +3,19 @@ import { Injectable } from "@angular/core";
 import { environment } from "@environment/environment";
 import { Subject } from "rxjs";
 import { LocalStorageMerchantService } from "../localstorage/local.service";
-import { ConfigService } from "@services/config/config.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class CommonService {
-  apiUrl: string = environment.backendHost;
+  apiUrl: string = environment.loginHost;
   objectRefresh = new Subject<any>();
   currentBalanceRefresh = new Subject<any>();
   isChangeThemeMode = new Subject<any>();
   // isAutoRefreshOBJ = new Subject<any>;
   constructor(
     private http: HttpClient,
-    private localStorageMerchantService: LocalStorageMerchantService,
-    private configService: ConfigService
+    private localStorageMerchantService: LocalStorageMerchantService
   ) {}
   /** BL auto Refresh */
   isBLAutoRefresh(refresh: any) {
@@ -39,8 +37,7 @@ export class CommonService {
   }
   currentBalanceData() {
     return this.http.get(
-      this.configService.getBackendHost() +
-        `api/v1/merchant/payment_transactions/current_balance`
+      this.apiUrl + `api/v1/merchant/payment_transactions/current_balance`
     );
   }
   setThemeMode(item: any) {
@@ -61,8 +58,7 @@ export class CommonService {
   }
   getModemBanks(data: any) {
     return this.http.get(
-      this.configService.getBackendHost() +
-        `api/v1/merchant/dashboard/bank_with_type?bank_type=${data}`
+      this.apiUrl + `api/v1/merchant/dashboard/bank_with_type?bank_type=${data}`
     );
   }
   getPermissionOBJ(parentName: string) {
