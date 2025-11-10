@@ -1,17 +1,16 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "@environment/environment";
-import { ConfigService } from "@services/config/config.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class ThemeModeService {
-  apiUrl: string = environment.backendHost;
-  constructor(private http: HttpClient, private configService: ConfigService) {}
+  apiUrl: string = environment.loginHost;
+  constructor(private http: HttpClient) {}
   adminDarkTheme(data: any) {
     return this.http.put(
-      this.configService.getBackendHost() +
+      this.apiUrl +
         `api/v1/users/update_dark_theme
       `,
       data
@@ -19,7 +18,7 @@ export class ThemeModeService {
   }
   merchantDarkTheme(data: any) {
     return this.http.post(
-      this.configService.getBackendHost() +
+      this.apiUrl +
         `api/v1/merchant/dashboard/update_dark_theme
       `,
       data

@@ -68,34 +68,15 @@
               <div class="text-xs font-weight-bold text-uppercase mb-1">
                 Full Name
               </div>
-              <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">{{tabsData.pending_deposits}}</div> -->
             </div>
-            <!-- <div class="col-auto">
-              <i class="bi bi-modem icon-primary"></i>
-            </div> -->
           </div>
           <p>{{ listData?.first_name }} {{ listData?.last_name }}</p>
         </div>
       </div>
     </div>
+
     <div class="col-xl-3 col-md-4 mb-3">
-      <div class="card border-left-primary shadow h-90 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-uppercase mb-1">
-                {{ "balance" | translate }}
-              </div>
-            </div>
-          </div>
-          <p>
-            {{ listData?.limit }}
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-3 col-md-4 mb-3">
-      <a routerLink="/admin/deposits">
+      <a routerLink="/admin/deposit">
         <div class="card border-left-success shadow h-90 py-2">
           <div class="card-body">
             <div class="row no-gutters align-items-center">
@@ -110,19 +91,11 @@
                 >
                   {{ depositCount }}
                 </div>
-                <!-- <div
-								class="h5 mb-0 font-weight-bold text-gray-800 text-success"
-							>
-								 {{ list?.pending_deposit_requests  }}
-							</div> -->
               </div>
               <div class="col-auto">
                 <i class="bi bi-bank icon-success"></i>
               </div>
             </div>
-            <!-- <p class="text-success">
-							<i class="bx bxs-up-arrow align-middle"></i>Only Success + Approved
-						</p> -->
           </div>
         </div>
       </a>
@@ -148,31 +121,12 @@
                 <i class="bi bi-bank icon-success"></i>
               </div>
             </div>
-            <!-- <p class="text-success">
-							<i class="bx bxs-up-arrow align-middle"></i>Only Success + Approved
-						</p> -->
           </div>
         </div>
       </a>
     </div>
-    <!-- <div class="col-xl-3 col-md-4 mb-3">
-      <div class="card border-left-primary shadow h-90 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-uppercase mb-1">
-                {{ "hold_balance" | translate }}
-              </div>
-            </div>
-          </div>
-          <p>
-            {{ listData?.hold_balance }}
-          </p>
-        </div>
-      </div>
-    </div> -->
+
     <div class="col-xl-3 col-md-4 mb-3">
-      <!-- <a routerLink="/admin/support-tickets"> -->
       <div class="card border-left-info shadow h-90 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -187,10 +141,8 @@
           </p>
         </div>
       </div>
-      <!-- </a> -->
     </div>
     <div class="col-xl-3 col-md-4 mb-3">
-      <!-- <a routerLink="/admin/support-tickets"> -->
       <div class="card border-left-info shadow h-90 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -205,10 +157,8 @@
           </p>
         </div>
       </div>
-      <!-- </a> -->
     </div>
     <div class="col-xl-3 col-md-4 mb-3">
-      <!-- <a routerLink="/admin/support-tickets"> -->
       <div class="card border-left-info shadow h-90 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -223,10 +173,8 @@
           </p>
         </div>
       </div>
-      <!-- </a> -->
     </div>
     <div class="col-xl-3 col-md-4 mb-3">
-      <!-- <a routerLink="/admin/support-tickets"> -->
       <div class="card border-left-info shadow h-90 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -241,7 +189,6 @@
           </p>
         </div>
       </div>
-      <!-- </a> -->
     </div>
     <div class="col-xl-3 col-md-4 mb-3">
       <div class="card border-left-primary shadow h-90 py-2">

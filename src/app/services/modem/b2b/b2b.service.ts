@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "@environment/environment";
 import { ApiService } from "@services/apiService/api-service.service";
-import { ConfigService } from "@services/config/config.service";
 
 @Injectable({
   providedIn: "root",

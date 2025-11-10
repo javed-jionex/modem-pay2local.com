@@ -30,8 +30,10 @@ export class DashboardComponent {
     this.paymentsRequestList();
   }
   getDetails() {
+    this.isDisplayed = true;
     this.profileService.profile().subscribe((res: any) => {
       if (res.status == 200) {
+        this.isDisplayed = false;
         this.listData = res.data;
         this.serviceType = this.listData?.payment_accept;
         this.statusType = this.listData?.status;

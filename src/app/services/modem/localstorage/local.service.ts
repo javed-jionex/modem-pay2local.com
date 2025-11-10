@@ -6,7 +6,7 @@ import { environment } from "@environment/environment";
   providedIn: "root",
 })
 export class LocalStorageMerchantService {
-  apiUrl: string = environment.backendHost;
+  apiUrl: string = environment.loginHost;
   projectName: string = environment.project;
   constructor(private http: HttpClient) {}
 
