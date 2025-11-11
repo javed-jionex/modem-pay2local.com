@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "@environment/environment";
-import * as moment from "moment";
+import * as moment from "moment-timezone";
 import { Subject } from "rxjs";
 
 @Injectable({
