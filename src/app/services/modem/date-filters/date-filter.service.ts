@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "@environment/environment";
+import * as moment from "moment";
 import { Subject } from "rxjs";
 
 @Injectable({
@@ -24,15 +25,14 @@ export class DateFilterService {
 
   /** Daily Date Format */
   daliyStartDate(): string {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = this.padZero(now.getMonth() + 1);
-    const day = this.padZero(now.getDate());
-    const hours = "00";
-    const minutes = "00";
-    const seconds = "00"; // Set to 00
+    // Get current time in Dhaka timezone
+    const bdtMoment = moment().tz("Asia/Dhaka");
 
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    // Force to start of day (00:00:00)
+    const startOfDay = bdtMoment.startOf("day");
+
+    // Return formatted string
+    return startOfDay.format("YYYY-MM-DD HH:mm:ss");
   }
   /***** This function using for default time */
   // dailyEndDate(): string {
