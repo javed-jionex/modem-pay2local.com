@@ -69,6 +69,8 @@ export class DashboardComponent {
       if (res?.response?.status == 200) {
         this.getDetails();
         this.alertService.success("", res?.response?.message);
+      } else {
+        this.alertService.warning("", res?.response?.message);
       }
     });
   }

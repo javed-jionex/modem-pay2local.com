@@ -1,15 +1,15 @@
-import { DecimalPipe } from '@angular/common';
-import { Pipe, PipeTransform } from '@angular/core';
+import { DecimalPipe } from "@angular/common";
+import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: 'appNumberFormat'
+  name: "appNumberFormat",
 })
 export class IndianNumberFormatPipe implements PipeTransform {
-  constructor(private decimalPipe: DecimalPipe) { }
-  transform(value: number): any {
-    if (value === null || value === undefined) {
-      return '';
-    }
+  constructor(private decimalPipe: DecimalPipe) {}
+  transform(value: any): any {
+    // if (value === null || value === undefined) {
+    //   return '';
+    // }
     // const formattedValue = value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     // return formattedValue
 
@@ -21,18 +21,24 @@ export class IndianNumberFormatPipe implements PipeTransform {
     // }
     // return parts.join('.')
 
-    const formattedNumber: any = this.decimalPipe.transform(value, '1.0-0');
-    const parts = formattedNumber.split(','); // Split the formatted number by commas
-    const firstGroup = parts.shift(); // Remove the first part (which is the integer part)
-    const integerPart = firstGroup.replace(/\B(?=(\d{2})+(?!\d))/g, ','); // Add comma for every two digits
-    let formattedNumberWithDecimal;
-    if (parts.length > 0) {
-      formattedNumberWithDecimal = integerPart + ',' + parts.join(',') + '.00'; // Join the parts back together
-    } else {
-      formattedNumberWithDecimal = formattedNumber + '.00'; // Join the parts back together
-    }
+    if (value === null || value === undefined || value === "") return "N/A";
+    if (value === "-") return value;
 
-    // console.log(formattedNumberWithDecimal); // Outputs 3,17,879.00
-    return formattedNumberWithDecimal
+    // Convert to string and clean up spaces
+    let strValue = value.toString().trim();
+
+    // Allow negative numbers with space like "- 1000"
+    strValue = strValue.replace(/\s+/g, ""); // remove all spaces
+    // Convert to number
+    const num = Number(strValue);
+    if (isNaN(num)) return value;
+
+    // Keep the sign for negative numbers
+    const formatted = new Intl.NumberFormat("en-US", {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2,
+    }).format(Math.abs(num));
+
+    return num < 0 ? `-${formatted}` : formatted;
   }
 }
