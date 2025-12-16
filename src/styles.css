@@ -12,16 +12,20 @@
   text-align: right;
   direction: rtl;
 }
+
 .form-switch .form-check-input {
   border-radius: 0 !important;
 }
+
 [dir="ltr"] {
   text-align: left;
   direction: ltr;
 }
+
 #developer td span:last-child span {
   display: none;
 }
+
 .star {
   color: red !important;
 }
@@ -316,7 +320,7 @@ input[type="checkbox"]:checked::before {
   display: block;
 }
 
-.permission .card > .row {
+.permission .card>.row {
   row-gap: 30px;
 }
 
@@ -328,9 +332,11 @@ button.btn.btn-primary.custom-button-gentrate {
   position: absolute;
   top: 56%;
 }
+
 .card-body {
   position: relative;
 }
+
 #dashboard-tabs .bi {
   color: #fff;
   background-color: var(--color-one);
@@ -719,6 +725,13 @@ body.dark-mode .home-page .payment-option {
 
 .slider-three .slick-next {
   right: 20px !important;
+}
+
+.filter {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  padding-bottom: 20px;
 }
 
 @media (max-width: 767px) {
