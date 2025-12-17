@@ -62,7 +62,7 @@ export class LoginComponent {
       return;
     }
     this.loadingLogin = true;
-    this.loginForm.value.phone_number = this.custNumber;
+    // this.loginForm.value.phone_number = this.custNumber;
     this.loginService
       .login(this.loginForm.value)
       .pipe(finalize(() => (this.loadingLogin = false)))
