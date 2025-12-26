@@ -1,10 +1,12 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "@pages/home/home.component";
+import { ModemCheckVersionComponent } from "@pages/modem-check-version/modem-check-version.component";
 import { AuthGuard } from "@services/auth/auth.guard";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
+  { path: "modem-version", component: ModemCheckVersionComponent },
   {
     path: "admin",
     canActivate: [AuthGuard],
@@ -30,41 +32,6 @@ const routes: Routes = [
     loadChildren: () =>
       import("@pages/modem-login/pin-code/pin-code.module").then(
         (m) => m.PinCodeModule
-      ),
-  },
-  // {
-  //   path: "admin/signup",
-  //   loadChildren: () =>
-  //     import("@pages/merchant-login/sign-up/sign-up.module").then(
-  //       (m) => m.SignUpModule
-  //     ),
-  // },
-  {
-    path: "documentation",
-    loadChildren: () =>
-      import("@pages/home/documentation/documentation.module").then(
-        (m) => m.DocumentationModule
-      ),
-  },
-  {
-    path: "documentation-v2",
-    loadChildren: () =>
-      import("@pages/home/documentation-v2/documentation-v2.module").then(
-        (m) => m.DocumentationV2Module
-      ),
-  },
-  {
-    path: "become-a-partner",
-    loadChildren: () =>
-      import("@pages/home/become-a-partner/become-a-partner.module").then(
-        (m) => m.BecomeAPartnerModule
-      ),
-  },
-  {
-    path: "become-a-agent",
-    loadChildren: () =>
-      import("@pages/home/become-a-agent/become-a-agent.module").then(
-        (m) => m.BecomeAAgentModule
       ),
   },
   {

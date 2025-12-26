@@ -17,6 +17,7 @@ import { SlickCarouselModule } from "ngx-slick-carousel";
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { SharedModule } from "./pipes/sharedModule";
 import { AppRoutingModule } from "./app-routing.module";
+import { ModemCheckVersionComponent } from "@pages/modem-check-version/modem-check-version.component";
 let providers: Provider[] = [
   {
     provide: HTTP_INTERCEPTORS,
@@ -38,6 +39,7 @@ if (environment) {
     ErrorHandlerComponent,
     HomeComponent,
     SignUpComponent,
+    ModemCheckVersionComponent,
   ],
   imports: [
     BrowserModule,
