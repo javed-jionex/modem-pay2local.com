@@ -37,7 +37,7 @@ export class WithdrawalsComponent {
   maxTrxID: number = 0;
   minTrxID: number = 0;
   isAutoRefresh: boolean = true;
-  seconds: number = 3;
+  seconds: number = 2;
   timerSubscription: any;
   Math = Math;
   isLoading: boolean = false;
@@ -56,7 +56,7 @@ export class WithdrawalsComponent {
     this.paymentsRequestList();
     this.userProfile = this.localStorageMerchantService.getUserProfile();
     // this.initForm();
-    // this.setTimer();
+    this.setTimer();
     setTimeout(() => {
       this.getPermisions();
     }, 1500);
@@ -101,17 +101,28 @@ export class WithdrawalsComponent {
           this.minTrxID = 10;
         }
         this.initForm();
-        // if (this.displayedData?.cust_phone) {
-        //   this.isAutoRefresh = false;
-        //   this.setTimer();
-        // } else {
-        //   if (this.isAutoRefresh != true) {
-        //     this.isAutoRefresh = true;
-        //     this.setTimer();
-        //   }
-        // }
+        if (this.displayedData?.id) {
+          this.isAutoRefresh = false;
+          this.setTimer();
+        } else {
+          if (this.isAutoRefresh != true) {
+            this.isAutoRefresh = true;
+            this.setTimer();
+          }
+        }
         this.withdrawalID = this.displayedData?.id;
         this.isDisplayed = false;
+      } else if (res.status == 403) {
+        this.initForm();
+        if (this.displayedData?.id) {
+          this.isAutoRefresh = false;
+          this.setTimer();
+        } else {
+          if (this.isAutoRefresh != true) {
+            this.isAutoRefresh = true;
+            this.setTimer();
+          }
+        }
       }
 
       // this.dashboardService.pedingCountRF(true);
@@ -150,15 +161,15 @@ export class WithdrawalsComponent {
           this.minTrxID = 10;
         }
         this.initForm();
-        // if (this.displayedData?.cust_phone) {
-        //   this.isAutoRefresh = false;
-        //   this.setTimer();
-        // } else {
-        //   if (this.isAutoRefresh != true) {
-        //     this.isAutoRefresh = true;
-        //     this.setTimer();
-        //   }
-        // }
+        if (this.displayedData?.id) {
+          this.isAutoRefresh = false;
+          this.setTimer();
+        } else {
+          if (this.isAutoRefresh != true) {
+            this.isAutoRefresh = true;
+            this.setTimer();
+          }
+        }
         this.withdrawalID = this.displayedData?.id;
         this.isDisplayed = false;
       } else if (res.status == "no_requests_available") {
@@ -331,8 +342,8 @@ export class WithdrawalsComponent {
         .subscribe(() => {
           if (this.seconds == 0) {
             //this.autoRefreshList();
-            this.paymentsRequestList();
-            this.seconds = 3;
+            this.fetchPRWithdrawal();
+            this.seconds = 2;
           } else {
             this.seconds -= 1;
           }
