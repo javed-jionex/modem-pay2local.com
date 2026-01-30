@@ -258,10 +258,17 @@
                       </button>
                       <button
                         type="button"
-                        class="btn btn-danger rejected"
+                        class="btn btn-danger rejected me-2"
                         (click)="isType('reject')"
                       >
                         {{ "Reject" | translate }}
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-warning rejected me-2"
+                        (click)="isType('release')"
+                      >
+                        {{ "Release" | translate }}
                       </button>
                     </div>
                   </form>
@@ -304,6 +311,62 @@
                         class="btn btn-danger rejected me-2"
                       >
                         {{ "Reject" | translate }}
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-warning rejected me-2"
+                        (click)="isType('release')"
+                      >
+                        {{ "Release" | translate }}
+                      </button>
+                    </div>
+                  </form>
+                  <form
+                    class="row g-3"
+                    [formGroup]="releaseForm"
+                    #p="ngForm"
+                    (submit)="saveRelease(p.value)"
+                    autocomplete="off"
+                    *ngIf="formType == 'release'"
+                  >
+                    <div class="col-12">
+                      <select
+                        class="form-select requiredField"
+                        formControlName="notes"
+                      >
+                        <option selected disabled value="">Choose...</option>
+                        <option value="Daily Limit Exceed">
+                          Daily Limit Exceed
+                        </option>
+                        <option value="Monthly Limit Exceed">
+                          Monthly Limit Exceed
+                        </option>
+                        <option value="Detail are incorrect">
+                          Detail are incorrect
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="col-12 text-center">
+                      <button
+                        type="button"
+                        class="btn btn-primary me-2"
+                        (click)="isType('approve')"
+                      >
+                        {{ "Approve" | translate }}
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger rejected me-2"
+                        (click)="isType('reject')"
+                      >
+                        {{ "Reject" | translate }}
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn btn-warning rejected me-2"
+                      >
+                        {{ "Release" | translate }}
                       </button>
                     </div>
                   </form>

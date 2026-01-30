@@ -26,6 +26,7 @@ export class WithdrawalsComponent {
   showingData: any;
   actionForm!: FormGroup;
   rejectForm!: FormGroup;
+  releaseForm!: FormGroup;
   actionType: any;
   actionID: any;
   transaction_id: any;
@@ -49,7 +50,7 @@ export class WithdrawalsComponent {
     private permissionService: PermissionMerchantService,
     private routers: ActivatedRoute,
     private commonService: CommonService,
-    private alertService: AlertService
+    private alertService: AlertService,
   ) {}
   ngOnInit() {
     // this.permissionService.sendMethod(this.routers.snapshot.data);
@@ -69,6 +70,10 @@ export class WithdrawalsComponent {
       id: [""],
     });
     this.rejectForm = this.fb.group({
+      id: [""],
+      notes: ["", Validators.required],
+    });
+    this.releaseForm = this.fb.group({
       id: [""],
       notes: ["", Validators.required],
     });
@@ -204,7 +209,7 @@ export class WithdrawalsComponent {
         },
         (reason) => {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
+        },
       );
   }
   private getDismissReason(reason: any): string {
@@ -290,6 +295,21 @@ export class WithdrawalsComponent {
         this.displayedData = "";
       } else {
         this.alertService.error("error", res?.message);
+      }
+    });
+  }
+  saveRelease(data: any) {
+    if (this.releaseForm.invalid) {
+      return;
+    }
+    this.releaseForm.value.id = this.withdrawalID;
+    this.withdrawalService.release(data).subscribe((res: any) => {
+      if (res?.status === 200) {
+        this.alertService.success("", res?.message);
+        this.paymentsRequestList();
+        this.displayedData = "";
+      } else {
+        this.alertService.warning("", res?.message);
       }
     });
   }

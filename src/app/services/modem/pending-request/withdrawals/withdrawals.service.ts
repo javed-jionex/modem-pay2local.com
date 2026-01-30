@@ -10,30 +10,36 @@ export class WithdrawalService {
   constructor(private http: HttpClient) {}
   list() {
     return this.http.get(
-      this.apiUrl + `api/v1/modem_web/payments/get_pending_withdraw`
+      this.apiUrl + `api/v1/modem_web/payments/get_pending_withdraw`,
     );
   }
   getListOnClick() {
     return this.http.get(
-      this.apiUrl + `api/v1/modem_web/payments/request_withdraw`
+      this.apiUrl + `api/v1/modem_web/payments/request_withdraw`,
     );
   }
   reject(data: any) {
     return this.http.put(
       this.apiUrl + `api/v1/modem_web/payments/reject_withdraw`,
-      data
+      data,
+    );
+  }
+  release(data: any) {
+    return this.http.put(
+      this.apiUrl + `api/v1/modem_web/payments/release_withdraw`,
+      data,
     );
   }
   approve(data: any) {
     return this.http.put(
       this.apiUrl + `api/v1/modem_web/payments/approve_withdraw`,
-      data
+      data,
     );
   }
   viewWithdrawalsRecord(data: any) {
     return this.http.put(
       this.apiUrl + `api/v1/modem_web/payments/view_withdraw_request`,
-      data
+      data,
     );
   }
 }
