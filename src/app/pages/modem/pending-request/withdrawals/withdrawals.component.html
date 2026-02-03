@@ -217,7 +217,7 @@
                   </div>
                 </div>
               </div> -->
-                <div class="col-md-7" style="margin: auto">
+                <div class="col-md-12" style="margin: auto">
                   <form
                     class="row g-3"
                     [formGroup]="actionForm"
@@ -226,7 +226,7 @@
                     autocomplete="off"
                     *ngIf="formType == 'approve'"
                   >
-                    <div class="col-12">
+                    <div class="col-7 margin-auto">
                       <!-- <select
       class="form-select requiredField"
       formControlName="modem_type"
@@ -270,6 +270,13 @@
                       >
                         {{ "Release" | translate }}
                       </button>
+                      <button
+                        type="submit"
+                        class="btn btn-warning rejected me-2"
+                        (click)="isType('waiting')"
+                      >
+                        {{ "Waiting" | translate }}
+                      </button>
                     </div>
                   </form>
                   <form
@@ -280,7 +287,7 @@
                     autocomplete="off"
                     *ngIf="formType == 'reject'"
                   >
-                    <div class="col-12">
+                    <div class="col-7 margin-auto">
                       <select
                         class="form-select requiredField"
                         formControlName="notes"
@@ -319,6 +326,13 @@
                       >
                         {{ "Release" | translate }}
                       </button>
+                      <button
+                        type="submit"
+                        class="btn btn-warning rejected me-2"
+                        (click)="isType('waiting')"
+                      >
+                        {{ "Waiting" | translate }}
+                      </button>
                     </div>
                   </form>
                   <form
@@ -329,7 +343,7 @@
                     autocomplete="off"
                     *ngIf="formType == 'release'"
                   >
-                    <div class="col-12">
+                    <div class="col-7 margin-auto">
                       <select
                         class="form-select requiredField"
                         formControlName="notes"
@@ -367,6 +381,59 @@
                         class="btn btn-warning rejected me-2"
                       >
                         {{ "Release" | translate }}
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn btn-warning rejected me-2"
+                        (click)="isType('waiting')"
+                      >
+                        {{ "Waiting" | translate }}
+                      </button>
+                    </div>
+                  </form>
+                  <form
+                    class="row g-3"
+                    [formGroup]="waitingForm"
+                    #w="ngForm"
+                    (submit)="saveWaiting(w.value)"
+                    autocomplete="off"
+                    *ngIf="formType == 'waiting'"
+                  >
+                    <div class="col-7 margin-auto">
+                      <input
+                        class="form-control requiredField"
+                        formControlName="notes"
+                        placeholder="Detail are incorrect ***"
+                      />
+                    </div>
+
+                    <div class="col-12 text-center">
+                      <button
+                        type="button"
+                        class="btn btn-primary me-2"
+                        (click)="isType('approve')"
+                      >
+                        {{ "Approve" | translate }}
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger rejected me-2"
+                        (click)="isType('reject')"
+                      >
+                        {{ "Reject" | translate }}
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn btn-warning rejected me-2"
+                        (click)="isType('release')"
+                      >
+                        {{ "Release" | translate }}
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn btn-warning rejected me-2"
+                      >
+                        {{ "Waiting" | translate }}
                       </button>
                     </div>
                   </form>
