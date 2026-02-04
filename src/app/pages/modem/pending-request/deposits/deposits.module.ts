@@ -9,6 +9,7 @@ import { NumberPipeModule } from "@modules/pipe/numberpipe/number.pipe.module";
 import { CheckPermissionPurePipeModule } from "@modules/pipe/checkpermission/check-permission-pure.pipe.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DetailComponent } from "./detail/detail.component";
+import { ButtonComponent } from "@components/elements/button/button.component";
 
 @NgModule({
   declarations: [DepositsComponent, DetailComponent],
@@ -22,6 +23,7 @@ import { DetailComponent } from "./detail/detail.component";
     CheckPermissionPurePipeModule,
     FormsModule,
     ReactiveFormsModule,
+    ButtonComponent,
   ],
 })
 export class DepositsModule {}

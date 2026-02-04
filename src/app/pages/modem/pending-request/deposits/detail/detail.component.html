@@ -128,7 +128,7 @@
                     <button
                       type="button"
                       class="btn btn-primary me-2"
-                      (click)="saveApprove()"
+                      (click)="isType('approve')"
                     >
                       {{ "Approve" | translate }}
                     </button>
@@ -143,14 +143,17 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6" style="margin: auto">
+              <div
+                class="col-md-6"
+                style="margin: auto"
+                *ngIf="formType == 'reject'"
+              >
                 <form
                   class="row g-3"
                   [formGroup]="actionForm"
                   #r="ngForm"
                   (submit)="saveReject(r.value)"
                   autocomplete="off"
-                  *ngIf="formType == 'reject'"
                 >
                   <div class="col-12">
                     <input
@@ -164,6 +167,45 @@
                     <button type="submit" class="btn btn-primary me-2">
                       {{ "save" | translate }}
                     </button>
+                  </div>
+                </form>
+              </div>
+              <div
+                class="col-md-6"
+                style="margin: auto"
+                *ngIf="formType == 'approve'"
+              >
+                <form
+                  class="row g-3"
+                  [formGroup]="approveForm"
+                  #a="ngForm"
+                  (submit)="saveApprove(a.value)"
+                  autocomplete="off"
+                >
+                  <div class="col-12">
+                    <input
+                      class="form-control requiredField"
+                      formControlName="amount"
+                      type="number"
+                      placeholder="example: 100"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <input
+                      class="form-control requiredField"
+                      formControlName="transaction_id"
+                      placeholder="123****"
+                    />
+                  </div>
+
+                  <div class="col-12 text-center">
+                    <app-button
+                      buttonClass="btn btn-primary me-2"
+                      [loading]="isLoading"
+                      [disabled]="isLoading"
+                    >
+                      {{ "Save" | translate }}
+                    </app-button>
                   </div>
                 </form>
               </div>
