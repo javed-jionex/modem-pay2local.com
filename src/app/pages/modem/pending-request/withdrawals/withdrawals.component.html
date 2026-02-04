@@ -245,17 +245,18 @@
                         (input)="checkMaxLimit(maxTrxID, $event)"
                       />
                     </div>
-                    <!-- <div class="col-12">
-                    <input
-                      class="form-control requiredField"
-                      formControlName="notes"
-                      placeholder="Notes"
-                    />
-                  </div> -->
+
                     <div class="col-12 text-center">
-                      <button type="submit" class="btn btn-primary me-2">
+                      <app-button
+                        buttonClass="btn btn-primary me-2"
+                        [loading]="isLoading"
+                        [disabled]="isLoading"
+                      >
                         {{ "Approve" | translate }}
-                      </button>
+                      </app-button>
+                      <!-- <button type="submit" class="btn btn-primary me-2">
+                        {{ "Approve" | translate }}
+                      </button> -->
                       <button
                         type="button"
                         class="btn btn-danger rejected me-2"
@@ -313,12 +314,19 @@
                       >
                         {{ "Approve" | translate }}
                       </button>
-                      <button
+                      <app-button
+                        buttonClass="btn btn-danger me-2"
+                        [loading]="isLoading"
+                        [disabled]="isLoading"
+                      >
+                        {{ "Reject" | translate }}
+                      </app-button>
+                      <!-- <button
                         type="submit"
                         class="btn btn-danger rejected me-2"
                       >
                         {{ "Reject" | translate }}
-                      </button>
+                      </button> -->
                       <button
                         type="button"
                         class="btn btn-warning rejected me-2"
@@ -376,12 +384,13 @@
                       >
                         {{ "Reject" | translate }}
                       </button>
-                      <button
-                        type="submit"
-                        class="btn btn-warning rejected me-2"
+                      <app-button
+                        buttonClass="btn btn-warning me-2"
+                        [loading]="isLoading"
+                        [disabled]="isLoading"
                       >
                         {{ "Release" | translate }}
-                      </button>
+                      </app-button>
                       <button
                         type="submit"
                         class="btn btn-warning rejected me-2"
@@ -429,12 +438,13 @@
                       >
                         {{ "Release" | translate }}
                       </button>
-                      <button
-                        type="submit"
-                        class="btn btn-warning rejected me-2"
+                      <app-button
+                        buttonClass="btn btn-warning me-2"
+                        [loading]="isLoading"
+                        [disabled]="isLoading"
                       >
                         {{ "Waiting" | translate }}
-                      </button>
+                      </app-button>
                     </div>
                   </form>
                 </div>
