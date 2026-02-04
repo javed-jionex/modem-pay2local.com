@@ -20,7 +20,9 @@
     padding-top: 20px;
     margin: auto;
 }
-
+button {
+    color: #ffffff;
+}
 @media (max-width: 767px) {
     .card .card-body .text-end {
         text-align: right !important;

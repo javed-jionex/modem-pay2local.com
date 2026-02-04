@@ -269,12 +269,16 @@ export class WithdrawalsComponent {
     this.actionPermission = this.commonService.getPermissionOBJ("Pendings");
   }
   isType(type: string) {
+    this.isLoading = false;
     this.formType = type;
   }
   saveApprove(data: any) {
+    this.isLoading = true;
     if (this.actionForm.invalid) {
+      this.isLoading = false;
       return;
     }
+
     this.actionForm.value.id = this.withdrawalID;
     this.withdrawalService
       .approve(this.actionForm.value)
@@ -283,13 +287,17 @@ export class WithdrawalsComponent {
           this.alertService.success("success", res?.message);
           this.paymentsRequestList();
           this.displayedData = "";
+          this.isLoading = false;
         } else {
+          this.isLoading = false;
           this.alertService.error("error", res?.message);
         }
       });
   }
   saveReject(data: any) {
+    this.isLoading = true;
     if (this.rejectForm.invalid) {
+      this.isLoading = false;
       return;
     }
     this.rejectForm.value.id = this.withdrawalID;
@@ -298,13 +306,17 @@ export class WithdrawalsComponent {
         this.alertService.success("success", res?.message);
         this.paymentsRequestList();
         this.displayedData = "";
+        this.isLoading = false;
       } else {
+        this.isLoading = false;
         this.alertService.error("error", res?.message);
       }
     });
   }
   saveRelease(data: any) {
+    this.isLoading = true;
     if (this.releaseForm.invalid) {
+      this.isLoading = false;
       return;
     }
     this.releaseForm.value.id = this.withdrawalID;
@@ -313,13 +325,17 @@ export class WithdrawalsComponent {
         this.alertService.success("", res?.message);
         this.paymentsRequestList();
         this.displayedData = "";
+        this.isLoading = false;
       } else {
         this.alertService.warning("", res?.message);
+        this.isLoading = false;
       }
     });
   }
   saveWaiting(data: any) {
+    this.isLoading = true;
     if (this.waitingForm.invalid) {
+      this.isLoading = false;
       return;
     }
     this.waitingForm.value.id = this.withdrawalID;
@@ -328,7 +344,9 @@ export class WithdrawalsComponent {
         this.alertService.success("", res?.message);
         this.paymentsRequestList();
         this.displayedData = "";
+        this.isLoading = false;
       } else {
+        this.isLoading = false;
         this.alertService.warning("", res?.message);
       }
     });
