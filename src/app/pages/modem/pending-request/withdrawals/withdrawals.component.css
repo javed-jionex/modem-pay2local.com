@@ -16,9 +16,26 @@
     position: absolute;
     margin-left: 5px;
 }
+.margin-auto{
+    padding-top: 20px;
+    margin: auto;
+}
+
 @media (max-width: 767px) {
     .card .card-body .text-end {
         text-align: right !important;
         margin-top: 0 !important;
     }
+        .card .card-body form button {
+        font-size: 12px;
+    }
+    .col-7.margin-auto {
+    width: 100%;
+}
+.row{
+    margin: auto;
+}
+.card-body {
+    padding: 1.5rem 0rem;
+}
 }

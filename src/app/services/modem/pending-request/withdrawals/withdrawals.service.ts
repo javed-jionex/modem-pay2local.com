@@ -30,6 +30,13 @@ export class WithdrawalService {
       data,
     );
   }
+
+  waiting(data: any) {
+    return this.http.put(
+      this.apiUrl + `api/v1/modem_web/payments/waiting_withdraw`,
+      data,
+    );
+  }
   approve(data: any) {
     return this.http.put(
       this.apiUrl + `api/v1/modem_web/payments/approve_withdraw`,

@@ -27,6 +27,7 @@ export class WithdrawalsComponent {
   actionForm!: FormGroup;
   rejectForm!: FormGroup;
   releaseForm!: FormGroup;
+  waitingForm!: FormGroup;
   actionType: any;
   actionID: any;
   transaction_id: any;
@@ -74,6 +75,10 @@ export class WithdrawalsComponent {
       notes: ["", Validators.required],
     });
     this.releaseForm = this.fb.group({
+      id: [""],
+      notes: ["", Validators.required],
+    });
+    this.waitingForm = this.fb.group({
       id: [""],
       notes: ["", Validators.required],
     });
@@ -304,6 +309,21 @@ export class WithdrawalsComponent {
     }
     this.releaseForm.value.id = this.withdrawalID;
     this.withdrawalService.release(data).subscribe((res: any) => {
+      if (res?.status === 200) {
+        this.alertService.success("", res?.message);
+        this.paymentsRequestList();
+        this.displayedData = "";
+      } else {
+        this.alertService.warning("", res?.message);
+      }
+    });
+  }
+  saveWaiting(data: any) {
+    if (this.waitingForm.invalid) {
+      return;
+    }
+    this.waitingForm.value.id = this.withdrawalID;
+    this.withdrawalService.waiting(data).subscribe((res: any) => {
       if (res?.status === 200) {
         this.alertService.success("", res?.message);
         this.paymentsRequestList();
