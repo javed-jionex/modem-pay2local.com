@@ -268,6 +268,7 @@
                         type="button"
                         class="btn btn-warning rejected me-2"
                         (click)="isType('release')"
+                        *ngIf="isReleaseButton"
                       >
                         {{ "Release" | translate }}
                       </button>
@@ -275,6 +276,7 @@
                         type="submit"
                         class="btn btn-warning rejected me-2"
                         (click)="isType('waiting')"
+                        *ngIf="isWaitingButton"
                       >
                         {{ "Waiting" | translate }}
                       </button>
@@ -331,6 +333,7 @@
                         type="button"
                         class="btn btn-warning rejected me-2"
                         (click)="isType('release')"
+                        *ngIf="isReleaseButton"
                       >
                         {{ "Release" | translate }}
                       </button>
@@ -338,6 +341,7 @@
                         type="submit"
                         class="btn btn-warning rejected me-2"
                         (click)="isType('waiting')"
+                        *ngIf="isWaitingButton"
                       >
                         {{ "Waiting" | translate }}
                       </button>
@@ -388,6 +392,7 @@
                         buttonClass="btn btn-warning me-2"
                         [loading]="isLoading"
                         [disabled]="isLoading"
+                        *ngIf="isReleaseButton"
                       >
                         {{ "Release" | translate }}
                       </app-button>
@@ -395,6 +400,7 @@
                         type="submit"
                         class="btn btn-warning rejected me-2"
                         (click)="isType('waiting')"
+                        *ngIf="isWaitingButton"
                       >
                         {{ "Waiting" | translate }}
                       </button>
@@ -435,6 +441,7 @@
                         type="submit"
                         class="btn btn-warning rejected me-2"
                         (click)="isType('release')"
+                        *ngIf="isReleaseButton"
                       >
                         {{ "Release" | translate }}
                       </button>
@@ -442,6 +449,7 @@
                         buttonClass="btn btn-warning me-2"
                         [loading]="isLoading"
                         [disabled]="isLoading"
+                        *ngIf="isWaitingButton"
                       >
                         {{ "Waiting" | translate }}
                       </app-button>
