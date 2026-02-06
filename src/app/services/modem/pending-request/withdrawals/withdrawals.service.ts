@@ -49,4 +49,14 @@ export class WithdrawalService {
       data,
     );
   }
+  releaseWithdrawalRequest() {
+    return this.http.get(
+      this.apiUrl + `api/v1/modem_web/payments/release_flag_data`,
+    );
+  }
+  waitingWithdrawalRequest() {
+    return this.http.get(
+      this.apiUrl + `api/v1/modem_web/payments/waiting_flag_data`,
+    );
+  }
 }

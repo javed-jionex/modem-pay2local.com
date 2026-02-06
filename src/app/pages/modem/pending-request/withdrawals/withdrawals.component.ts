@@ -43,6 +43,8 @@ export class WithdrawalsComponent {
   timerSubscription: any;
   Math = Math;
   isLoading: boolean = false;
+  isReleaseButton: boolean = false;
+  isWaitingButton: boolean = false;
   constructor(
     private withdrawalService: WithdrawalService,
     private fb: FormBuilder,
@@ -62,6 +64,7 @@ export class WithdrawalsComponent {
     setTimeout(() => {
       this.getPermisions();
     }, 1500);
+    this.getReleaseWaitingStatus();
   }
   initForm() {
     let parttrn = new RegExp(`^[^\\s]{${this.minTrxID},}$`);
@@ -81,6 +84,18 @@ export class WithdrawalsComponent {
     this.waitingForm = this.fb.group({
       id: [""],
       notes: ["", Validators.required],
+    });
+  }
+  getReleaseWaitingStatus() {
+    this.withdrawalService.releaseWithdrawalRequest().subscribe((res: any) => {
+      if (res.status == 200) {
+        this.isReleaseButton = res.release_withdraw_into_pending;
+      }
+    });
+    this.withdrawalService.waitingWithdrawalRequest().subscribe((res: any) => {
+      if (res.status == 200) {
+        this.isWaitingButton = res.allow_waiting_withdraw;
+      }
     });
   }
   paymentsRequestList() {
