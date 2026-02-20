@@ -48,7 +48,11 @@
                   <th>View</th>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of displayedData; let i = index">
+                  <tr
+                    *ngFor="let item of displayedData; let i = index"
+                    (click)="onView(item.id)"
+                    style="cursor: pointer"
+                  >
                     <td>{{ i + 1 }}</td>
 
                     <td>{{ item.cust_phone }}</td>

@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DepositService } from "@services/modem/pending-request/deposits/deposits.service";
 
@@ -19,7 +19,8 @@ export class DepositsComponent {
     private fb: FormBuilder,
     private modalService: NgbModal,
     private depositService: DepositService,
-    private routers: ActivatedRoute
+    private routers: ActivatedRoute,
+    private router: Router,
   ) {}
   ngOnInit() {
     this.initForm();
@@ -52,7 +53,7 @@ export class DepositsComponent {
         },
         (reason) => {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
+        },
       );
   }
   private getDismissReason(reason: any): string {
@@ -83,5 +84,8 @@ export class DepositsComponent {
         return word.charAt(0).toUpperCase() + word.slice(1);
       })
       .join(" ");
+  }
+  onView(ID: any) {
+    this.router.navigate(["/admin/deposit/detail/" + ID]);
   }
 }

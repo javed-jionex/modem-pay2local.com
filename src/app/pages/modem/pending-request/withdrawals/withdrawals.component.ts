@@ -315,18 +315,37 @@ export class WithdrawalsComponent {
       this.isLoading = false;
       return;
     }
-    this.rejectForm.value.id = this.withdrawalID;
-    this.withdrawalService.reject(data).subscribe((res: any) => {
-      if (res?.status === 200) {
-        this.alertService.success("success", res?.message);
-        this.paymentsRequestList();
-        this.displayedData = "";
-        this.isLoading = false;
-      } else {
-        this.isLoading = false;
-        this.alertService.error("error", res?.message);
-      }
-    });
+    if (data?.notes == "release_to_other") {
+      let payLoad = {
+        notes: data.notes,
+        id: this.withdrawalID,
+      };
+      this.releaseForm.value.id = this.withdrawalID;
+      this.withdrawalService.release(payLoad).subscribe((res: any) => {
+        if (res?.status === 200) {
+          this.alertService.success("", res?.message);
+          this.paymentsRequestList();
+          this.displayedData = "";
+          this.isLoading = false;
+        } else {
+          this.alertService.warning("", res?.message);
+          this.isLoading = false;
+        }
+      });
+    } else {
+      this.rejectForm.value.id = this.withdrawalID;
+      this.withdrawalService.reject(data).subscribe((res: any) => {
+        if (res?.status === 200) {
+          this.alertService.success("success", res?.message);
+          this.paymentsRequestList();
+          this.displayedData = "";
+          this.isLoading = false;
+        } else {
+          this.isLoading = false;
+          this.alertService.error("error", res?.message);
+        }
+      });
+    }
   }
   saveRelease(data: any) {
     this.isLoading = true;
