@@ -4,15 +4,17 @@ import {
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
+  HttpResponse,
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, finalize, Observable, throwError } from "rxjs";
+import { catchError, finalize, Observable, tap, throwError } from "rxjs";
 import { environment } from "@environment/environment";
 import { ErrorHandlerService } from "@services/error-handler/error-handler.service";
 import { Router } from "@angular/router";
 import { AlertService } from "@services/alert/alert.service";
 import { Location } from "@angular/common";
 import { LocalStorageMerchantService } from "@services/modem/localstorage/local.service";
+import { PosthogService } from "@services/modem/posthog-services/posthog.service";
 @Injectable()
 export class HttpCallsInterceptor implements HttpInterceptor {
   currentUrl: any;
@@ -22,14 +24,15 @@ export class HttpCallsInterceptor implements HttpInterceptor {
     private router: Router,
     private alertService: AlertService,
     private location: Location,
-    private localStorageMerchantService: LocalStorageMerchantService
+    private localStorageMerchantService: LocalStorageMerchantService,
+    private posthogService: PosthogService,
   ) {
     this.currentUrl = this.location.path();
     this.currentUrl = this.currentUrl.split("/");
   }
   intercept(
     request: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     let userProfile: any;
 
@@ -55,40 +58,54 @@ export class HttpCallsInterceptor implements HttpInterceptor {
       // 	this.router.navigate(['/login']);
       //  }
     }
-
     return next.handle(request).pipe(
+      tap((event) => {
+        if (event instanceof HttpResponse) {
+          // ✅ SUCCESS API TRACK
+          this.posthogService.capture("api_success", {
+            url: request.url,
+            method: request.method,
+            status: event.status,
+          });
+        }
+      }),
+
       catchError((error: HttpErrorResponse) => {
+        // ✅ ERROR API TRACK
+        this.posthogService.capture("api_error", {
+          url: request.url,
+          method: request.method,
+          status: error.status,
+          message: error.message,
+        });
+
         if (error.status === 0) {
-          //console.error('An error occurred:', error?.error);
+          console.error("An error occurred:", error?.error);
         } else if (error.status === 401) {
           let moduleType = localStorage.getItem("moduleType");
-          // if(this.count == 0){
-          // 	this.alertService.error('Error', error?.error?.error);
-          // }
 
           this.count = this.count + 1;
-          //localStorage.clear();
 
           this.localStorageMerchantService.removePindCode();
           this.localStorageMerchantService.removeUerProfile();
           this.router.navigate(["admin/login"]);
         } else if (error.status !== 429) {
-          // Log errors other than 429
-          //console.error('HTTP Error:', error);
+          console.error("HTTP Error:", error);
         } else {
           console.error(
             `Backend returned code ${error.status}, body was: `,
-            error.error
+            error.error,
           );
         }
-        //this.errHandlerService.showErrorr(error.message);
+
         return throwError(
-          () => new Error("Something bad happened; please try again later.")
+          () => new Error("Something bad happened; please try again later."),
         );
       }),
+
       finalize(() => {
-        //this.loaderService.closeDialog();
-      })
+        // optional loader बंद
+      }),
     ) as Observable<HttpEvent<any>>;
   }
 }

@@ -7,6 +7,7 @@ import { CommonService } from "@services/modem/common/common.service";
 import { LocalStorageMerchantService } from "@services/modem/localstorage/local.service";
 import { WithdrawalService } from "@services/modem/pending-request/withdrawals/withdrawals.service";
 import { PermissionMerchantService } from "@services/modem/permission/permission.service";
+import { PosthogService } from "@services/modem/posthog-services/posthog.service";
 import { interval, take } from "rxjs";
 @Component({
   selector: "app-withdrawals",
@@ -54,6 +55,7 @@ export class WithdrawalsComponent {
     private routers: ActivatedRoute,
     private commonService: CommonService,
     private alertService: AlertService,
+    private posthog: PosthogService,
   ) {}
   ngOnInit() {
     // this.permissionService.sendMethod(this.routers.snapshot.data);
@@ -65,6 +67,9 @@ export class WithdrawalsComponent {
       this.getPermisions();
     }, 1500);
     this.getReleaseWaitingStatus();
+    this.posthog.capture("get-withdrawal-request", {
+      value: "Pending Request Withdrawal",
+    });
   }
   initForm() {
     let parttrn = new RegExp(`^[^\\s]{${this.minTrxID},}$`);
@@ -103,14 +108,6 @@ export class WithdrawalsComponent {
     let data = {
       page_size: this.itemsPerPage,
       page_number: this.pageNumber,
-      // mobile_banking_id: this.searchParm?.mobile_banking_id || null,
-      // transaction_id: this.searchParm?.transaction_id || null,
-      // cust_phone: this.searchParm?.cust_phone || null,
-      // merchant_id: this.searchParm?.merchant_id || null,
-      // start_date: this.searchParm?.start_date || null,
-      // export_type: "list",
-      // end_date: this.searchParm?.end_date || null,
-      // modem_type: this.searchParm?.modem_type || null,
     };
     this.isDisplayed = true;
     this.withdrawalService.list().subscribe((res: any) => {

@@ -6,4 +6,6 @@ export const environment = {
   domain: "https://pay2local.com/",
   project: "modemPay2bd",
   serverType: "sandbox", //dev_india OR sandbox_india OR prod_india
+  posthogKey: "phc_mBrvJCcjD4JxQfZrbrwTzzYZva7WynD24RGgk6Am2ciw",
+  posthogHost: "https://us.i.posthog.com",
 };

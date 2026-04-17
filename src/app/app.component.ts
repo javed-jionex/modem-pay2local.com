@@ -2,6 +2,7 @@ import { DOCUMENT } from "@angular/common";
 import { Component, Inject } from "@angular/core";
 import { CommonService } from "@services/common/common.service";
 import { LocalizationService } from "@services/global/localization.service";
+import { PosthogService } from "@services/modem/posthog-services/posthog.service";
 
 @Component({
   selector: "app-root",
@@ -15,7 +16,7 @@ export class AppComponent {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private commonService: CommonService,
-    private localizationService: LocalizationService
+    private localizationService: LocalizationService,
   ) {
     this.themeMode = localStorage.getItem("pay2LocalThemeMode") || "";
     if (this.themeMode) {
@@ -30,14 +31,14 @@ export class AppComponent {
       this.loadStyle(res?.type);
       this.themeMode = res.type;
     });
-    this.getJionexStatus();
+    //this.getJionexStatus();
     this.localizationService.setLanguage("bn");
   }
   loadStyle(styleName: string) {
     const head = this.document.getElementsByTagName("head")[0];
 
     let themeLink = this.document.getElementById(
-      "client-theme"
+      "client-theme",
     ) as HTMLLinkElement;
     if (themeLink) {
       themeLink.href = `assets/css/${styleName}.css`;
