@@ -15,7 +15,7 @@ export class PosthogService {
   }
 
   init() {
-    //if (window.location.hostname === "localhost") return;
+    if (window.location.hostname === "localhost") return;
     if (!environment.posthogKey) return;
 
     this.ngZone.runOutsideAngular(() => {
