@@ -15,13 +15,14 @@ export class PosthogService {
   }
 
   init() {
+    //if (window.location.hostname === "localhost") return;
     if (!environment.posthogKey) return;
 
     this.ngZone.runOutsideAngular(() => {
       posthog.init(environment.posthogKey, {
         api_host: environment.posthogHost,
         capture_pageview: false, // manual tracking
-
+        disable_session_recording: true,
         session_recording: {
           maskAllInputs: true,
           network_payload_capture: true,
@@ -38,10 +39,27 @@ export class PosthogService {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: any) => {
+        const url = event.urlAfterRedirects;
         posthog.capture("$pageview", {
           path: event.urlAfterRedirects,
         });
+        const allowedPages = ["/admin/withdrawals"];
+
+        if (allowedPages.some((p) => url.includes(p))) {
+          this.startRecording();
+        } else {
+          this.stopRecording();
+        }
       });
+  }
+  // ✅ Start session replay
+  startRecording() {
+    posthog.startSessionRecording();
+  }
+
+  // ✅ Stop session replay
+  stopRecording() {
+    posthog.stopSessionRecording();
   }
 
   //  Console logs tracking
@@ -66,25 +84,8 @@ export class PosthogService {
     };
   }
 
-  //  Network tracking (Angular interceptor ke through use hoga)
-  trackApiCall(req: any, res: any) {
-    posthog.capture("api_call", {
-      url: req.url,
-      method: req.method,
-      status: res.status,
-    });
-  }
-
   // Custom event
   capture(event: string, data?: any) {
     posthog.capture(event, data);
-  }
-
-  // Identify user
-  identify(user: any) {
-    posthog.identify(user.id, {
-      email: user.email,
-      name: user.name,
-    });
   }
 }
