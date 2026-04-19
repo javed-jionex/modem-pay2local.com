@@ -6,6 +6,7 @@ import { AlertService } from "@services/alert/alert.service";
 import { DepositService } from "@services/modem/pending-request/deposits/deposits.service";
 import { WithdrawalService } from "@services/modem/pending-request/withdrawals/withdrawals.service";
 import { PosthogService } from "@services/modem/posthog-services/posthog.service";
+import { LocalStorageMerchantService } from "@services/modem/localstorage/local.service";
 
 @Component({
   selector: "app-dashboard",
@@ -26,6 +27,7 @@ export class DashboardComponent {
     private withdrawalService: WithdrawalService,
     private alertService: AlertService,
     private posthog: PosthogService,
+    private localStorageMerchantService: LocalStorageMerchantService,
   ) {}
   ngOnInit() {
     this.getDetails();
@@ -33,36 +35,18 @@ export class DashboardComponent {
   }
   getDetails() {
     this.isDisplayed = true;
+    this.localStorageMerchantService.removeModemProfile();
     this.profileService.profile().subscribe((res: any) => {
       if (res.status == 200) {
         this.isDisplayed = false;
         this.listData = res.data;
         this.serviceType = this.listData?.payment_accept;
         this.statusType = this.listData?.status;
-        this.posthogSendData(this.listData);
+        this.localStorageMerchantService.sendModemProfile(this.listData);
       }
     });
   }
-  posthogSendData(data: any) {
-    this.posthog.capture("modem_data_loaded", {
-      first_name: data.first_name,
-      last_name: data.last_name,
-      phone_number: data.phone_number,
-      pincode: data.pincode,
-      limit: data.limit,
-      type_of_modem: data.type_of_modem,
-      payment_accept: data.payment_accept,
-      status: data.status,
-      is_login: data.is_login,
-      cashin_progress: data.cashin_progress,
 
-      // 👇 flatten transactions
-      today_deposit: data.transactions.today_deposit,
-      monthly_deposit: data.transactions.monthly_deposit,
-      today_withdraw: data.transactions.today_withdraw,
-      monthly_withdraw: data.transactions.monthly_withdraw,
-    });
-  }
   formatLabel(value: string): string {
     if (!value) return "";
 

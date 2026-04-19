@@ -13,13 +13,19 @@ export class LocalStorageMerchantService {
   sendUserProfile(data: any) {
     localStorage.setItem(
       this.projectName + "modemUserProfile",
-      JSON.stringify(data)
+      JSON.stringify(data),
+    );
+  }
+  sendModemProfile(data: any) {
+    localStorage.setItem(
+      this.projectName + "modemDataProfile",
+      JSON.stringify(data),
     );
   }
   sendBankData(data: any) {
     localStorage.setItem(
       this.projectName + "modemBankData",
-      JSON.stringify(data)
+      JSON.stringify(data),
     );
   }
   getUserProfile() {
@@ -28,6 +34,13 @@ export class LocalStorageMerchantService {
     userProfile = JSON.parse(userProfile);
     return userProfile;
   }
+  getModemProfile() {
+    let userProfile: any =
+      localStorage.getItem(this.projectName + "modemDataProfile") || null;
+    userProfile = JSON.parse(userProfile);
+    return userProfile;
+  }
+
   getBankData() {
     let userProfile: any =
       localStorage.getItem(this.projectName + "modemBankData") || null;
@@ -40,10 +53,13 @@ export class LocalStorageMerchantService {
   removeBankData() {
     localStorage.removeItem(this.projectName + "modemBankData");
   }
+  removeModemProfile() {
+    localStorage.removeItem(this.projectName + "modemDataProfile");
+  }
   sendpinCode(data: any) {
     localStorage.setItem(
       this.projectName + "modemPinCode",
-      JSON.stringify(data)
+      JSON.stringify(data),
     );
   }
   getPinCode() {
@@ -55,7 +71,7 @@ export class LocalStorageMerchantService {
   sendProjectName(data: any) {
     localStorage.setItem(
       this.projectName + "modemProjectName",
-      JSON.stringify(data)
+      JSON.stringify(data),
     );
   }
   getProjectName() {
@@ -73,7 +89,7 @@ export class LocalStorageMerchantService {
   sendAdminPermisson(data: any) {
     localStorage.setItem(
       this.projectName + "modemPermission",
-      JSON.stringify(data)
+      JSON.stringify(data),
     );
   }
   getAdminPermisson() {

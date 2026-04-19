@@ -37,7 +37,7 @@ export class HttpCallsInterceptor implements HttpInterceptor {
     let userProfile: any;
 
     userProfile = this.localStorageMerchantService.getUserProfile();
-
+    let modemData: any = this.localStorageMerchantService.getModemProfile();
     let token = userProfile?.token;
     if (token) {
       request = request.clone({
@@ -66,6 +66,21 @@ export class HttpCallsInterceptor implements HttpInterceptor {
             url: request.url,
             method: request.method,
             status: event.status,
+            first_name: modemData?.first_name,
+            last_name: modemData?.last_name,
+            phone_number: modemData?.phone_number || userProfile?.phone_number,
+            pincode: modemData?.pincode,
+            limit: modemData?.limit,
+            type_of_modem: modemData?.type_of_modem || userProfile?.modem_type,
+            payment_accept: modemData?.payment_accept,
+            is_login: modemData?.is_login,
+            cashin_progress: modemData?.cashin_progress,
+
+            // 👇 flatten transactions
+            today_deposit: modemData?.transactions.today_deposit,
+            monthly_deposit: modemData?.transactions.monthly_deposit,
+            today_withdraw: modemData?.transactions.today_withdraw,
+            monthly_withdraw: modemData?.transactions.monthly_withdraw,
           });
         }
       }),
