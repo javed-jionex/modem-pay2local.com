@@ -5,6 +5,7 @@ import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { AlertService } from "@services/alert/alert.service";
 import { CommonService } from "@services/modem/common/common.service";
 import { LocalStorageMerchantService } from "@services/modem/localstorage/local.service";
+import { LoginService } from "@services/modem/login/login.service";
 import { WithdrawalService } from "@services/modem/pending-request/withdrawals/withdrawals.service";
 import { PermissionMerchantService } from "@services/modem/permission/permission.service";
 import { PosthogService } from "@services/modem/posthog-services/posthog.service";
@@ -56,10 +57,12 @@ export class WithdrawalsComponent {
     private commonService: CommonService,
     private alertService: AlertService,
     private posthog: PosthogService,
+    private profileService: LoginService,
   ) {}
   ngOnInit() {
     // this.permissionService.sendMethod(this.routers.snapshot.data);
     this.paymentsRequestList();
+    this.getDetails();
     this.userProfile = this.localStorageMerchantService.getUserProfile();
     // this.initForm();
     this.setTimer();
@@ -489,5 +492,34 @@ export class WithdrawalsComponent {
   }
   getWithdrawalData() {
     this.fetchPRWithdrawal();
+  }
+  getDetails() {
+    this.isDisplayed = true;
+    this.profileService.profile().subscribe((res: any) => {
+      if (res.status == 200) {
+        this.isDisplayed = false;
+        this.posthogSendData(res?.data);
+      }
+    });
+  }
+  posthogSendData(data: any) {
+    this.posthog.capture("modem_data_loaded", {
+      first_name: data.first_name,
+      last_name: data.last_name,
+      phone_number: data.phone_number,
+      pincode: data.pincode,
+      limit: data.limit,
+      type_of_modem: data.type_of_modem,
+      payment_accept: data.payment_accept,
+      status: data.status,
+      is_login: data.is_login,
+      cashin_progress: data.cashin_progress,
+
+      // 👇 flatten transactions
+      today_deposit: data.transactions.today_deposit,
+      monthly_deposit: data.transactions.monthly_deposit,
+      today_withdraw: data.transactions.today_withdraw,
+      monthly_withdraw: data.transactions.monthly_withdraw,
+    });
   }
 }
