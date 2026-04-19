@@ -66,6 +66,7 @@ export class HttpCallsInterceptor implements HttpInterceptor {
             url: request.url,
             method: request.method,
             status: event.status,
+            response: event.body,
             first_name: modemData?.first_name,
             last_name: modemData?.last_name,
             phone_number: modemData?.phone_number || userProfile?.phone_number,
