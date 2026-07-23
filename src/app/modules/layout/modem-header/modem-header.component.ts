@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 import { environment } from "@environment/environment";
 import { AlertService } from "@services/alert/alert.service";
 import { CommonService } from "@services/common/common.service";
+import { LogoConfigService } from "@services/common/logo-config.service";
 import { LocalStorageMerchantService } from "@services/modem/localstorage/local.service";
 //import { CommonService } from '@services/merchant/common/common.service';
 import { LoginService } from "@services/modem/login/login.service";
@@ -33,7 +34,9 @@ export class ModemHeaderComponent {
   serverType: string = environment.serverType;
   countryName: any = "";
   isSandbox: boolean = false;
+  isLogo = true;
   @Output() isLoader = new EventEmitter();
+
   constructor(
     private alertService: AlertService,
     private logOutService: LoginService,
@@ -42,7 +45,8 @@ export class ModemHeaderComponent {
     private router: Router,
     private commonService: CommonService,
     private loginService: LoginService,
-    private localStorageMerchantService: LocalStorageMerchantService
+    private localStorageMerchantService: LocalStorageMerchantService,
+    private logoConfigService: LogoConfigService,
   ) {
     this.userProfile = this.localStorageMerchantService.getUserProfile();
   }
@@ -50,18 +54,7 @@ export class ModemHeaderComponent {
     this.themeMode =
       this.localStorageMerchantService.getThemeType() || "light-style";
     this.getCurrentBalance();
-
-    // this.headerService.getPendingCount().subscribe((res) => {
-    //   this.pendingDepositTotal = res?.deposit > 99 ? "99+" : res?.deposit ?? 0;
-    //   this.pendingWithdrawTotal =
-    //     res?.withdraw > 99 ? "99+" : res?.withdraw ?? 0;
-    // });
-    // this.headerService.getSupportCount().subscribe((res) => {
-    //   this.supportTotal =
-    //     res?.support_ticket > 99 ? "99+" : res?.support_ticket ?? 0;
-    // });
     this.countryName = this.localStorageMerchantService.getProjectName();
-    console.log(this.countryName);
     let subString = "sandbox";
     let isFind = this.countryName?.includes(subString);
     if (isFind) {
@@ -69,6 +62,7 @@ export class ModemHeaderComponent {
     } else {
       this.isSandbox = false;
     }
+    this.logoStatus();
   }
   logout() {
     //localStorage.clear();
@@ -119,7 +113,7 @@ export class ModemHeaderComponent {
               //  this.localStorageService.sendUserProfile(res.data);
               this.alertService.success(
                 "",
-                "Logged In successfully with admin"
+                "Logged In successfully with admin",
               );
               setTimeout(() => {
                 window.location.href =
@@ -163,4 +157,9 @@ export class ModemHeaderComponent {
   //     }
   //   });
   // }
+  logoStatus() {
+    this.logoConfigService.getLogoStatus().subscribe((status: boolean) => {
+      this.isLogo = status;
+    });
+  }
 }

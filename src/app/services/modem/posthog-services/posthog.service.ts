@@ -19,8 +19,8 @@ export class PosthogService {
     if (!environment.posthogKey) return;
 
     this.ngZone.runOutsideAngular(() => {
-      posthog.init(environment.posthogKey, {
-        api_host: environment.posthogHost,
+      posthog.init(environment?.posthogKey, {
+        api_host: environment?.posthogHost,
         capture_pageview: false, // manual tracking
         disable_session_recording: true,
         session_recording: {

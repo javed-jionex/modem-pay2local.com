@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { environment } from "@environment/environment";
 import { AlertService } from "@services/alert/alert.service";
+import { LogoConfigService } from "@services/common/logo-config.service";
 import { LocalStorageMerchantService } from "@services/modem/localstorage/local.service";
 import { LoginService } from "@services/modem/login/login.service";
 import { finalize } from "rxjs";
@@ -23,18 +24,21 @@ export class LoginComponent {
   custNumber: any;
   loginType: string = "Login";
   bankList: any;
+  isLogo = true;
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private loginService: LoginService,
     private alertService: AlertService,
-    private localStorageMerchantService: LocalStorageMerchantService
+    private localStorageMerchantService: LocalStorageMerchantService,
+    private logoConfigService: LogoConfigService,
   ) {}
   ngOnInit() {
     this.aFormGroup = this.fb.group({
       recaptcha: ["", Validators.required],
     });
     this.initLoginForm();
+    this.logoStatus();
   }
 
   handleSuccess(event: any) {
@@ -83,13 +87,13 @@ export class LoginComponent {
           } else {
             this.alertService.error(
               "Error",
-              "username or password is incorrect"
+              "username or password is incorrect",
             );
           }
         },
         (error: any) => {
           this.alertService.error("Error", "username or password is incorrect");
-        }
+        },
       );
   }
   saveBank(data: any) {
@@ -117,13 +121,13 @@ export class LoginComponent {
           } else {
             this.alertService.error(
               "Error",
-              "username or password is incorrect"
+              "username or password is incorrect",
             );
           }
         },
         (error: any) => {
           this.alertService.error("Error", "username or password is incorrect");
-        }
+        },
       );
   }
   setProjectName(event: any) {
@@ -148,5 +152,10 @@ export class LoginComponent {
       return false;
     }
     return true;
+  }
+  logoStatus() {
+    this.logoConfigService.getLogoStatus().subscribe((status: boolean) => {
+      this.isLogo = status;
+    });
   }
 }

@@ -18,7 +18,7 @@ export class CommonService {
   getAllBanks(data: any) {
     return this.http.post(
       this.apiUrl + `api/v1/mobile_bankings/custom_filter`,
-      data
+      data,
     );
   }
   /** BL Count Api Reftesh */
@@ -73,7 +73,7 @@ export class CommonService {
 
   getDistributors(company_id: string) {
     return this.http.get(
-      this.apiUrl + `api/v1/distributors?company_id=${company_id}`
+      this.apiUrl + `api/v1/distributors?company_id=${company_id}`,
     );
   }
   currentBalanceData() {
@@ -88,7 +88,7 @@ export class CommonService {
   }
   checkPaymentForMerchant(id: string) {
     return this.http.get(
-      this.apiUrl + `api/v1/users/check_merchant_payment?id=${id}`
+      this.apiUrl + `api/v1/users/check_merchant_payment?id=${id}`,
     );
   }
   agentModem(payload: any) {
@@ -96,31 +96,31 @@ export class CommonService {
   }
   bankLimit(ID: any) {
     return this.http.get(
-      this.apiUrl + `api/v1/secure/payment_requests/get_bank_limit?id=${ID}`
+      this.apiUrl + `api/v1/secure/payment_requests/get_bank_limit?id=${ID}`,
     );
   }
   customerPaymentRequest(data: any) {
     return this.http.post(
       this.apiUrl + `api/v1/secure/payment_requests/customer_request`,
-      data
+      data,
     );
   }
   merchantPaymentRequest(data: any) {
     return this.http.post(
       this.apiUrl + `api/v1/secure/merchant_payments/customer_request`,
-      data
+      data,
     );
   }
   customerWithdrawRequest(data: any) {
     return this.http.post(
       this.apiUrl + `api/v1/secure/payment_requests/customer_withdraw_request`,
-      data
+      data,
     );
   }
   relieseModem(phone_number: string) {
     return this.http.put(
       this.apiUrl + `api/v1/secure/payment_requests/reliese_modem`,
-      { phone_number: phone_number }
+      { phone_number: phone_number },
     );
   }
 
@@ -129,27 +129,27 @@ export class CommonService {
   }
   getModemAndMerchant() {
     return this.http.get(
-      this.apiUrl + `api/v1/payment_transactions/payments_filter_data`
+      this.apiUrl + `api/v1/payment_transactions/payments_filter_data`,
     );
   }
   prAdminCount() {
     return this.http.get(
-      this.apiUrl + `api/v1/payment_requests/admin_pending_counts`
+      this.apiUrl + `api/v1/payment_requests/admin_pending_counts`,
     );
   }
   prPartnerCount() {
     return this.http.get(
-      this.apiUrl + `api/v1/payment_requests/partner_pending_counts`
+      this.apiUrl + `api/v1/payment_requests/partner_pending_counts`,
     );
   }
   prAgentCount() {
     return this.http.get(
-      this.apiUrl + `api/v1/payment_requests/agent_pending_counts`
+      this.apiUrl + `api/v1/payment_requests/agent_pending_counts`,
     );
   }
   prDistributorCount() {
     return this.http.get(
-      this.apiUrl + `api/v1/payment_requests/distributor_pending_counts`
+      this.apiUrl + `api/v1/payment_requests/distributor_pending_counts`,
     );
   }
   agent() {
@@ -166,36 +166,41 @@ export class CommonService {
     return this.http.get(
       this.apiUrl +
         `api/v1/employees/dashboard_details
-      `
+      `,
     );
   }
   prEmployeeCount() {
     return this.http.get(
       this.apiUrl +
         `api/v1/employees/team_pending_counts
-      `
+      `,
     );
   }
   /**** New Apis standard Deposits */
   getBankWithModem(ID: any, reqId: any) {
     return this.http.get(
       this.apiUrl +
-        `api/v1/payment/deposits/bank_list?m_type=${ID}&request_id=${reqId}`
+        `api/v1/payment/deposits/bank_list?m_type=${ID}&request_id=${reqId}`,
     );
   }
   assignModem(payload: any) {
     return this.http.put(
       this.apiUrl + `api/v1/payment/deposits/select_bank`,
-      payload
+      payload,
     );
   }
   confirmPayment(data: any) {
     return this.http.put(
       this.apiUrl + `api/v1/payment/deposits/submit_payment_details`,
-      data
+      data,
     );
   }
   getJionexStatus() {
     return this.http.get(`${this.apiUrl}/api/v1/settings/logo_setting`);
+  }
+  getLogoStatus() {
+    return this.http.get(
+      `${this.apiUrl}api/public/feature_configs/get_project_logo_config`,
+    );
   }
 }

@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AlertService } from "@services/alert/alert.service";
+import { LogoConfigService } from "@services/common/logo-config.service";
 import { LocalStorageMerchantService } from "@services/modem/localstorage/local.service";
 import { LoginService } from "@services/modem/login/login.service";
 import { finalize } from "rxjs";
@@ -14,15 +15,18 @@ import { finalize } from "rxjs";
 export class PinCodeComponent {
   loginForm!: FormGroup;
   loadingLogin = false;
+  isLogo = true;
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private userService: LoginService,
     private alertService: AlertService,
-    private localStorageMerchantService: LocalStorageMerchantService
+    private localStorageMerchantService: LocalStorageMerchantService,
+    private logoConfigService: LogoConfigService,
   ) {}
   ngOnInit() {
     this.initLoginForm();
+    this.logoStatus();
   }
   initLoginForm(data?: any) {
     this.loginForm = this.fb.group({
@@ -50,5 +54,10 @@ export class PinCodeComponent {
           this.alertService.error("error", res?.message);
         }
       });
+  }
+  logoStatus() {
+    this.logoConfigService.getLogoStatus().subscribe((status: boolean) => {
+      this.isLogo = status;
+    });
   }
 }

@@ -1,6 +1,7 @@
 import { DOCUMENT } from "@angular/common";
 import { Component, Inject } from "@angular/core";
 import { CommonService } from "@services/common/common.service";
+import { LogoConfigService } from "@services/common/logo-config.service";
 import { LocalizationService } from "@services/global/localization.service";
 import { PosthogService } from "@services/modem/posthog-services/posthog.service";
 
@@ -17,6 +18,7 @@ export class AppComponent {
     @Inject(DOCUMENT) private document: Document,
     private commonService: CommonService,
     private localizationService: LocalizationService,
+    private logoConfigService: LogoConfigService,
   ) {
     this.themeMode = localStorage.getItem("pay2LocalThemeMode") || "";
     if (this.themeMode) {
@@ -26,6 +28,7 @@ export class AppComponent {
     }
   }
   ngOnInit() {
+    this.logoConfigService.loadConfig();
     this.commonService.getThemeMode().subscribe((res) => {
       localStorage.setItem("pay2LocalThemeMode", res.type);
       this.loadStyle(res?.type);
