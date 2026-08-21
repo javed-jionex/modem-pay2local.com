@@ -1,11 +1,11 @@
 <main id="main" class="main">
   <div class="pagetitle_wrap">
     <div class="pagetitle">
-      <h1>{{ "deposits" | translate }}</h1>
+      <h1>{{ "cash_out" | translate }}</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item">{{ "transactions" | translate }}</li>
-          <li class="breadcrumb-item active">{{ "deposits" | translate }}</li>
+          <li class="breadcrumb-item active">{{ "cash_out" | translate }}</li>
         </ol>
       </nav>
     </div>
@@ -58,7 +58,7 @@
                   <!-- <th>Comm.</th> -->
                   <th>{{ "amount" | translate }}</th>
                   <th>{{ "status" | translate }}</th>
-                  <th *ngIf="actionPermission | checkPermissionPure : 'Action'">
+                  <th *ngIf="actionPermission | checkPermissionPure: 'Action'">
                     Action
                   </th>
                 </thead>
@@ -70,7 +70,7 @@
                           : {
                               itemsPerPage: itemsPerPage,
                               currentPage: pageNumber,
-                              totalItems: totalRows
+                              totalItems: totalRows,
                             };
                       let i = index
                     "
@@ -119,7 +119,7 @@
                       }}</span>
                     </td>
                     <td
-                      *ngIf="actionPermission | checkPermissionPure : 'Action'"
+                      *ngIf="actionPermission | checkPermissionPure: 'Action'"
                     >
                       <a class="custom-icons">
                         <i
@@ -321,7 +321,7 @@
             <td>{{ "processing_time" | translate }}</td>
             <td>
               {{
-                showingData.date | dateDurationTwo : showingData.approved_time
+                showingData.date | dateDurationTwo: showingData.approved_time
               }}
             </td>
           </tr>

@@ -1,12 +1,12 @@
 <main id="main" class="main">
   <div class="pagetitle_wrap">
     <div class="pagetitle">
-      <h1>{{ "withdrawals" | translate }}</h1>
+      <h1>{{ "cash_in" | translate }}</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item">{{ "transactions" | translate }}</li>
           <li class="breadcrumb-item active">
-            {{ "withdrawals" | translate }}
+            {{ "cash_in" | translate }}
           </li>
         </ol>
       </nav>
@@ -62,7 +62,7 @@
                           : {
                               itemsPerPage: itemsPerPage,
                               currentPage: pageNumber,
-                              totalItems: totalRows
+                              totalItems: totalRows,
                             };
                       let i = index
                     "
@@ -249,7 +249,7 @@
             <td>
               {{
                 showingData.created_at
-                  | dateDurationTwo : showingData.process_time
+                  | dateDurationTwo: showingData.process_time
               }}
             </td>
           </tr>

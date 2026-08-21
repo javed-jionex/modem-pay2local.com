@@ -198,7 +198,7 @@ export class WithdrawalsComponent {
         this.withdrawalID = this.displayedData?.id;
         this.isDisplayed = false;
       } else if (res.status == "no_requests_available") {
-        this.alertService.warning("", res.message);
+        this.alertService.warning("", "Data not found");
       }
 
       // this.dashboardService.pedingCountRF(true);
